@@ -1,0 +1,41 @@
+ .game_menu
+ {
+     border: 2px solid #000000;
+     text-align: center;
+     width: 300px;
+ }
+ .minesweeper
+ {
+     border: 2px solid #000000;
+     width:fit-content;
+     display: block;
+     cursor: pointer;
+ }
+ .casino
+ {
+    border: 2px solid #000000;
+    width:fit-content;
+    display: block;
+    cursor: pointer;
+ }
+ .tetris
+ {
+    border: 2px solid #000000;
+    width:fit-content;
+    display: block;
+    cursor: pointer;
+ }
+ .waifu_clicker
+ {
+    border: 2px solid #000000;
+    width:fit-content;
+    display: block;
+    cursor: pointer;
+ }
+ .trivia
+ {
+    border: 2px solid #000000;
+    width:fit-content;
+    display: block;
+    cursor: pointer;
+ }
