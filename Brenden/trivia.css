@@ -1,0 +1,11 @@
+#body {
+    background-color: grey;
+}
+
+#welcomeheader {
+    font-family: 'Noto Serif';
+    color: cyan;
+    text-align: center;
+    border: solid black;
+    border-radius: 10px;
+}
