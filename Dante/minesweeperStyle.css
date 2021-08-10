@@ -22,5 +22,14 @@ body {
     width: 30px;
     height: 30px;
     margin: 2px;
-    background-color: grey;
+    background-color: lightgrey;
+}
+.button {
+    margin: 3px;
+    padding: 2px;
+    border: 1px solid grey;
+}
+.button:hover {
+    cursor: pointer;
+    user-select: none;
 }
