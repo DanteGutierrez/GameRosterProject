@@ -1,0 +1,35 @@
+html {
+    height: 100%;
+    width: 100%;
+    background-color:azure;
+}
+body {
+}
+.grid {
+    height: fit-content;
+    width: fit-content;
+    background-color: ghostwhite;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+}
+.box {
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+    background-color: lightgrey;
+}
+.button {
+    margin: 3px;
+    padding: 2px;
+    border: 1px solid grey;
+}
+.button:hover {
+    cursor: pointer;
+    user-select: none;
+}
