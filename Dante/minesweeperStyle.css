@@ -22,7 +22,11 @@ body {
     width: 30px;
     height: 30px;
     margin: 2px;
+    display: flex;
     background-color: lightgrey;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
 }
 .button {
     margin: 3px;
