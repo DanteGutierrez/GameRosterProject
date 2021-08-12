@@ -3,8 +3,6 @@ html {
     width: 100%;
     background-color:azure;
 }
-body {
-}
 .grid {
     height: fit-content;
     width: fit-content;
@@ -36,4 +34,40 @@ body {
 .button:hover {
     cursor: pointer;
     user-select: none;
+}
+.mine_style {
+    font-weight: bold;
+    background-color: grey;
+}
+.one_style {
+    font-weight: bold;
+    background-color: white;
+}
+.two_style {
+    font-weight: bold;
+    background-color: lightgreen;
+}
+.three_style {
+    font-weight: bold;
+    background-color: lightseagreen;
+}
+.four_style {
+    font-weight: bold;
+    background-color: lightskyblue;
+}
+.five_style {
+font-weight: bold;
+    background-color: yellow;
+}
+.six_style {
+font-weight: bold;
+    background-color: orange;
+}
+.seven_style {
+font-weight: bold;
+    background-color: red;
+}
+.eight_style {
+font-weight: bold;
+    background-color: purple;
 }
