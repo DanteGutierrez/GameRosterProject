@@ -1,12 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+<html lang="en" class = "index">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Main Menu</title>
+        <link href = "style.css" rel = "stylesheet">
+    </head>
+    <body>
+        <h1>Welcome to the Game Roster</h1>
+        <!--This is where the user will pick a game-->
+        <div class = "game_menu">
+            <!--This will lead to minesweeper-->
+            <!--By Dante-->
+            <div class = "minesweeper" id = "minesweeper_btn">
+                <h3 id = "minesweeper_btn">MineSweeper</h3>
+                <!--Description of the game goes here whe the button pressed-->
+                <div class = "desc_one" id = "desc_one"></div>
+                <!--This will allow you to click the buttons to play or close description-->
+            </div>
+            <!--This will lead to the Casino Area-->
+            <!--By Eric-->
+            <div class = "casino" id = "casino_btn">
+                <h3 id = "casino_btn">The Casino Area</h3>
+                <div class = "desc_two" id = "desc_two"></div>
+            </div>
+            <!--This will lead to Tetris-->
+            <!--By Nicole-->
+            <div class = "tetris" id = "tetris_btn">
+                <h3 id = "tetris_btn">Tetris</h3>
+                <div class = "desc_three" id = "desc_three"></div>
+            </div>
+            <!--This will lead to Waifu Clicker-->
+            <!--By Randy-->
+            <div class = "waifu_clicker" id = "waifu_clicker_btn">
+                <h3 id = "waifu_clicker_btn">Waifu Clicker</h3>
+                <div class = "desc_four" id = "desc_four"></div>
+            </div>
+            <!--This will lead to the Trivia Game-->
+            <!--Brenden-->
+            <div class = "trivia" id = "trivia_btn">
+                <h3 id = "trivia_btn">The Trivia Game</h3>
+                <div class = "desc_five" id = "desc_five"></div>
+            </div>
+        </div>
+
+        <script src = "index.js"></script>
+    </body>
 </html>
