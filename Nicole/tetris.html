@@ -5,11 +5,24 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tetris</title>
-        <link href = "style.css" rel = "stylesheet">
+        <link href = "tetris_style.css" rel = "stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
     </head>
     <body>
-        <h1>Tetris</h1>
-        <canvas id="tetris_canvas" width="240" height="400"></canvas>
+        <div>
+            <h1>Tetris</h1>
+            <div class = "game_board">
+                <div class = "score_board">
+                    Score:
+                    <div class = "score" id = "score">0</div>
+                </div>
+                <canvas class = "tetris_canvas" id="tetris_canvas" width="240" height="400"></canvas>
+            </div>
+            
+            
+        </div>
         <script src = "tetris_script.js"></script>
     </body>
 </html>

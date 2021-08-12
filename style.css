@@ -1,42 +1,57 @@
 .game_menu
 {
-    border: 2px solid #000;
+    border: 2px solid #2191FB;;
     width: 300px;
     text-align: center;
     cursor: pointer;
+    margin:auto;
+    color: #8CDEDC;
 }
 .minesweeper
 {
-    border: 2px solid #000;
+    border: 2px solid #2191FB;;
     width: 300px;
     text-align: center;
     cursor: pointer;
 }
 .casino
 {
-    border: 2px solid #000;
+    border: 2px solid #2191FB;;
     width: 300px;
     text-align: center;
     cursor: pointer;
 }
 .tetris
 {
-    border: 2px solid #000;
+    border: 2px solid #2191FB;;
     width: 300px;
     text-align: center;
     cursor: pointer;
 }
 .waifu_clicker
 {
-    border: 2px solid #000;
+    border: 2px solid #2191FB;;
     width: 300px;
     text-align: center;
     cursor: pointer;
 }
 .trivia
 {
-    border: 2px solid #000;
+    border: 2px solid #2191FB;;
     width: 300px;
     text-align: center;
     cursor: pointer;
+}
+body
+{
+    border: 4px solid #BA274A;
+    text-align: center;
+    padding-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #841C26;
+    color: #B2ECE1;
+}
+html
+{
+    background-color: #2191FB;
 }

@@ -1,0 +1,30 @@
+.game_board
+{
+    border: 3px solid #020122;
+    width: 300px;
+    margin: auto;
+    padding-bottom: 30px;
+    color: #EDD382;
+    background-color: #EDD382;
+}
+.score_board
+{
+    background-color: #020122;
+    width: 100px;
+    margin: auto;
+    border: 2px solid #F4442E;
+}
+.tetris_canvas
+{
+    border:2px solid #F4442E
+}
+body
+{
+    text-align: center;
+    color: #020122;
+}
+html
+{
+    font-family: 'Roboto', sans-serif;
+    background-color: #F2F3AE;
+}

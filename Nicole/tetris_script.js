@@ -1,13 +1,35 @@
 const tetris_canvas = document.getElementById("tetris_canvas");
 const context = tetris_canvas.getContext("2d");
+const score_board = document.getElementById("score");
 
 //This enlarges everything by 20 times
 context.scale(20, 20);
 
 //This sets up the colour of the canvas
-context.fillStyle = "#000";
+context.fillStyle = "#020122";
 //This sets the size of the entire canvas
 context.fillRect(0, 0, tetris_canvas.width, tetris_canvas.height);
+
+function arenaSweep()
+{
+    let rowCount = 1;
+    outer: for(let y = arena.length - 1; y > 0; y--)
+    {
+        for(let x = 0;x < arena[y].length; x++)
+        {
+            if(arena[y][x] == 0)
+            {
+                continue outer;
+            }
+        }
+        const row = arena.splice(y, 1)[0].fill(0);
+        arena.unshift(row);
+        y++;
+
+        player.score += rowCount * 10;
+        rowCount *=2;
+    }
+}
 
 function collision(arena, player)
 {
@@ -100,7 +122,7 @@ function createPiece(type)
 function draw()
 {
     //This clears the board to help with duplication of the piece
-    context.fillStyle = "#000";
+    context.fillStyle = "#020122";
     context.fillRect(0, 0, tetris_canvas.width, tetris_canvas.height);
 
     drawMatrix(arena, {x:0, y:0})
@@ -155,6 +177,8 @@ function playerDrop()
         player.pos.y--;
         merge(arena, player);
         playerReset();
+        arenaSweep();
+        updateScore();
     }
 }
 
@@ -167,6 +191,8 @@ function playerReset()
     if(collision(arena, player))
     {
         arena.forEach(row => row.fill(0));
+        player.score = 0;
+        updateScore();
     }
 }
 
@@ -241,14 +267,20 @@ const colours = [
     "#48233C",
 ];
 
+function updateScore()
+{
+    score_board.innerText = player.score;
+}
+
 const arena = createMatrix(12, 20);
 
 
 //This function sets the posistion of the piece
 const player = 
 {
-    pos: {x: 5, y: 0},
-    matrix:createPiece("tee"),
+    pos: {x: 0, y: 0},
+    matrix: null,
+    score: 0,
 }
 document.addEventListener('keydown', event =>
 {
@@ -274,4 +306,5 @@ document.addEventListener('keydown', event =>
     }
 })
 
+playerReset();
 update();
