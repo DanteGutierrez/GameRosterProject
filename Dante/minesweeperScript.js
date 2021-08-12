@@ -114,3 +114,13 @@ document.getElementById("SubRow").addEventListener("click", (evt) => {
         loadBoard();
     }
 });
+document.getElementById("AddMine").addEventListener("click", (evt) => {
+    mines++;
+    loadBoard();
+});
+document.getElementById("SubMine").addEventListener("click", (evt) => {
+    if (mines > 1) {
+        mines--;
+        loadBoard();
+    }
+});
