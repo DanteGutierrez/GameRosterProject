@@ -1,7 +1,9 @@
 let row = 12;
 let column = 12;
 let grid = [];
-let mines = 3;
+let mines = 20;
+let xray = false;
+let trueTiles = [];
 
 const randomizeArray = (array) => {
     for (let index = array.length - 1; index > 0; index--) {
@@ -45,6 +47,7 @@ const numberToString = (number) => {
     let string = '';
     switch (number) {
         case 0:
+            string = 'zero_style'
             break;
         case 1:
             string = 'one_style';
@@ -73,6 +76,8 @@ const numberToString = (number) => {
         case 'M':
             string = 'mine_style';
             break;
+        default:
+            break;
     }
     return string;
 }
@@ -89,7 +94,31 @@ const loadBoard = () => {
     for (let r = 0; r < row; r++) {
         board.innerHTML += '<div class="row boardRow"></div>';
         for (let c = 0; c < column; c++) {
-            document.getElementsByClassName("boardRow")[r].innerHTML += '<div class="box ' + numberToString(grid[r][c]) + '">' + grid[r][c] + '</div>';
+            let tile = document.getElementsByClassName("boardRow")[r];
+            tile.innerHTML += '<div class="box"></div>';
+        }
+        if (xray) {
+            xrayBoard();
+        }
+    }
+    trueTiles = [];
+    tempArray = document.getElementsByClassName("box");
+    for (let r = 0; r < row; r++) {
+        trueTiles[r] = [];
+        for (let c = 0; c < column; c++) {
+            trueTiles[r][c] = tempArray[(column * r) + c];
+            trueTiles[r][c].addEventListener("click", (evt) => {
+                trueTiles[r][c].classList.add(numberToString(grid[r][c]));
+                trueTiles[r][c].innerHTML = (grid[r][c] == 0 ? '' : grid[r][c]);
+            });
+        }
+    }
+}
+const xrayBoard = () => {
+    for (let r = 0; r < row; r++) {
+        for (let c = 0; c < column; c++) {
+            trueTiles[r][c].classList.add(numberToString(grid[r][c]));
+            trueTiles[r][c].innerHTML = (grid[r][c] == 0 ? '' : grid[r][c]);
         }
     }
 }
@@ -123,4 +152,7 @@ document.getElementById("SubMine").addEventListener("click", (evt) => {
         mines--;
         loadBoard();
     }
+});
+document.getElementById("Cheater").addEventListener("click", (evt) => {
+    xrayBoard();
 });

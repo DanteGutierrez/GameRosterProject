@@ -39,6 +39,9 @@ html {
     font-weight: bold;
     background-color: grey;
 }
+.zero_style {
+    background-color: darkgrey;
+}
 .one_style {
     font-weight: bold;
     background-color: white;
@@ -56,18 +59,18 @@ html {
     background-color: lightskyblue;
 }
 .five_style {
-font-weight: bold;
+    font-weight: bold;
     background-color: yellow;
 }
 .six_style {
-font-weight: bold;
+    font-weight: bold;
     background-color: orange;
 }
 .seven_style {
-font-weight: bold;
+    font-weight: bold;
     background-color: red;
 }
 .eight_style {
-font-weight: bold;
+    font-weight: bold;
     background-color: purple;
 }
