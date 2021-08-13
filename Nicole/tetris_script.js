@@ -145,6 +145,8 @@ function drawMatrix(matrix, offset)
     });
 }
 
+
+
 function merge(arena, player)
 {
     player.matrix.forEach((row, y) => 
@@ -179,6 +181,7 @@ function playerDrop()
         playerReset();
         arenaSweep();
         updateScore();
+        levels();
     }
 }
 
@@ -254,6 +257,26 @@ function update(time = 0)
     }
     draw();
     requestAnimationFrame(update);
+}
+
+function levels()
+{
+    if(player.score == 100)
+    {
+        dropInterval = 900;
+    }else if(player.score == 200)
+    {
+        dropInterval = 800;
+    }else if(player.score == 300)
+    {
+        dropInterval  = 600;
+    }else if(player.score == 400)
+    {
+        dropInterval = 400;
+    }else if(player.score >= 500)
+    {
+        dropInterval = 100;
+    }
 }
 
 const colours = [
