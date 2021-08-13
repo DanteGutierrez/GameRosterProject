@@ -2,16 +2,61 @@ h1{
     text-align: center;
 }
 
+#NameBox{
+    text-align: center;
+    
+}
+
 #waifu{
     position: absolute;
-    right: 0px;
+    top: 250px;
+    right: 150px;
     width: 300px;
-    padding: 100px;
 }
 
 #money{
-font-size: 20px;
-width: 200px;
-text-align: center;
-outline-style: solid;
+    font-size: 20px;
+    width: 200px;
+    left: 100px;
+    text-align: center;
+    outline-style: solid;
+}
+
+#waifuUpgrade1 {
+    position: absolute;
+    left: 0px;
+    margin-top: 50px;
+    outline-style: solid;
+}
+
+#waifuUpgrade2 {
+    position: absolute;
+    left: 0px;
+    margin-top: 200px;
+    outline-style: solid;
+}
+
+#waifuUpgrade3 {
+    position: absolute;
+    left: 0px;
+    margin-top: 350px;
+    outline-style: solid;
+}
+
+html{
+    background-image: url("images/aadsfwwe.jpg");
+    background-size: cover;
+
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:fit-content;
+}
+
+#title{
+    width: 100%;
 }
