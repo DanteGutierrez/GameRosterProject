@@ -62,7 +62,7 @@ function hit() {
     playerCards.innerHTML = "Your Cards: " + JSON.stringify(player.cards);
     playerScore.innerHTML = "Your Score: " + player.score;
     totalCardsPulled += 1;
-    if (player.score > 21) {
+    if (player.score >= 21) {
         checkWinner();
     }
 }
@@ -115,7 +115,7 @@ function reset() {
     newGameButton.disabled = false;
     hitButton.disabled = true;
     standButton.disabled = true;
-    board.innerHTML = "";
+    board.innerHTML = " ";
 }
 function checkWinner() {
     if (player.score == 21) {
