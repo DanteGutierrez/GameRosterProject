@@ -97,9 +97,6 @@ const loadBoard = () => {
             let tile = document.getElementsByClassName("boardRow")[r];
             tile.innerHTML += '<div class="box"></div>';
         }
-        if (xray) {
-            xrayBoard();
-        }
     }
     trueTiles = [];
     tempArray = document.getElementsByClassName("box");
@@ -112,6 +109,9 @@ const loadBoard = () => {
                 trueTiles[r][c].innerHTML = (grid[r][c] == 0 ? '' : grid[r][c]);
             });
         }
+    }
+    if (xray) {
+        xrayBoard();
     }
 }
 const xrayBoard = () => {
@@ -154,5 +154,6 @@ document.getElementById("SubMine").addEventListener("click", (evt) => {
     }
 });
 document.getElementById("Cheater").addEventListener("click", (evt) => {
+    xray = true;
     xrayBoard();
 });
