@@ -4,6 +4,7 @@ let grid = [];
 let mines = 20;
 let xray = false;
 let trueTiles = [];
+let queue = [];
 
 const randomizeArray = (array) => {
     for (let index = array.length - 1; index > 0; index--) {
@@ -81,8 +82,44 @@ const numberToString = (number) => {
     }
     return string;
 }
+const singleTile = (r, c) => {
+    trueTiles[r][c].classList.add(numberToString(grid[r][c]));
+    trueTiles[r][c].innerHTML = (grid[r][c] == 0 ? '' : grid[r][c]);
+    return grid[r][c];
+}
+const queueTiles = (r, c) => {
+    if (queue[0] == null) {
+        queue[0] = ([r, c]);
+    }
+    if (grid[r][c] == 0) {
+        console.log("test");
+        for (let modR = -1; modR < 2; modR++) {
+            for (let modC = -1; modC < 2; modC++) {
+                if (r + modR >= 0 && c + modC >= 0 && r + modR < grid.length && c + modC < grid[r].length && !trueTiles[r + modR][c + modC].classList.contains("revealed")) {
+                    let error = false;
+                    queue.forEach(coord => {
+                        if (coord[0] == r + modR && coord[1] == c + modC) {
+                            error = true;
+                        }
+                    });
+                    if (!error) {
+                        queue.push([r + modR, c + modC]);
+                    }
+                }
+            }
+        }
+    }
+}
+const revealTiles = () => {
+    while (queue.length > 0) {
+        singleTile(queue[0][0], queue[0][1]);
+        trueTiles[queue[0][0]][queue[0][1]].classList.add("revealed");
+        queueTiles(queue[0][0], queue[0][1]);
+        queue.shift();
+    }
+};
 const loadBoard = () => {
-    var board = document.getElementById("Board");
+    let board = document.getElementById("Board");
     board.innerHTML = '';
     let tempArray = [];
     for (let r = 0; r < row; r++) {
@@ -105,8 +142,8 @@ const loadBoard = () => {
         for (let c = 0; c < column; c++) {
             trueTiles[r][c] = tempArray[(column * r) + c];
             trueTiles[r][c].addEventListener("click", (evt) => {
-                trueTiles[r][c].classList.add(numberToString(grid[r][c]));
-                trueTiles[r][c].innerHTML = (grid[r][c] == 0 ? '' : grid[r][c]);
+                queueTiles(r, c);
+                revealTiles();
             });
         }
     }
@@ -117,8 +154,17 @@ const loadBoard = () => {
 const xrayBoard = () => {
     for (let r = 0; r < row; r++) {
         for (let c = 0; c < column; c++) {
-            trueTiles[r][c].classList.add(numberToString(grid[r][c]));
-            trueTiles[r][c].innerHTML = (grid[r][c] == 0 ? '' : grid[r][c]);
+            if (xray) {
+                singleTile(r, c);
+            }
+            else {
+                if (!trueTiles[r][c].classList.contains("revealed")) {
+                    if (trueTiles[r][c].classList.contains(numberToString(grid[r][c]))) {
+                        trueTiles[r][c].classList.remove(numberToString(grid[r][c]));
+                    }
+                    trueTiles[r][c].innerHTML = '';
+                }
+            }
         }
     }
 }
@@ -154,6 +200,6 @@ document.getElementById("SubMine").addEventListener("click", (evt) => {
     }
 });
 document.getElementById("Cheater").addEventListener("click", (evt) => {
-    xray = true;
+    xray = !xray;
     xrayBoard();
 });
