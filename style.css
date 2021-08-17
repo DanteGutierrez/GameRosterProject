@@ -15,6 +15,7 @@ Main Colour Pallete
     cursor: pointer;
     margin:auto;
     color: #313638;
+    user-select: none;
 }
 .minesweeper
 {
