@@ -38,7 +38,7 @@ html {
 }
 .mine_style {
     font-weight: bold;
-    background-color: grey;
+    background-color: red;
 }
 .zero_style {
     background-color: darkgrey;
@@ -69,9 +69,9 @@ html {
 }
 .seven_style {
     font-weight: bold;
-    background-color: red;
+    background-color: orangered;
 }
 .eight_style {
     font-weight: bold;
-    background-color: purple;
+    background-color: rebeccapurple;
 }

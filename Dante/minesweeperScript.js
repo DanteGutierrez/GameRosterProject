@@ -5,6 +5,7 @@ let mines = 20;
 let xray = false;
 let trueTiles = [];
 let queue = [];
+let running = false;
 
 const randomizeArray = (array) => {
     for (let index = array.length - 1; index > 0; index--) {
@@ -16,13 +17,17 @@ const randomizeArray = (array) => {
     return array;
 }
 const countBoard = () => {
-    for (let r = 0; r < grid.length; r++) {
-        for (let c = 0; c < grid[r].length; c++) {
-            let counter = 0;
+    for (let r = 0; r < grid.length; r++) { // Row Iteration
+        for (let c = 0; c < grid[r].length; c++) { // Column Iteration
+            let counter = 0; // Will keep track of surrounding mines
             if (grid[r][c] != 'M') {
-                for (let modR = -1; modR < 2; modR++) {
-                    for (let modC = -1; modC < 2; modC++) {
-                        if (r + modR >= 0 && c + modC >= 0 && r + modR < grid.length && c + modC < grid[r].length && !(modR == 0 && modC == 0)) {
+                for (let modR = -1; modR < 2; modR++) { // Vision Up/Down
+                    for (let modC = -1; modC < 2; modC++) { // Vision Left/Right
+                        if (r + modR >= 0
+                            && c + modC >= 0
+                            && r + modR < grid.length
+                            && c + modC < grid[r].length
+                            && !(modR == 0 && modC == 0)) {
                             if (grid[r + modR][c + modC] == 'M') {
                                 counter++
                             }
@@ -82,52 +87,94 @@ const numberToString = (number) => {
     }
     return string;
 }
-const singleTile = (r, c) => {
-    trueTiles[r][c].classList.add(numberToString(grid[r][c]));
-    trueTiles[r][c].innerHTML = (grid[r][c] == 0 ? '' : grid[r][c]);
-    return grid[r][c];
-}
-const queueTiles = (r, c) => {
-    if (queue[0] == null) {
-        queue[0] = ([r, c]);
-    }
-    if (grid[r][c] == 0) {
-        console.log("test");
-        for (let modR = -1; modR < 2; modR++) {
-            for (let modC = -1; modC < 2; modC++) {
-                if (r + modR >= 0 && c + modC >= 0 && r + modR < grid.length && c + modC < grid[r].length && !trueTiles[r + modR][c + modC].classList.contains("revealed")) {
-                    let error = false;
-                    queue.forEach(coord => {
-                        if (coord[0] == r + modR && coord[1] == c + modC) {
-                            error = true;
-                        }
-                    });
-                    if (!error) {
-                        queue.push([r + modR, c + modC]);
-                    }
-                }
+const gameLost = () => {
+    running = false;
+    for (let r = 0; r < row; r++) {
+        for (let c = 0; c < column; c++) {
+            if (grid[r][c] == 'M') {
+                singleTile(r, c);
             }
         }
     }
 }
+const singleTile = (r, c) => {
+    let box = trueTiles[r][c];
+    let boxValue = grid[r][c];
+    if (!box.classList.contains("flagged")) {
+        box.classList.add(numberToString(boxValue));
+        box.innerHTML = (boxValue == 0 ? '' : boxValue);
+    }
+    return boxValue;
+}
+const queueTiles = (r, c) => {
+    if (!trueTiles[r][c].classList.contains("flagged")) {
+        // Start the Queue
+        if (queue[0] == null) {
+            queue[0] = ([r, c]);
+        }
+        if (grid[r][c] == 0) { // Check if the tile is blank
+            for (let modR = -1; modR < 2; modR++) { // Vision Up/Down
+                for (let modC = -1; modC < 2; modC++) { // Vision Left/Right
+                    if (r + modR >= 0 && c + modC >= 0
+                        && r + modR < grid.length
+                        && c + modC < grid[r].length
+                        && !trueTiles[r + modR][c + modC].classList.contains("revealed")) {
+                        let error = false;
+                        // Bad way of checking if tile is already Queue'd
+                        queue.forEach(coord => {
+                            if (coord[0] == r + modR && coord[1] == c + modC) {
+                                error = true;
+                            }
+                        });
+                        if (!error) {
+                            queue.push([r + modR, c + modC]);
+                        }
+                    }
+                }
+            }
+        }  
+    }
+}
 const revealTiles = () => {
     while (queue.length > 0) {
-        singleTile(queue[0][0], queue[0][1]);
-        trueTiles[queue[0][0]][queue[0][1]].classList.add("revealed");
-        queueTiles(queue[0][0], queue[0][1]);
+        let box = trueTiles[queue[0][0]][queue[0][1]];
+        if (!box.classList.contains("flagged")) {
+            boxValue = singleTile(queue[0][0], queue[0][1]);
+            if (boxValue == 'M') {
+                gameLost();
+            }
+            box.classList.add("revealed");
+            queueTiles(queue[0][0], queue[0][1]);
+        }
         queue.shift();
     }
+};
+const flagTile = (r, c) => {
+    let box = trueTiles[r][c];
+    if (!box.classList.contains("revealed")) {
+        if (box.classList.contains("flagged")) {
+            box.classList.remove("flagged");
+            box.innerHTML = "";
+        }
+        else {
+            box.classList.add("flagged");
+            box.innerHTML = "F";
+        }    
+    }
+    
 };
 const loadBoard = () => {
     let board = document.getElementById("Board");
     board.innerHTML = '';
     let tempArray = [];
+    // Fill array with mines
     for (let r = 0; r < row; r++) {
         for (let c = 0; c < column; c++) {
             tempArray[(column * r) + c] = (column * r) + c < mines ? 'M' : '';
         }
     }
     arrayToGrid(randomizeArray(tempArray));
+    // Tile Display Grid
     for (let r = 0; r < row; r++) {
         board.innerHTML += '<div class="row boardRow"></div>';
         for (let c = 0; c < column; c++) {
@@ -135,34 +182,48 @@ const loadBoard = () => {
             tile.innerHTML += '<div class="box"></div>';
         }
     }
+    // Tile Association Grid
     trueTiles = [];
     tempArray = document.getElementsByClassName("box");
     for (let r = 0; r < row; r++) {
         trueTiles[r] = [];
         for (let c = 0; c < column; c++) {
             trueTiles[r][c] = tempArray[(column * r) + c];
+            // Tile Click Event
             trueTiles[r][c].addEventListener("click", (evt) => {
-                queueTiles(r, c);
-                revealTiles();
+                if (running) {
+                    if (evt.shiftKey) {
+                        flagTile(r, c);
+                    }
+                    else {
+                        queueTiles(r, c);
+                        revealTiles();
+                    }    
+                }
             });
         }
     }
     if (xray) {
         xrayBoard();
     }
+    queue = [];
+    running = true;
 }
 const xrayBoard = () => {
     for (let r = 0; r < row; r++) {
         for (let c = 0; c < column; c++) {
+            let box = trueTiles[r][c];
+            let boxValue = grid[r][c];
             if (xray) {
                 singleTile(r, c);
             }
             else {
-                if (!trueTiles[r][c].classList.contains("revealed")) {
-                    if (trueTiles[r][c].classList.contains(numberToString(grid[r][c]))) {
-                        trueTiles[r][c].classList.remove(numberToString(grid[r][c]));
+                if (!box.classList.contains("revealed")
+                    && !box.classList.contains("flagged")) {
+                    if (box.classList.contains(numberToString(boxValue))) {
+                        box.classList.remove(numberToString(boxValue));
                     }
-                    trueTiles[r][c].innerHTML = '';
+                    box.innerHTML = '';
                 }
             }
         }
