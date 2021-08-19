@@ -6,7 +6,11 @@ let xray = false;
 let trueTiles = [];
 let queue = [];
 let running = false;
+let winning = 0;
 
+const setResultText = (text) => {
+    document.getElementById("Result").innerHTML = text;
+};
 const randomizeArray = (array) => {
     for (let index = array.length - 1; index > 0; index--) {
         let randomIndex = Math.floor(Math.random() * (index + 1));
@@ -15,7 +19,7 @@ const randomizeArray = (array) => {
         array[randomIndex] = temporary;
     }
     return array;
-}
+};
 const countBoard = () => {
     for (let r = 0; r < grid.length; r++) { // Row Iteration
         for (let c = 0; c < grid[r].length; c++) { // Column Iteration
@@ -38,7 +42,7 @@ const countBoard = () => {
             }
         }
     }
-}
+};
 const arrayToGrid = (array) => {
     grid = [];
     for (let r = 0; r < row; r++) {
@@ -48,7 +52,7 @@ const arrayToGrid = (array) => {
         }
     }
     countBoard();
-}
+};
 const numberToString = (number) => {
     let string = '';
     switch (number) {
@@ -86,17 +90,26 @@ const numberToString = (number) => {
             break;
     }
     return string;
-}
+};
 const gameLost = () => {
     running = false;
     for (let r = 0; r < row; r++) {
         for (let c = 0; c < column; c++) {
+            let box = trueTiles[r][c];
             if (grid[r][c] == 'M') {
+                if (box.classList.contains("flagged")) {
+                    box.classList.remove("flagged");
+                }
                 singleTile(r, c);
             }
         }
     }
-}
+    setResultText("Loser...");
+};
+const gameWon = () => {
+    running = false;
+    setResultText("Winner!");
+};
 const singleTile = (r, c) => {
     let box = trueTiles[r][c];
     let boxValue = grid[r][c];
@@ -105,7 +118,7 @@ const singleTile = (r, c) => {
         box.innerHTML = (boxValue == 0 ? '' : boxValue);
     }
     return boxValue;
-}
+};
 const queueTiles = (r, c) => {
     if (!trueTiles[r][c].classList.contains("flagged")) {
         // Start the Queue
@@ -132,16 +145,20 @@ const queueTiles = (r, c) => {
                     }
                 }
             }
-        }  
+        }
     }
-}
+};
 const revealTiles = () => {
     while (queue.length > 0) {
         let box = trueTiles[queue[0][0]][queue[0][1]];
         if (!box.classList.contains("flagged")) {
             boxValue = singleTile(queue[0][0], queue[0][1]);
+            winning--;
             if (boxValue == 'M') {
                 gameLost();
+            }
+            else if (winning == 0) {
+                gameWon();
             }
             box.classList.add("revealed");
             queueTiles(queue[0][0], queue[0][1]);
@@ -168,9 +185,15 @@ const loadBoard = () => {
     board.innerHTML = '';
     let tempArray = [];
     // Fill array with mines
+    winning = 0;
     for (let r = 0; r < row; r++) {
         for (let c = 0; c < column; c++) {
-            tempArray[(column * r) + c] = (column * r) + c < mines ? 'M' : '';
+            let tempMine = 'M';
+            if ((column * r) + c >= mines) {
+                tempMine = '';
+                winning++;
+            }
+            tempArray[(column * r) + c] = tempMine;
         }
     }
     arrayToGrid(randomizeArray(tempArray));
@@ -198,17 +221,18 @@ const loadBoard = () => {
                     else {
                         queueTiles(r, c);
                         revealTiles();
-                    }    
+                    }
                 }
             });
         }
     }
+    setResultText("");
     if (xray) {
         xrayBoard();
     }
     queue = [];
     running = true;
-}
+};
 const xrayBoard = () => {
     for (let r = 0; r < row; r++) {
         for (let c = 0; c < column; c++) {
@@ -228,7 +252,8 @@ const xrayBoard = () => {
             }
         }
     }
-}
+    setResultText(xray ? "Cheater!" : "");
+};
 loadBoard();
 document.getElementById("AddColumn").addEventListener("click", (evt) => {
     column++;
@@ -263,4 +288,7 @@ document.getElementById("SubMine").addEventListener("click", (evt) => {
 document.getElementById("Cheater").addEventListener("click", (evt) => {
     xray = !xray;
     xrayBoard();
+});
+document.getElementById("Reset").addEventListener("click", (evt) => {
+    loadBoard();
 });

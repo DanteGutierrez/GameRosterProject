@@ -75,3 +75,7 @@ html {
     font-weight: bold;
     background-color: rebeccapurple;
 }
+.label {
+    font-weight: bold;
+    margin: 0px 10px;
+}
