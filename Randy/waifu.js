@@ -7,7 +7,7 @@ let money_btn;
 let money_count;
 let UpgradePage;
 let Background1;
-let Waifu1;
+// let Waifu1;
 let Waifu2;
 let MainPage;
 let Upgrade1;
@@ -139,7 +139,7 @@ function runtime(){
     money_count = document.getElementById('money');
     UpgradePage = document.getElementById('UpgradesPage');
     Background1 = document.getElementById('Background1');
-    Waifu1 = document.getElementById('Waifu1');
+    // Waifu1 = document.getElementById('Waifu1');
     Waifu2 = document.getElementById('Waifu2');
 
     console.log(sessionStorage.getItem('start'));
@@ -157,7 +157,7 @@ function runtime(){
     money_btn.addEventListener('click', onClick);
     UpgradePage.addEventListener('click', UpgradesPageOnClick);
     Background1.addEventListener('click',Background1onClick);
-    Waifu1.addEventListener('click',Waifu1onClick);
+    // Waifu1.addEventListener('click',Waifu1onClick);
     Waifu2.addEventListener('click',Waifu2onClick);
 
     
