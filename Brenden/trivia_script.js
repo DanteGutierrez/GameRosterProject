@@ -6,15 +6,35 @@ let cate_four;
 let cate_five;
 let cate_six;
 let cate_eight;
-let cate_nine;
+let main_menu;
 
 //Trivia game objects
 let question_txt;
+let category_txt;
 let opt_one;
 let opt_two;
 let opt_three;
 let opt_four;
 let score;
+let answer;
+let correct_ans;
+
+function ans_check()
+{
+    if(answer == correct_ans)
+    {
+        player.score = player.score + 10;
+        score.innerHTML = player.score;
+        random();
+    }else
+    {
+        window.location.replace("trivia_menu.html");
+    }
+    if(player.score == 100)
+    {
+        window.location.replace("trivia_menu.html");
+    }
+}
 
 let category = 0;
 
@@ -55,9 +75,10 @@ let menuOnClick = evt =>
         category = 7;
         sessionStorage.setItem(player.ques_category, category);
         window.location.replace("trivia.html");
+    }else if(evt.target.id == "main_menu")
+    {
+        window.location.replace("../index.html");
     }
-    
-    
 }
 
 function onLoad()
@@ -70,7 +91,7 @@ function onLoad()
         cate_five = document.getElementById("cate_five");
         cate_six = document.getElementById("cate_six");
         cate_eight = document.getElementById("cate_eight");
-        cate_nine = document.getElementById("cate_nine");
+        main_menu = document.getElementById("main_menu");
 
         cate_one.addEventListener("click", menuOnClick);
         cate_two.addEventListener("click", menuOnClick);
@@ -78,30 +99,57 @@ function onLoad()
         cate_five.addEventListener("click", menuOnClick);
         cate_six.addEventListener("click", menuOnClick);
         cate_eight.addEventListener("click", menuOnClick);
-        cate_nine.addEventListener("click", menuOnClick);
+        main_menu.addEventListener("click", menuOnClick);
     }
     else if(document.URL.includes("trivia.html"))
     {
+        category_txt = document.getElementById("cate_name");
         question_txt = document.getElementById("question_txt");
         score = document.getElementById("score");
         opt_one = document.getElementById("opt_one");
         opt_two = document.getElementById("opt_two");
         opt_three = document.getElementById("opt_three");
         opt_four = document.getElementById("opt_four");
-        console.log(category);
         player.ques_category = sessionStorage.getItem(player.ques_category);
+
+        category_txt.innerHTML = question_category[player.ques_category];
+        score.innerHTML = 0;
+
+        opt_one.addEventListener('click', onClick);
+        opt_two.addEventListener('click', onClick);
+        opt_three.addEventListener('click', onClick);
+        opt_four.addEventListener('click', onClick);
+        random();
     }
 }
 
 let onClick = evt =>
 {
-    
+    if(evt.target.id == "opt_one")
+    {
+        answer = opt_one.textContent;
+        ans_check();
+    }else if(evt.target.id == "opt_two")
+    {
+        answer = opt_two.textContent;
+        ans_check();
+    }else if(evt.target.id == "opt_three")
+    {
+        answer = opt_three.textContent;
+        ans_check();
+    }else if(evt.target.id == "opt_four")
+    {
+        answer = opt_four.textContent;
+        ans_check();
+    }
 }
 
 function populate()
 {
 
 }
+
+
 const player =
 {
     score: 0,
@@ -110,9 +158,6 @@ const player =
     difficult: 0,
 }
 
-let question_category = [
-    null, "History", "Geography", "Sports", "Pop Culture", "Gaming", "Nations", "Foods", "Music"
-]
 
 //[ans1, ans2, ans3, correctans]
 //question_array[0][1][0][question][ans]
@@ -679,99 +724,54 @@ let question_array = [
                 "Slovenia"
             ]
         ]
-    ],
-    [//Food
-        [//1
-            "What is the main ingredients of the sandwich called Kota",
-            [
-                "Bacon, Eggs and Mayo",
-                "Stewed Meat and Cabbage",
-                "Crisps and cucumbers",
-                "Fish, Chips, Egg, and seasoned Buns"
-            ]
-        ],
-        [//2
-            "What is the nation that Sausages come from?",
-            [
-                "Germany",
-                "Rome",
-                "Iraq",
-                "Saudi Arabia"
-            ]
-        ],
-        [//3
-            "Which of these vegetables do not come from the same plant",
-            [
-                "Brusselsprouts",
-                "Cabbage",
-                "Broccoli",
-                "Lettuce"
-            ]
-        ],
-        [//4
-            "What is the most popular non-alchoholic drink in Russia?",
-            [
-                "Coffee",
-                "Tea",
-                "NA-Kvass",
-                "Kompot"
-            ]
-        ],
-        [//5
-            "What food/drink makes one of Boston's nickname Bean Town?",
-            [
-                "Coffee",
-                "Green Beans",
-                "Mollasses",
-                "Baked Beans"
-            ]
-        ],
-        [//6
-            "What food is steriotypically American?",
-            [
-                "Chips",
-                "Crisp",
-                "Hot Dogs",
-                "Hamburgers"
-            ]
-        ],
-        [//7
-            "What is the most famous food that Canada has ever made?",
-            [
-                "Beaver Tails",
-                "Toutierre",
-                "Fiddleheads",
-                "Poutine"
-            ]
-        ],
-        [//8
-            "What is the most steriotypical food made by New Englanders?",
-            [
-                "Baked Beans",
-                "Lobster Rolls",
-                "Fish and Chips",
-                "Clam Chowder"
-            ]
-        ],
-        [//9
-            "What are the ingredients of Fairy Bread",
-            [
-                "Vegemite, Butter, and Bread",
-                "Butter, Garlic Salt, and Bread",
-                "Sugar, Butter, and Bread",
-                "Sprinkle, Butter, and Bread"
-            ]
-        ],
-        [//10
-            "What is the national food of Russia?",
-            [
-                "Chebureki",
-                "Zharkoye",
-                "Halva",
-                "Pelmeni"
-            ]
-        ]
     ]
 ]
 
+let question_category = [
+    null, "History", "Geography", "Sports", "Pop Culture", "Gaming", "Nations", "Foods", "Music"
+]
+
+let question_select = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+let answer_select = [0, 1, 2, 3]
+
+//question_array[0][1][0][question][ans]
+function random()
+{
+   var ques_rand = Math.random() * (9 - 0) - 0| 0;
+   var ans_rand = Math.random() * (4 - 0) - 0| 0;
+   question_txt.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][0];
+   opt_one.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand]];
+   if(ans_rand == 0)
+   {
+    opt_two.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand + 1]];
+    opt_three.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand + 2]];
+    opt_four.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand + 3]];
+   }else if(ans_rand == 1)
+   {
+    opt_two.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand + 1]];
+    opt_three.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand + 2]];
+    opt_four.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand - 1]];
+   }else if(ans_rand == 2)
+   {
+    opt_two.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand - 2]];
+    opt_three.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand + 1]];
+    opt_four.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand- 1]];
+   }else if(ans_rand == 3)
+   {
+    opt_two.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand- 3]];
+    opt_three.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand - 2]];
+    opt_four.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand-1]];
+   }
+   correct_ans = question_array[0][player.ques_category][question_select[ques_rand]][1][3];
+   player.ques_id = ques_rand;
+   used_Ques_Rand.push(ques_rand);
+   used_Ans_Rand.push(ans_rand);
+   console.log(correct_ans);
+}
+
+let used_Ques_Rand = [];
+let used_Ans_Rand = [];
+
 onLoad();
+
