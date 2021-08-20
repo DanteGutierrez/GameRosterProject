@@ -27,6 +27,10 @@ html {
     flex-direction: column;
     user-select: none;
 }
+.center {
+    justify-content: center;
+    align-items: center;
+}
 .button {
     margin: 3px;
     padding: 2px;
@@ -77,5 +81,24 @@ html {
 }
 .label {
     font-weight: bold;
-    margin: 0px 10px;
+}
+.noSelect {
+    user-select: none;
+}
+#ReturnToRoster {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-bottom: black solid 1px;
+    background-color: white;
+    padding: 10px;
+}
+#BTN_Return {
+    border: black solid 1px;
+    padding: 3px;
+    font-weight: bold;
+    background-color: white;
+    text-decoration: none;
+    color: black;
 }

@@ -7,6 +7,8 @@ let trueTiles = [];
 let queue = [];
 let running = false;
 let winning = 0;
+let time = 0;
+let leaderBoard = [["Dante", 100], ["Randy", 100], ["Nicole", 100], ["Eric", 100]];
 
 const setResultText = (text) => {
     document.getElementById("Result").innerHTML = text;
@@ -109,6 +111,7 @@ const gameLost = () => {
 const gameWon = () => {
     running = false;
     setResultText("Winner!");
+    document.getElementById("Submit").hidden = false;
 };
 const singleTile = (r, c) => {
     let box = trueTiles[r][c];
@@ -180,7 +183,61 @@ const flagTile = (r, c) => {
     }
     
 };
+let secondPassed = () => {
+    document.getElementById("Hundreds").hidden = false;
+    document.getElementById("Tens").hidden = false;
+    document.getElementById("Ones").hidden = false;
+    if (running) {
+        time++;
+        if (time >= 100) {
+            document.getElementById("Hundreds").innerHTML = time.toString()[0];
+            document.getElementById("Tens").innerHTML = time.toString()[1];
+            document.getElementById("Ones").innerHTML = time.toString()[2];
+        }
+        else if (time >= 10) {
+            document.getElementById("Hundreds").hidden = true;
+            document.getElementById("Tens").innerHTML = time.toString()[0];
+            document.getElementById("Ones").innerHTML = time.toString()[1];
+        }
+        else {
+            document.getElementById("Hundreds").hidden = true;
+            document.getElementById("Tens").hidden = true;
+            document.getElementById("Ones").innerHTML = time.toString()[0];
+        }
+    }
+};
+const orderLeaderboard = () => {
+    let tempBoard = [];
+    for (let index = 0; index < leaderBoard.length; index++) {
+        let temp = leaderBoard[index];
+        let inputIndex = 0;
+        let error = true;
+        for (let secondIndex = 0; secondIndex < tempBoard.length; secondIndex++) {
+            if (temp[1] < tempBoard[secondIndex][1]) {
+                inputIndex = secondIndex;
+                error = false;
+                break;
+            }
+        }
+        if (error) {
+            tempBoard.push(temp);
+        }
+        else {
+            tempBoard.splice(inputIndex, 0, temp);
+        }
+    }
+    leaderBoard = tempBoard;
+}
+const leaderBoardUpdate = () => {
+    let theBoard = document.getElementById("Leaderboard");
+    theBoard.innerHTML = '';
+    orderLeaderboard();
+    for (let index = 0; index < leaderBoard.length; index++) {
+        theBoard.innerHTML += "<div class='row noSelect'>" + leaderBoard[index][0] + ": " + leaderBoard[index][1] + "</div>";
+    }
+}
 const loadBoard = () => {
+    document.getElementById("Submit").hidden = true;
     let board = document.getElementById("Board");
     board.innerHTML = '';
     let tempArray = [];
@@ -232,6 +289,9 @@ const loadBoard = () => {
     }
     queue = [];
     running = true;
+    time = -1;
+    secondPassed();
+    leaderBoardUpdate();
 };
 const xrayBoard = () => {
     for (let r = 0; r < row; r++) {
@@ -292,3 +352,10 @@ document.getElementById("Cheater").addEventListener("click", (evt) => {
 document.getElementById("Reset").addEventListener("click", (evt) => {
     loadBoard();
 });
+document.getElementById("Submit").addEventListener("click", (evt) => {
+    leaderBoard.unshift([document.getElementById("NameValue").value, time]);
+    leaderBoardUpdate();
+    document.getElementById("Submit").hidden = true;
+});
+
+let timer = setInterval(secondPassed, 1000);

@@ -57,7 +57,7 @@ let onClick = evt =>
                 e = 0;
             }else if(b == 1)
             {
-                window.location.replace("Eric/CardGame.html");
+                window.location.replace("Eric/Casino.html");
             }
         }
         if(evt.target.id == "tetris_btn")

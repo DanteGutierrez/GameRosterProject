@@ -3,7 +3,7 @@ html {
                 50% / 20px 20px
 }
 body{
-    background-color: rgb(255, 255, 255); 
+    background-image: url(RouletteImages/background.jpg); 
     width: 30%;
     margin: 20px auto;
     box-shadow: 10px 10px 5px #000;
@@ -11,4 +11,23 @@ body{
     border: 5px solid rgb(0, 0, 0);
     border-radius: 12px;
     text-align: center;
+    color: #f0f0f0;
+}
+img{
+    width: 10%;
+    height: 17%;
+    margin: auto;
+    padding: 10px;
+}
+div{
+    display: block;
+}
+.main_menu
+{
+    background-color: #f0f0f0;
+    color:#000000;
+    width: 70px;
+    margin: auto;
+    padding: 10px;
+    cursor: pointer;
 }

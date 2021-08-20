@@ -5,22 +5,44 @@
     <link href="minesweeperStyle.css" rel="stylesheet"/>
 </head>
 <body>
-    <h1>
-        Welcome to MineSweeper!
-    </h1>
-    <div class="row">
-        <div id="AddColumn" class="button">+column</div>
-        <div id="SubColumn" class="button">-column</div>
-        <div id="AddRow" class="button">+row</div>
-        <div id="SubRow" class="button">-row</div>
-        <div id="AddMine" class="button">+mine</div>
-        <div id="SubMine" class="button">-mine</div>
-        <div id="Reset" class="button">Reset</div>
-        <input id="Cheater" name="cheat" type="checkbox" value="false"/>
-        <label for="cheat">x-ray</label>
-        <div id="Result" class="label"></div>
+    <div id="ReturnToRoster">
+        <a id="BTN_Return" href="../index.html">Return to Roster</a>
     </div>
-    <div id="Board" class="grid column boardColumn"></div>
+    <div class="row center">
+        <h1>
+            Welcome to MineSweeper!
+        </h1>
+    </div>
+    <div id="PlayArea" class="column center">
+        
+        <div class="row">
+            <div id="AddColumn" class="button">+column</div>
+            <div id="SubColumn" class="button">-column</div>
+            <div id="AddRow" class="button">+row</div>
+            <div id="SubRow" class="button">-row</div>
+            <div id="AddMine" class="button">+mine</div>
+            <div id="SubMine" class="button">-mine</div>
+            <div id="Reset" class="button">Reset</div>
+            <input id="Cheater" name="cheat" type="checkbox" value="false"/>
+            <label for="cheat">x-ray</label>
+        </div>
+        <div class="row center">
+            <div id="Hundreds" class="noSelect label"></div>
+            <div id="Tens" class="noSelect label"></div>
+            <div id="Ones" class="noSelect label"></div>
+        </div>
+        <div class="row">
+            <div id="Result" class="label"></div>
+        </div>
+        <div class="row center">
+            <div id="Board" class="grid column boardColumn"></div>
+        </div>
+        <div class="row center">
+            <input id="NameValue" type="text" placeholder="Name"></input>
+            <div id="Submit" class="button">Submit Score!</div>
+        </div>
+    </div>
+    <div id="Leaderboard" class="column center"></div>
     <script src="minesweeperScript.js"></script>
 </body>
 </html>
