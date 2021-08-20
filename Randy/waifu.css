@@ -58,6 +58,14 @@ h1{
     outline-style: solid;
 }
 
+#powerUpgrade1{
+    right: 0px;
+    width: 300px;
+    margin-top: 250px;
+    outline-style: solid;
+    position: absolute;
+}
+
 html{
     background-image: url("images/aadsfwwe.jpg");
     background-size: cover;

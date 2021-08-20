@@ -10,6 +10,7 @@ let MainPage;
 let Upgrade1;
 let Upgrade2;
 let Upgrade3;
+let PowerUpgrade1;
 
 let onClick = evt =>
 {
@@ -28,6 +29,7 @@ let UpgradesPageOnClick = evt =>
     window.location = 'Upgrades.html';
     sessionStorage.setItem('money',money);
     sessionStorage.setItem('multiplier',multiplier);
+    sessionStorage.setItem('BaseClick',BaseClick);
     console.log(sessionStorage.getItem('multiplier'));
   }
 }
@@ -39,6 +41,7 @@ let MainPageOnClick = evt =>
     window.location = 'waifu.html';
     sessionStorage.setItem('money',money);
     sessionStorage.setItem('multiplier',multiplier);
+    sessionStorage.setItem('BaseClick',BaseClick);
     console.log(sessionStorage.getItem('money'));
     sessionStorage.setItem('start', start);
     console.log(sessionStorage.getItem('start'));
@@ -85,6 +88,21 @@ let Upgrade3OnClick = evt =>
   }
 }
 
+let PowerUpgrade1OnClick = evt =>
+{
+  if(evt.target.id == 'powerUpgrade1')
+  {
+    if(money >= 3000){
+      money = 0;
+      money_count.innerHTML = money;
+      multiplier = 1;
+      BaseClick = 2;
+      console.log(multiplier);
+      console.log(BaseClick);
+    }
+  }
+}
+
 function runtime(){
   if(document.URL.includes("waifu.html")){
 
@@ -95,6 +113,7 @@ function runtime(){
     if(sessionStorage.getItem('start') == 1){
         money = Number(sessionStorage.getItem('money'));
         multiplier = Number(sessionStorage.getItem('multiplier'));
+        BaseClick = Number(sessionStorage.getItem('BaseClick'));
         money_count.innerHTML = money;
         console.log(money);
 
@@ -112,6 +131,7 @@ function runtime(){
     Upgrade1 = document.getElementById('waifuUpgrade1');
     Upgrade2 = document.getElementById('waifuUpgrade2');
     Upgrade3 = document.getElementById('waifuUpgrade3');
+    PowerUpgrade1 = document.getElementById('powerUpgrade1');
     money_count = document.getElementById('money');
     money = sessionStorage.getItem('money');
     
@@ -119,6 +139,7 @@ function runtime(){
     Upgrade1.addEventListener('click', Upgrade1OnClick);
     Upgrade2.addEventListener('click', Upgrade2OnClick);
     Upgrade3.addEventListener('click', Upgrade3OnClick);
+    PowerUpgrade1.addEventListener('click', PowerUpgrade1OnClick);
 
     money_count.innerHTML = sessionStorage.getItem('money');
   }
