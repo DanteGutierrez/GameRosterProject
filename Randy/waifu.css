@@ -20,10 +20,28 @@ h1{
 }
 
 #waifu{
+    user-select: none;
     position: absolute;
     top: 250px;
     right: 150px;
     width: 300px;
+    height: 300px;
+}
+
+#waifu1{
+    position: absolute;
+    left: 150px;
+    margin-top: 300px;
+    width: 150px;
+    height: 150px;
+}
+
+#waifu2{
+    position: absolute;
+    left: 150px;
+    margin-top: 150px;
+    width: 150px;
+    height: 100px;
 }
 
 #money{
@@ -32,6 +50,14 @@ h1{
     left: 100px;
     text-align: center;
     outline-style: solid;
+}
+
+#background1{
+    position: absolute;
+    left: 10px;
+    margin-top: 150px;
+    width: 150px;
+    height: 100px;
 }
 
 #waifuUpgrade1 {
@@ -58,6 +84,14 @@ h1{
     outline-style: solid;
 }
 
+#powerUpgrade1{
+    right: 0px;
+    width: 300px;
+    margin-top: 250px;
+    outline-style: solid;
+    position: absolute;
+}
+
 html{
     background-image: url("images/aadsfwwe.jpg");
     background-size: cover;
@@ -73,4 +107,21 @@ html{
 
 #title{
     width: 100%;
+}
+
+.background1{
+    background-image: url("images/anime-City.jpg");
+    background-size: cover;
+}
+
+.waifu1{
+    background-image: url("images/waifu (2).png");
+    background-size: cover;
+    background-position: center;
+}
+
+.waifu2{
+    background-image: url("images/anime-girl-with-long-hair-52650-117629__1_-removebg-preview.png");
+    background-size: cover;
+    background-position: center;
 }
