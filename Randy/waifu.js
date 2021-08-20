@@ -94,7 +94,7 @@ function runtime(){
     console.log(sessionStorage.getItem('start'));
     if(sessionStorage.getItem('start') == 1){
         money = Number(sessionStorage.getItem('money'));
-
+        multiplier = Number(sessionStorage.getItem('multiplier'));
         money_count.innerHTML = money;
         console.log(money);
 
