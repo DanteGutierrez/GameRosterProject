@@ -25,6 +25,7 @@ html {
     text-align: center;
     justify-content: center;
     flex-direction: column;
+    user-select: none;
 }
 .button {
     margin: 3px;
@@ -37,7 +38,7 @@ html {
 }
 .mine_style {
     font-weight: bold;
-    background-color: grey;
+    background-color: red;
 }
 .zero_style {
     background-color: darkgrey;
@@ -68,9 +69,13 @@ html {
 }
 .seven_style {
     font-weight: bold;
-    background-color: red;
+    background-color: orangered;
 }
 .eight_style {
     font-weight: bold;
-    background-color: purple;
+    background-color: rebeccapurple;
+}
+.label {
+    font-weight: bold;
+    margin: 0px 10px;
 }
