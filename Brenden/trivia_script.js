@@ -30,7 +30,7 @@ function ans_check()
     {
         window.location.replace("trivia_menu.html");
     }
-    if(player.score == 100)
+    if(player.score == 80)
     {
         window.location.replace("trivia_menu.html");
     }
@@ -763,11 +763,18 @@ function random()
     opt_three.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand - 2]];
     opt_four.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand-1]];
    }
-   correct_ans = question_array[0][player.ques_category][question_select[ques_rand]][1][3];
-   player.ques_id = ques_rand;
-   used_Ques_Rand.push(ques_rand);
-   used_Ans_Rand.push(ans_rand);
-   console.log(correct_ans);
+   if(used_Ques_Rand.includes(ques_rand))
+   {
+       random();
+   }else
+   {
+        correct_ans = question_array[0][player.ques_category][question_select[ques_rand]][1][3];
+        player.ques_id = ques_rand;
+        used_Ques_Rand.push(ques_rand);
+        used_Ans_Rand.push(ans_rand);
+        console.log(correct_ans);
+   }
+   
 }
 
 let used_Ques_Rand = [];
