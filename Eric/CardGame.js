@@ -6,6 +6,10 @@ const playerCards = document.getElementById("playercards");
 const playerScore = document.getElementById("playerscore");
 const dealerCards = document.getElementById("dealercards");
 const dealerScore = document.getElementById("dealerscore");
+const playerCardsDiv = document.getElementById("test");
+const dealerCardDiv = document.getElementById("dealerTest");
+const main_menu_btn = document.getElementById("main_menu_btn");
+var hitFinished = false;
 
 var totalCardsPulled = 0;
 
@@ -47,6 +51,8 @@ deck.shuffleDeck();
 console.log(deck.totalDeck);
 
 function newGame() {
+    reset();
+    board.innerHTML = " ";
     if (hitButton.disabled == true && standButton.disabled == true) {
         hitButton.disabled = false;
         standButton.disabled = false;
@@ -59,12 +65,14 @@ function newGame() {
 function hit() {
     player.cards.push(deck.totalDeck[totalCardsPulled])
     player.score = checkHandValue(player.cards);
-    playerCards.innerHTML = "Your Cards: " + JSON.stringify(player.cards);
-    playerScore.innerHTML = "Your Score: " + player.score;
-    totalCardsPulled += 1;
+    console.log(player.cards);
     if (player.score >= 21) {
         checkWinner();
     }
+    playerCards.innerHTML = "Your Cards: " + JSON.stringify(player.cards);
+    playerScore.innerHTML = "Your Score: " + player.score;
+    totalCardsPulled += 1;
+    turnToImagePlayer(JSON.stringify(player.cards));
 }
 function dealerDraw() {
     dealer.cards.push(deck.totalDeck[totalCardsPulled])
@@ -72,15 +80,51 @@ function dealerDraw() {
     dealerCards.innerHTML = "Dealers Cards: " + JSON.stringify(dealer.cards);
     dealerScore.innerHTML = "Dealers Score: " + dealer.score;
     totalCardsPulled += 1;
+    turnToImageDealer(JSON.stringify(dealer.cards));
+}
+function capitalizeFirstLetter(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function turnToImagePlayer(hand) {
+    for (let i = 0; i < hand.length; i++) {
+        var suite = capitalizeFirstLetter(player.cards[i].suit);
+        if (playerCardsDiv.innerHTML == "") {
+            playerCardsDiv.innerHTML = '<img src="./Cards/'+ player.cards[i].rank + 'Of' + suite + '.png">';
+            break
+        }
+        else{
+            playerCardsDiv.innerHTML = "";
+            for (let i = 0; i < hand.length; i++) {
+                var suite = capitalizeFirstLetter(player.cards[i].suit);
+                playerCardsDiv.innerHTML += '<img src="./Cards/'+ player.cards[i].rank + 'Of' + suite + '.png">';   
+            }   
+        }   
+    }
+}
+function turnToImageDealer(hand) {
+    for (let i = 0; i < hand.length; i++) {
+        var suite = capitalizeFirstLetter(dealer.cards[i].suit);
+        if (dealerCardDiv.innerHTML == "") {
+            dealerCardDiv.innerHTML = '<img src="./Cards/'+ dealer.cards[i].rank + 'Of' + suite + '.png">';
+            break
+        }
+        else{
+            dealerCardDiv.innerHTML = "";
+            for (let i = 0; i < hand.length; i++) {
+                var suite = capitalizeFirstLetter(dealer.cards[i].suit);
+                dealerCardDiv.innerHTML += '<img src="./Cards/'+ dealer.cards[i].rank + 'Of' + suite + '.png">';   
+            }   
+        }   
+    }
 }
 function stand() {
+    newGameButton.disabled = false;
     hitButton.disabled = true;
     standButton.disabled = true;
     while (dealer.score <= 17) {
         dealerDraw();
     }
-    checkWinner()
-    newGameButton.disabled = false;
+    checkWinner();
 }
 function checkHandValue(hand) {
     var cards = [];
@@ -100,9 +144,16 @@ function checkHandValue(hand) {
     while (aces > 0 && totalPoints > 21)
     {
         totalPoints -= 10;
-        aceCount = 0;
+        aces = 0;
     }
     return totalPoints;
+}
+function gameEnd(){
+    deck.makeDeck();
+    deck.shuffleDeck();
+    newGameButton.disabled = false;
+    hitButton.disabled = true;
+    standButton.disabled = true;
 }
 function reset() {
     totalCardsPulled = 0;
@@ -115,32 +166,36 @@ function reset() {
     newGameButton.disabled = false;
     hitButton.disabled = true;
     standButton.disabled = true;
-    board.innerHTML = " ";
 }
 function checkWinner() {
     if (player.score == 21) {
-        board.innerHTML = "You win! You hit 21";
-        reset();
+        board.innerHTML = "You hit 21, you win! click Deal to keep playing";
+        gameEnd();
     }
     
-    if (player.score > 21) {
-        board.innerHTML = "You went over 21, Dealer wins";
-        reset();
+    else if (player.score > 21) {
+        board.innerHTML = "You went over 21, Dealer wins! click Deal to keep playing";
+        gameEnd();
     }
-    if (dealer.score > 21) {
+    else if (dealer.score > 21) {
         board.innerHTML = "Dealer went over 21! You win! click Deal to keep playing";
-        reset();
+        gameEnd();
     }
-    if (player.score > dealer.score && player.score < 21) {
-        board.innerHTML = "You win! You beat the dealer click Deal to keep playing";
-        reset();
+    else if (player.score > dealer.score && player.score <= 21) {
+        board.innerHTML = "You win! You beat the dealer! click Deal to keep playing";
+        gameEnd();
     }
-    if (player.score < dealer.score && dealer.score < 21) {
-        board.innerHTML = "You lost. Dealer had the higher score. click Deal to keep playing";
-        reset();
+    else if (player.score < dealer.score && dealer.score <= 21) {
+        board.innerHTML = "You lost. Dealer had the higher score! click Deal to keep playing";
+        gameEnd();
     }
-    if (player.score == dealer.score && dealer.score < 21) {
+    else if (player.score == dealer.score && dealer.score <= 21) {
         board.innerHTML = "You tied! click Deal to keep playing";
-        reset();
+        gameEnd();
     }
 }
+let onClick = evt =>
+{
+    window.location.replace("Casino.html");
+}
+main_menu_btn.addEventListener("click", onClick);
