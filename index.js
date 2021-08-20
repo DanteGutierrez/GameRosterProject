@@ -120,7 +120,7 @@ let onClick = evt =>
                 e = 1;
             }else if(e == 1)
             {
-                window.location.replace("Brenden/trivia.html");
+                window.location.replace("Brenden/trivia_menu.html");
             }
         }
         

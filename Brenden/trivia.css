@@ -1,0 +1,48 @@
+/*
+Colour Pallete
+#EEE2DF-Isabelline(Off-White)
+#EED7C5-Champagne Pink(Cream)
+#C89F9C-Tuscany(Darker Pink)
+#C97C5D-Copper Crayola(Copper Brown)
+#B36A5E-Copper Penny(Copper Red)
+*/
+
+
+
+.main_menu
+{
+    margin:auto;
+    border: 2px solid #C97C5D;
+    width: 200px;
+    background-color: #EED7C5;
+    color: #B36A5E;
+}
+.category
+{
+    background-color: #EED7C5;
+    border: 2px solid #C97C5D;
+    color:#C97C5D;
+    width: 300px;
+    text-align: center;
+    margin:auto;
+    padding-bottom: 25px;
+}
+.trivia_btn
+{
+    background-color: #B36A5E;
+    border: 2px solid #C97C5D;
+    width: 200px;
+    margin:auto;
+    cursor: pointer;
+    color: #EEE2DF;
+}
+body
+{
+    text-align: center;
+    background-color: #C89F9C;
+    color: #EEE2DF
+}
+html
+{
+    font-family: 'Roboto', sans-serif;
+}

@@ -2,6 +2,7 @@ const tetris_canvas = document.getElementById("tetris_canvas");
 const context = tetris_canvas.getContext("2d");
 const score_board = document.getElementById("score");
 const tetris_audio_player = document.getElementById("tetris_audio_play");
+const main_menu_btn = document.getElementById("main_menu_btn");
 
 var audioFile = new Audio("audio/tetris_audio.mp3");
 
@@ -339,9 +340,14 @@ let onClick = evt =>
     {
         audioFile.play();
     }
+    else if(evt.target.id == "main_menu_btn")
+    {
+        window.location.replace("../index.html");
+    }
 }
 
 playerReset();
 update();
 
 tetris_audio_player.addEventListener("click", onClick);
+main_menu_btn.addEventListener("click", onClick);
