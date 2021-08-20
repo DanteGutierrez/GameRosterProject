@@ -27,6 +27,10 @@ html {
     flex-direction: column;
     user-select: none;
 }
+.center {
+    justify-content: center;
+    align-items: center;
+}
 .button {
     margin: 3px;
     padding: 2px;
@@ -77,5 +81,7 @@ html {
 }
 .label {
     font-weight: bold;
-    margin: 0px 10px;
+}
+.noSelect {
+    user-select: none;
 }
