@@ -1,22 +1,50 @@
 var money = 0;
 var multiplier = 1;
+var BaseClick = 1;
+var start = 0;
 
-const money_btn = document.getElementById('waifu');
-const money_count = document.getElementById('money');
-const Upgrade1 = document.getElementById('waifuUpgrade1');
-const Upgrade2 = document.getElementById('waifuUpgrade2');
-const Upgrade3 = document.getElementById('waifuUpgrade3');
+let money_btn;
+let money_count;
+let UpgradePage;
+let MainPage;
+let Upgrade1;
+let Upgrade2;
+let Upgrade3;
 
 let onClick = evt =>
 {
   if(evt.target.id == 'waifu')
   {
-    money = money + (1 * multiplier);
+    money = money + (BaseClick * multiplier);
     money_count.innerHTML = money;
     console.log(money);
   }
 }
-money_btn.addEventListener('click', onClick);
+
+let UpgradesPageOnClick = evt =>
+{
+  if(evt.target.id == 'UpgradesPage')
+  {
+    window.location = 'Upgrades.html';
+    sessionStorage.setItem('money',money);
+    sessionStorage.setItem('multiplier',multiplier);
+    console.log(sessionStorage.getItem('multiplier'));
+  }
+}
+
+let MainPageOnClick = evt =>
+{
+  if(evt.target.id == 'MainPage')
+  {
+    window.location = 'waifu.html';
+    sessionStorage.setItem('money',money);
+    sessionStorage.setItem('multiplier',multiplier);
+    console.log(sessionStorage.getItem('money'));
+    sessionStorage.setItem('start', start);
+    console.log(sessionStorage.getItem('start'));
+    console.log(sessionStorage.getItem('multiplier'));
+  }
+}
 
 let Upgrade1OnClick = evt =>
 {
@@ -30,7 +58,6 @@ let Upgrade1OnClick = evt =>
     }
   }
 }
-Upgrade1.addEventListener('click', Upgrade1OnClick);
 
 let Upgrade2OnClick = evt =>
 {
@@ -44,7 +71,6 @@ let Upgrade2OnClick = evt =>
     }
   }
 }
-Upgrade2.addEventListener('click', Upgrade2OnClick);
 
 let Upgrade3OnClick = evt =>
 {
@@ -58,4 +84,44 @@ let Upgrade3OnClick = evt =>
     }
   }
 }
-Upgrade3.addEventListener('click', Upgrade3OnClick);
+
+function runtime(){
+  if(document.URL.includes("waifu.html")){
+
+    money_btn = document.getElementById('waifu');
+    money_count = document.getElementById('money');
+    UpgradePage = document.getElementById('UpgradesPage');
+    console.log(sessionStorage.getItem('start'));
+    if(sessionStorage.getItem('start') == 1){
+        money = Number(sessionStorage.getItem('money'));
+
+        money_count.innerHTML = money;
+        console.log(money);
+
+    }else if(start == 0){
+      money_count.innerHTML = money;
+    }
+   
+    money_btn.addEventListener('click', onClick);
+    UpgradePage.addEventListener('click', UpgradesPageOnClick);
+
+    
+  }else if(document.URL.includes("Upgrades.html")){
+    start = 1;
+    MainPage = document.getElementById('MainPage');
+    Upgrade1 = document.getElementById('waifuUpgrade1');
+    Upgrade2 = document.getElementById('waifuUpgrade2');
+    Upgrade3 = document.getElementById('waifuUpgrade3');
+    money_count = document.getElementById('money');
+    money = sessionStorage.getItem('money');
+    
+    MainPage.addEventListener('click', MainPageOnClick);
+    Upgrade1.addEventListener('click', Upgrade1OnClick);
+    Upgrade2.addEventListener('click', Upgrade2OnClick);
+    Upgrade3.addEventListener('click', Upgrade3OnClick);
+
+    money_count.innerHTML = sessionStorage.getItem('money');
+  }
+}
+
+runtime();
