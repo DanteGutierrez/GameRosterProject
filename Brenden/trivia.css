@@ -8,7 +8,8 @@ Colour Pallete
 */
 
 
-
+/*Specific Elements*/
+/*Trivia Menu*/
 .main_menu
 {
     margin:auto;
@@ -16,6 +17,7 @@ Colour Pallete
     width: 200px;
     background-color: #EED7C5;
     color: #B36A5E;
+    cursor: pointer;
 }
 .category
 {
@@ -36,6 +38,77 @@ Colour Pallete
     cursor: pointer;
     color: #EEE2DF;
 }
+/*Trivia Game*/
+.cate_name
+{
+    background-color: #B36A5E;
+    border: 2px solid #EED7C5;
+    width: 250px;
+    margin:auto;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.score_menu
+{
+    background-color: #C97C5D;
+    border: 2px solid #EEE2DF;
+    width: 100px;
+    margin:auto;
+    margin-bottom:15px;
+}
+.question_menu
+{
+    background-color: #B36A5E;
+    border: 2px solid #EEE2DF;
+    width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.question
+{
+    border: 2px solid #C89F9C;
+    background-color: #EEE2DF;
+    color: #B36A5E;
+    width: 400px;
+    margin: auto;
+    padding-top:10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.option_menu
+{
+    background-color: #B36A5E;
+    border: 2px solid #EEE2DF;
+    width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.option_btn
+{
+    border: 2px solid #C89F9C;
+    border-radius: 15px;
+    background-color: #EEE2DF;
+    color: #B36A5E;
+    width: 400px;
+    margin: auto;
+    margin-bottom:10px;
+    padding-top:10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+/*Html Elements*/
 body
 {
     text-align: center;
