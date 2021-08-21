@@ -154,6 +154,7 @@ function runtime(){
       money_count.innerHTML = money;
     }
    
+
     money_btn.addEventListener('click', onClick);
     UpgradePage.addEventListener('click', UpgradesPageOnClick);
     Background1.addEventListener('click',Background1onClick);
