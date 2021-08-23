@@ -3,6 +3,10 @@
 <head>
     <title>MineSweeper</title>
     <link href="minesweeperStyle.css" rel="stylesheet"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
+    </style>
 </head>
 <body>
     <div id="ReturnToRoster">
@@ -41,10 +45,9 @@
         <div class="column center">
             <div id="HUD">
                 <div class="row">
-                    <div class="label">Mines: </div>
-                    <div id="MineCounter" class="label"></div>
+                    <div id="MineCounter" class="label digitalDisplay"></div>
                 </div>
-                <div class="row center">
+                <div class="row center digitalDisplay">
                     <div id="Hundreds" class="label"></div>
                     <div id="Tens" class="label"></div>
                     <div id="Ones" class="label"></div>

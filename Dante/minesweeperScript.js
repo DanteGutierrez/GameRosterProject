@@ -117,7 +117,7 @@ const singleTile = (r, c) => {
     let boxValue = grid[r][c];
     if (!box.classList.contains("flagged")) {
         box.classList.add(numberToString(boxValue));
-        box.innerHTML = (boxValue == 0 ? '' : boxValue);
+        box.innerHTML = (boxValue == 0 || boxValue == 'M' ? '' : boxValue);
     }
     return boxValue;
 };
@@ -181,14 +181,12 @@ const flagTile = (r, c) => {
     if (!box.classList.contains("revealed")) {
         if (box.classList.contains("flagged")) {
             box.classList.remove("flagged");
-            box.innerHTML = "";
             if (grid[r][c] == 'M') {
                 updateMines(true);
             }
         }
         else {
             box.classList.add("flagged");
-            box.innerHTML = "F";
             if (grid[r][c] == 'M') {
                 updateMines(false);
             }

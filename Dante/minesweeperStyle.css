@@ -17,9 +17,10 @@ html {
     flex-direction: row;
 }
 .box {
+    background-image: url("./Assets/unclickedTile.jpg");
+    background-size: cover;
     width: 30px;
     height: 30px;
-    margin: 2px;
     display: flex;
     background-color: lightgrey;
     text-align: center;
@@ -45,50 +46,58 @@ html {
 .menuButton:hover {
     cursor: pointer;
 }
-.mine_style {
-    font-weight: bold;
-    background-color: red;
-}
 .zero_style {
-    background-color: darkgrey;
+    color: darkgrey;
 }
 .one_style {
-    font-weight: bold;
-    background-color: white;
+    color: blue;
 }
 .two_style {
-    font-weight: bold;
-    background-color: lightgreen;
+    color: green;
 }
 .three_style {
-    font-weight: bold;
-    background-color: lightseagreen;
+    color: red;
 }
 .four_style {
-    font-weight: bold;
-    background-color: lightskyblue;
+    color: darkblue;
 }
 .five_style {
-    font-weight: bold;
-    background-color: yellow;
+    color: darkred;
 }
 .six_style {
-    font-weight: bold;
-    background-color: orange;
+    color: teal;
 }
 .seven_style {
-    font-weight: bold;
-    background-color: orangered;
+    color: black;
 }
 .eight_style {
+    color: gray;
+}
+.zero_style, .one_style, .two_style, .three_style, .four_style, .five_style, .six_style, .seven_style, .eight_style, .mine_style{
+    font-family: 'Press Start 2P', cursive;
     font-weight: bold;
-    background-color: rebeccapurple;
+    background-image: url("");
+    border: gray solid 1px;
+    box-sizing: border-box;
+
+}
+.mine_style {
+    background-image: url("./Assets/mine.svg");
+    background-color: red;
+}
+.flagged {
+    background-image: url("./Assets/flaggedTile.jpg");
 }
 .label {
     font-weight: bold;
 }
 .noSelect {
     user-select: none;
+}
+.digitalDisplay {
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 48px;
+    color: red;
 }
 #HUD {
     width:100%;
