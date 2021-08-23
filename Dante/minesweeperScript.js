@@ -6,7 +6,6 @@ let xray = false;
 let trueTiles = [];
 let queue = [];
 let running = false;
-let winning = 0;
 let time = 0;
 let leaderBoard = [["Dante", 100], ["Randy", 100], ["Nicole", 100], ["Eric", 100]];
 
@@ -156,17 +155,25 @@ const revealTiles = () => {
         let box = trueTiles[queue[0][0]][queue[0][1]];
         if (!box.classList.contains("flagged")) {
             boxValue = singleTile(queue[0][0], queue[0][1]);
-            winning--;
             if (boxValue == 'M') {
                 gameLost();
             }
-            else if (winning == 0) {
-                gameWon();
-            }
             box.classList.add("revealed");
             queueTiles(queue[0][0], queue[0][1]);
+            if (document.getElementsByClassName("revealed").length == (row * column) - mines) {
+                gameWon();
+            }
         }
         queue.shift();
+    }
+};
+const updateMines = (add) => {
+    let tile = document.getElementById("MineCounter");
+    if (add) {
+        tile.innerHTML = Number(tile.innerHTML) + 1;
+    }
+    else {
+        tile.innerHTML = Number(tile.innerHTML) - 1;
     }
 };
 const flagTile = (r, c) => {
@@ -175,13 +182,18 @@ const flagTile = (r, c) => {
         if (box.classList.contains("flagged")) {
             box.classList.remove("flagged");
             box.innerHTML = "";
+            if (grid[r][c] == 'M') {
+                updateMines(true);
+            }
         }
         else {
             box.classList.add("flagged");
             box.innerHTML = "F";
+            if (grid[r][c] == 'M') {
+                updateMines(false);
+            }
         }    
     }
-    
 };
 let secondPassed = () => {
     document.getElementById("Hundreds").hidden = false;
@@ -242,13 +254,11 @@ const loadBoard = () => {
     board.innerHTML = '';
     let tempArray = [];
     // Fill array with mines
-    winning = 0;
     for (let r = 0; r < row; r++) {
         for (let c = 0; c < column; c++) {
             let tempMine = 'M';
             if ((column * r) + c >= mines) {
                 tempMine = '';
-                winning++;
             }
             tempArray[(column * r) + c] = tempMine;
         }
@@ -283,7 +293,7 @@ const loadBoard = () => {
             });
         }
     }
-    setResultText("");
+    setResultText(" ");
     if (xray) {
         xrayBoard();
     }
@@ -292,6 +302,7 @@ const loadBoard = () => {
     time = -1;
     secondPassed();
     leaderBoardUpdate();
+    document.getElementById("MineCounter").innerHTML = mines;
 };
 const xrayBoard = () => {
     for (let r = 0; r < row; r++) {
@@ -312,7 +323,7 @@ const xrayBoard = () => {
             }
         }
     }
-    setResultText(xray ? "Cheater!" : "");
+    setResultText(xray ? "Cheater!" : " ");
 };
 loadBoard();
 document.getElementById("AddColumn").addEventListener("click", (evt) => {
@@ -357,5 +368,11 @@ document.getElementById("Submit").addEventListener("click", (evt) => {
     leaderBoardUpdate();
     document.getElementById("Submit").hidden = true;
 });
-
+document.getElementById("ShowSettings").addEventListener("click", (evt) => {
+    let items = document.getElementsByClassName("settings");
+    for (let index = 0; index < items.length; index++) {
+        items[index].hidden = !items[index].hidden;
+    }
+    document.getElementById("ShowSettings").innerHTML = items[0].hidden ? "▼" : "▲";
+});
 let timer = setInterval(secondPassed, 1000);

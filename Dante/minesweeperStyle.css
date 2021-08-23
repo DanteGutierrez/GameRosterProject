@@ -38,7 +38,12 @@ html {
 }
 .button:hover {
     cursor: pointer;
-    user-select: none;
+}
+.menuButton {
+    margin: 0px 3px;
+}
+.menuButton:hover {
+    cursor: pointer;
 }
 .mine_style {
     font-weight: bold;
@@ -85,6 +90,11 @@ html {
 .noSelect {
     user-select: none;
 }
+#HUD {
+    width:100%;
+    display: flex;
+    justify-content:space-between;
+}
 #ReturnToRoster {
     display: flex;
     flex-direction: row;
@@ -101,4 +111,8 @@ html {
     background-color: white;
     text-decoration: none;
     color: black;
+}
+#Settings {
+    position: absolute;
+    left: 10px;
 }
