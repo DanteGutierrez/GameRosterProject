@@ -83,6 +83,8 @@ html {
 }
 .mine_style {
     background-image: url("./Assets/mine.svg");
+}
+.loserTile {
     background-color: red;
 }
 .flagged {
@@ -98,6 +100,11 @@ html {
     font-family: 'ZCOOL QingKe HuangYou', cursive;
     font-size: 48px;
     color: red;
+    width: 75px;
+}
+.digit {
+    width: 25px;
+    text-align: right;
 }
 #HUD {
     width:100%;
@@ -124,4 +131,13 @@ html {
 #Settings {
     position: absolute;
     left: 10px;
+}
+.resetButton {
+    height: 48px;
+    width: 48px;
+    background-image: url("./Assets/unclickedTile.jpg");
+    background-size: cover;
+}
+.resetButtong:hover {
+    cursor: pointer;
 }

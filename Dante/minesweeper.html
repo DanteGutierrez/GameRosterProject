@@ -35,7 +35,6 @@
             <div id="SubMine" class="button settings">-mine</div>    
         </div>
         <div class="row">
-            <div id="Reset" class="button settings">Reset</div>
             <input id="Cheater" class="settings" name="cheat" type="checkbox" value="false"/>
             <label for="cheat" class="settings">x-ray</label> 
         </div>
@@ -44,13 +43,18 @@
     <div id="PlayArea" class="column center">
         <div class="column center">
             <div id="HUD">
+                <div class="row center digitalDisplay">
+                    <div id="MHundreds" class="label digit"></div>
+                    <div id="MTens" class="label digit"></div>
+                    <div id="MOnes" class="label digit"></div>
+                </div>
                 <div class="row">
-                    <div id="MineCounter" class="label digitalDisplay"></div>
+                    <div id="Reset" class="resetButton"></div>
                 </div>
                 <div class="row center digitalDisplay">
-                    <div id="Hundreds" class="label"></div>
-                    <div id="Tens" class="label"></div>
-                    <div id="Ones" class="label"></div>
+                    <div id="THundreds" class="label digit"></div>
+                    <div id="TTens" class="label digit"></div>
+                    <div id="TOnes" class="label digit"></div>
                 </div>
             </div>
             <div id="Board" class="grid column boardColumn"></div>

@@ -109,8 +109,10 @@ const gameLost = () => {
 };
 const gameWon = () => {
     running = false;
-    setResultText("Winner!");
-    document.getElementById("Submit").hidden = false;
+    if (document.getElementById("Result").innerHTML != "Cheater!") {
+        setResultText("Winner!");
+        document.getElementById("Submit").hidden = false;
+    }
 };
 const singleTile = (r, c) => {
     let box = trueTiles[r][c];
@@ -156,6 +158,7 @@ const revealTiles = () => {
         if (!box.classList.contains("flagged")) {
             boxValue = singleTile(queue[0][0], queue[0][1]);
             if (boxValue == 'M') {
+                box.classList.add("loserTile");
                 gameLost();
             }
             box.classList.add("revealed");
@@ -167,13 +170,27 @@ const revealTiles = () => {
         queue.shift();
     }
 };
-const updateMines = (add) => {
-    let tile = document.getElementById("MineCounter");
-    if (add) {
-        tile.innerHTML = Number(tile.innerHTML) + 1;
-    }
-    else {
-        tile.innerHTML = Number(tile.innerHTML) - 1;
+const updateMines = () => {
+    let hundreds = document.getElementById("MHundreds");
+    let tens = document.getElementById("MTens");
+    let ones = document.getElementById("MOnes");
+    let counter = mines - document.getElementsByClassName("flagged").length;
+    if (running) {
+        if (counter >= 100) {
+            hundreds.innerHTML = counter.toString()[0];
+            tens.innerHTML = counter.toString()[1];
+            ones.innerHTML = counter.toString()[2];
+        }
+        else if (counter >= 10) {
+            hundreds.innerHTML = 0;
+            tens.innerHTML = counter.toString()[0];
+            ones.innerHTML = counter.toString()[1];
+        }
+        else {
+            hundreds.innerHTML = 0;
+            tens.innerHTML = 0;
+            ones.innerHTML = counter.toString()[0];
+        }
     }
 };
 const flagTile = (r, c) => {
@@ -181,38 +198,34 @@ const flagTile = (r, c) => {
     if (!box.classList.contains("revealed")) {
         if (box.classList.contains("flagged")) {
             box.classList.remove("flagged");
-            if (grid[r][c] == 'M') {
-                updateMines(true);
-            }
+            updateMines();
         }
-        else {
+        else if(document.getElementsByClassName("flagged").length < mines){
             box.classList.add("flagged");
-            if (grid[r][c] == 'M') {
-                updateMines(false);
-            }
+            updateMines();
         }    
     }
 };
-let secondPassed = () => {
-    document.getElementById("Hundreds").hidden = false;
-    document.getElementById("Tens").hidden = false;
-    document.getElementById("Ones").hidden = false;
+const secondPassed = () => {
+    let hundreds = document.getElementById("THundreds");
+    let tens = document.getElementById("TTens");
+    let ones = document.getElementById("TOnes");
     if (running) {
         time++;
         if (time >= 100) {
-            document.getElementById("Hundreds").innerHTML = time.toString()[0];
-            document.getElementById("Tens").innerHTML = time.toString()[1];
-            document.getElementById("Ones").innerHTML = time.toString()[2];
+            hundreds.innerHTML = time.toString()[0];
+            tens.innerHTML = time.toString()[1];
+            ones.innerHTML = time.toString()[2];
         }
         else if (time >= 10) {
-            document.getElementById("Hundreds").hidden = true;
-            document.getElementById("Tens").innerHTML = time.toString()[0];
-            document.getElementById("Ones").innerHTML = time.toString()[1];
+            hundreds.innerHTML = 0;
+            tens.innerHTML = time.toString()[0];
+            ones.innerHTML = time.toString()[1];
         }
         else {
-            document.getElementById("Hundreds").hidden = true;
-            document.getElementById("Tens").hidden = true;
-            document.getElementById("Ones").innerHTML = time.toString()[0];
+            hundreds.innerHTML = 0;
+            tens.innerHTML = 0;
+            ones.innerHTML = time.toString()[0];
         }
     }
 };
@@ -237,7 +250,7 @@ const orderLeaderboard = () => {
         }
     }
     leaderBoard = tempBoard;
-}
+};
 const leaderBoardUpdate = () => {
     let theBoard = document.getElementById("Leaderboard");
     theBoard.innerHTML = '';
@@ -245,7 +258,7 @@ const leaderBoardUpdate = () => {
     for (let index = 0; index < leaderBoard.length; index++) {
         theBoard.innerHTML += "<div class='row noSelect'>" + leaderBoard[index][0] + ": " + leaderBoard[index][1] + "</div>";
     }
-}
+};
 const loadBoard = () => {
     document.getElementById("Submit").hidden = true;
     let board = document.getElementById("Board");
@@ -299,8 +312,8 @@ const loadBoard = () => {
     running = true;
     time = -1;
     secondPassed();
+    updateMines();
     leaderBoardUpdate();
-    document.getElementById("MineCounter").innerHTML = mines;
 };
 const xrayBoard = () => {
     for (let r = 0; r < row; r++) {
@@ -321,7 +334,9 @@ const xrayBoard = () => {
             }
         }
     }
-    setResultText(xray ? "Cheater!" : " ");
+    if (xray) {
+        setResultText("Cheater!");
+    }
 };
 loadBoard();
 document.getElementById("AddColumn").addEventListener("click", (evt) => {
