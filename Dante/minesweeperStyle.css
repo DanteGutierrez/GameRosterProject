@@ -17,7 +17,11 @@ html {
     flex-direction: row;
 }
 .box {
-    background-image: url("./Assets/unclickedTile.jpg");
+    box-sizing:border-box;
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
     background-size: cover;
     width: 30px;
     height: 30px;
@@ -33,15 +37,25 @@ html {
     align-items: center;
 }
 .button {
-    margin: 3px;
     padding: 2px;
-    border: 1px solid grey;
+    box-sizing:border-box;
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+    background-color: lightgrey;
 }
 .button:hover {
     cursor: pointer;
 }
 .menuButton {
-    margin: 0px 3px;
+    padding: 2px;
+    box-sizing:border-box;
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+    background-color: lightgrey;
 }
 .menuButton:hover {
     cursor: pointer;
@@ -88,10 +102,19 @@ html {
     background-color: red;
 }
 .flagged {
-    background-image: url("./Assets/flaggedTile.jpg");
+    background-image: url("./Assets/flag.svg");
 }
 .label {
     font-weight: bold;
+}
+.settingLabel {
+    padding: 2px;
+    box-sizing:border-box;
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+    background-color: lightgrey;
 }
 .noSelect {
     user-select: none;
@@ -104,7 +127,27 @@ html {
 }
 .digit {
     width: 25px;
+    height: 48px;
     text-align: right;
+}
+.resetButton {
+    height: 48px;
+    width: 48px;
+    background-image: url("./Assets/happySmile.svg");
+    box-sizing:border-box;
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+    background-color: lightgrey;
+}
+.resetButton:hover {
+    background-image: url("./Assets/xSmile.svg");
+    cursor: pointer;
+}
+.max {
+    width: 100%;
+    height: 30px;
 }
 #HUD {
     width:100%;
@@ -130,14 +173,23 @@ html {
 }
 #Settings {
     position: absolute;
-    left: 10px;
+    left: 0px;
 }
-.resetButton {
-    height: 48px;
-    width: 48px;
-    background-image: url("./Assets/unclickedTile.jpg");
-    background-size: cover;
+#PlayArea {
+    background-color: lightgrey;
 }
-.resetButtong:hover {
-    cursor: pointer;
+#OutBorder {
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+}
+#MidBorder {
+    border: lightgrey solid 22px;
+}
+#InBorder {
+    border-top: grey solid 4px;
+    border-bottom: ghostwhite solid 4px;
+    border-left: grey solid 4px;
+    border-right: ghostwhite solid 4px;
 }

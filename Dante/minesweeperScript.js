@@ -7,7 +7,7 @@ let trueTiles = [];
 let queue = [];
 let running = false;
 let time = 0;
-let leaderBoard = [["Dante", 100], ["Randy", 100], ["Nicole", 100], ["Eric", 100]];
+let leaderBoard = [["Dante", 20, 100], ["Randy", 20, 100], ["Nicole", 20, 100], ["Eric", 20, 100]];
 
 const setResultText = (text) => {
     document.getElementById("Result").innerHTML = text;
@@ -236,7 +236,7 @@ const orderLeaderboard = () => {
         let inputIndex = 0;
         let error = true;
         for (let secondIndex = 0; secondIndex < tempBoard.length; secondIndex++) {
-            if (temp[1] < tempBoard[secondIndex][1]) {
+            if (temp[2] < tempBoard[secondIndex][2]) {
                 inputIndex = secondIndex;
                 error = false;
                 break;
@@ -256,7 +256,7 @@ const leaderBoardUpdate = () => {
     theBoard.innerHTML = '';
     orderLeaderboard();
     for (let index = 0; index < leaderBoard.length; index++) {
-        theBoard.innerHTML += "<div class='row noSelect'>" + leaderBoard[index][0] + ": " + leaderBoard[index][1] + "</div>";
+        theBoard.innerHTML += "<div class='row noSelect'>" + leaderBoard[index][0] + ": " + leaderBoard[index][1] + " mine(s), " + leaderBoard[index][2] + " second(s)</div>";
     }
 };
 const loadBoard = () => {
@@ -377,7 +377,7 @@ document.getElementById("Reset").addEventListener("click", (evt) => {
     loadBoard();
 });
 document.getElementById("Submit").addEventListener("click", (evt) => {
-    leaderBoard.unshift([document.getElementById("NameValue").value, time]);
+    leaderBoard.unshift([document.getElementById("NameValue").value, mines, time]);
     leaderBoardUpdate();
     document.getElementById("Submit").hidden = true;
 });
