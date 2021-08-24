@@ -9,34 +9,46 @@ let cate_eight;
 let main_menu;
 
 //Trivia game objects
-let question_txt;
+let answer;
+let correct_ans;
 let category_txt;
 let opt_one;
 let opt_two;
 let opt_three;
 let opt_four;
+let question_txt;
 let score;
-let answer;
-let correct_ans;
+
 
 function ans_check()
 {
-    if(answer == correct_ans)
+    if(player.ques_id == question_array[0][player.ques_category].length)
     {
         player.score = player.score + 10;
         score.innerHTML = player.score;
-        random();
+        populate();
+    }else if(answer == correct_ans)
+    {
+        player.score = player.score + 10;
+        score.innerHTML = player.score;
+        shuffle(answer_select);
+        ques_populate();
     }else
     {
-        window.location.replace("trivia_menu.html");
+        emt_score = player.score;
+        player.score = 0;
+        score.innerHTML = player.score;
+        populate();
     }
-    if(player.score == 80)
-    {
-        window.location.replace("trivia_menu.html");
-    }
+    
 }
 
+let answer_select = [0, 1, 2, 3];
+
 let category = 0;
+
+let emt_score;
+
 
 let menuOnClick = evt =>
 {
@@ -79,6 +91,7 @@ let menuOnClick = evt =>
     {
         window.location.replace("../index.html");
     }
+    
 }
 
 function onLoad()
@@ -119,7 +132,8 @@ function onLoad()
         opt_two.addEventListener('click', onClick);
         opt_three.addEventListener('click', onClick);
         opt_four.addEventListener('click', onClick);
-        random();
+
+        randomize_ques();
     }
 }
 
@@ -127,26 +141,75 @@ let onClick = evt =>
 {
     if(evt.target.id == "opt_one")
     {
-        answer = opt_one.textContent;
-        ans_check();
+        if(opt_one.textContent == "Restart")
+        {
+            randomize_ques();
+        }else if(opt_one.textContent == "Choose new Category")
+        {
+            window.location.replace("trivia_menu.html");
+        }else
+        {
+            answer = opt_one.textContent;
+            ans_check();
+        }
+       
     }else if(evt.target.id == "opt_two")
     {
-        answer = opt_two.textContent;
-        ans_check();
+        if(opt_two.textContent == "Choose new Category")
+        {
+            window.location.replace("trivia_menu.html");
+        }else if(opt_two.textContent == "Go back to Main Menu")
+        {
+            window.location.replace("../index.html");
+        }else
+        {
+            answer = opt_two.textContent;
+            ans_check();
+        }
     }else if(evt.target.id == "opt_three")
     {
-        answer = opt_three.textContent;
-        ans_check();
+        if(opt_three.textContent == "Go back to the Main Menu")
+        {
+            window.location.replace("../index.html");
+        }else
+        {
+            answer = opt_three.textContent;
+            ans_check();
+        }
+        
+        
     }else if(evt.target.id == "opt_four")
     {
-        answer = opt_four.textContent;
-        ans_check();
+        if(opt_four.textContent == "See Score before Fail")
+        {
+            question_txt.innerHTML = "Your score before fail was " + emt_score + ". What now?";
+        }else
+        {
+            answer = opt_four.textContent;
+            ans_check();
+        }
+        
     }
 }
 
 function populate()
 {
-
+    if(player.score == 0)
+    {
+        question_txt.innerHTML = "You have lost, what would you like to do?";
+        opt_one.innerHTML = "Restart";
+        opt_two.innerHTML = "Choose new Category";
+        opt_three.innerHTML = "Go back to the Main Menu";
+        opt_four.innerHTML = "See Score before Fail";
+    }
+    else if(player.score == 100)
+    {
+        question_txt.innerHTML = "You have won! What's your next move?";
+        opt_one.innerHTML = "Choose new Category";
+        opt_two.innerHTML = "Go back to Main Menu";
+        opt_three.innerHTML = "";
+        opt_four.innerHTML = "";
+    }
 }
 
 
@@ -571,7 +634,7 @@ let question_array = [
             [//4
                 "What is the most streamed and watched game on Twitch?",
                 [
-                    "Apex Legneds",
+                    "Apex Legends",
                     "Valorant",
                     "League of Legends",
                     "Grand Theft Auto V"
@@ -728,57 +791,52 @@ let question_array = [
 ]
 
 let question_category = [
-    null, "History", "Geography", "Sports", "Pop Culture", "Gaming", "Nations", "Foods", "Music"
+    null, "History", "Geography", "Sports", "Pop Culture", "Gaming", "Nations"
 ]
 
 let question_select = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-let answer_select = [0, 1, 2, 3]
-
-//question_array[0][1][0][question][ans]
-function random()
+function ques_populate()
 {
-   var ques_rand = Math.random() * (9 - 0) - 0| 0;
-   var ans_rand = Math.random() * (4 - 0) - 0| 0;
-   question_txt.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][0];
-   opt_one.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand]];
-   if(ans_rand == 0)
-   {
-    opt_two.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand + 1]];
-    opt_three.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand + 2]];
-    opt_four.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand + 3]];
-   }else if(ans_rand == 1)
-   {
-    opt_two.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand + 1]];
-    opt_three.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand + 2]];
-    opt_four.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand - 1]];
-   }else if(ans_rand == 2)
-   {
-    opt_two.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand - 2]];
-    opt_three.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand + 1]];
-    opt_four.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand- 1]];
-   }else if(ans_rand == 3)
-   {
-    opt_two.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand- 3]];
-    opt_three.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand - 2]];
-    opt_four.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand-1]];
-   }
-   if(used_Ques_Rand.includes(ques_rand))
-   {
-       random();
-   }else
-   {
-        correct_ans = question_array[0][player.ques_category][question_select[ques_rand]][1][3];
-        player.ques_id = ques_rand;
-        used_Ques_Rand.push(ques_rand);
-        used_Ans_Rand.push(ans_rand);
-        console.log(correct_ans);
-   }
-   
+    console.log(player.ques_id);
+    question_txt.innerHTML = question_array[0][player.ques_category][question_select[player.ques_id]][0];
+    opt_one.innerHTML = question_array[0][player.ques_category][question_select[player.ques_id]][1][answer_select[0]];
+    opt_two.innerHTML = question_array[0][player.ques_category][question_select[player.ques_id]][1][answer_select[1]];
+    opt_three.innerHTML = question_array[0][player.ques_category][question_select[player.ques_id]][1][answer_select[2]];
+    opt_four.innerHTML = question_array[0][player.ques_category][question_select[player.ques_id]][1][answer_select[3]];
+    correct_ans = question_array[0][player.ques_category][question_select[player.ques_id]][1][3];
+    player.ques_id++;
+    console.log(correct_ans);
+    console.log(player.ques_id);
 }
 
-let used_Ques_Rand = [];
-let used_Ans_Rand = [];
+//question_array[0][1][0][question][ans]
+//question_txt.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][0];
+//opt_one.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand]];
+function randomize_ques()
+{
+    shuffle(answer_select);
+    shuffle(question_select);
+    player.ques_id = 0;
+    ques_populate();
+}
+function shuffle(array)
+{
+    var current_index = array.length;
+    var temp_value, rand_index;
+
+    while(0 != current_index)
+    {
+        rand_index = Math.random() * current_index | 0;
+        current_index -= 1;
+        
+        temp_value = array[current_index];
+        array[current_index] = array[rand_index];
+        array[rand_index] = temp_value
+    }
+    return array;
+}
+
 
 onLoad();
 
