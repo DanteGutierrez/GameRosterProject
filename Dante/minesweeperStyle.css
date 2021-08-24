@@ -17,9 +17,14 @@ html {
     flex-direction: row;
 }
 .box {
+    box-sizing:border-box;
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+    background-size: cover;
     width: 30px;
     height: 30px;
-    margin: 2px;
     display: flex;
     background-color: lightgrey;
     text-align: center;
@@ -32,58 +37,122 @@ html {
     align-items: center;
 }
 .button {
-    margin: 3px;
     padding: 2px;
-    border: 1px solid grey;
+    box-sizing:border-box;
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+    background-color: lightgrey;
 }
 .button:hover {
     cursor: pointer;
-    user-select: none;
 }
-.mine_style {
-    font-weight: bold;
-    background-color: red;
+.menuButton {
+    padding: 2px;
+    box-sizing:border-box;
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+    background-color: lightgrey;
+}
+.menuButton:hover {
+    cursor: pointer;
 }
 .zero_style {
-    background-color: darkgrey;
+    color: darkgrey;
 }
 .one_style {
-    font-weight: bold;
-    background-color: white;
+    color: blue;
 }
 .two_style {
-    font-weight: bold;
-    background-color: lightgreen;
+    color: green;
 }
 .three_style {
-    font-weight: bold;
-    background-color: lightseagreen;
+    color: red;
 }
 .four_style {
-    font-weight: bold;
-    background-color: lightskyblue;
+    color: darkblue;
 }
 .five_style {
-    font-weight: bold;
-    background-color: yellow;
+    color: darkred;
 }
 .six_style {
-    font-weight: bold;
-    background-color: orange;
+    color: teal;
 }
 .seven_style {
-    font-weight: bold;
-    background-color: orangered;
+    color: black;
 }
 .eight_style {
+    color: gray;
+}
+.zero_style, .one_style, .two_style, .three_style, .four_style, .five_style, .six_style, .seven_style, .eight_style, .mine_style{
+    font-family: 'Press Start 2P', cursive;
     font-weight: bold;
-    background-color: rebeccapurple;
+    background-image: url("");
+    border: gray solid 1px;
+    box-sizing: border-box;
+
+}
+.mine_style {
+    background-image: url("./Assets/mine.svg");
+}
+.loserTile {
+    background-color: red;
+}
+.flagged {
+    background-image: url("./Assets/flag.svg");
 }
 .label {
     font-weight: bold;
 }
+.settingLabel {
+    padding: 2px;
+    box-sizing:border-box;
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+    background-color: lightgrey;
+}
 .noSelect {
     user-select: none;
+}
+.digitalDisplay {
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 48px;
+    color: red;
+    width: 75px;
+}
+.digit {
+    width: 25px;
+    height: 48px;
+    text-align: right;
+}
+.resetButton {
+    height: 48px;
+    width: 48px;
+    background-image: url("./Assets/happySmile.svg");
+    box-sizing:border-box;
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+    background-color: lightgrey;
+}
+.resetButton:hover {
+    background-image: url("./Assets/xSmile.svg");
+    cursor: pointer;
+}
+.max {
+    width: 100%;
+    height: 30px;
+}
+#HUD {
+    width:100%;
+    display: flex;
+    justify-content:space-between;
 }
 #ReturnToRoster {
     display: flex;
@@ -101,4 +170,26 @@ html {
     background-color: white;
     text-decoration: none;
     color: black;
+}
+#Settings {
+    position: absolute;
+    left: 0px;
+}
+#PlayArea {
+    background-color: lightgrey;
+}
+#OutBorder {
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+}
+#MidBorder {
+    border: lightgrey solid 22px;
+}
+#InBorder {
+    border-top: grey solid 4px;
+    border-bottom: ghostwhite solid 4px;
+    border-left: grey solid 4px;
+    border-right: ghostwhite solid 4px;
 }

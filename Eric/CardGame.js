@@ -196,6 +196,6 @@ function checkWinner() {
 }
 let onClick = evt =>
 {
-    window.location.replace("Casino.html");
+    window.location.replace("casino.html");
 }
 main_menu_btn.addEventListener("click", onClick);

@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html class="noSelect">
 <head>
     <title>MineSweeper</title>
     <link href="minesweeperStyle.css" rel="stylesheet"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
+    </style>
 </head>
 <body>
     <div id="ReturnToRoster">
@@ -13,35 +17,68 @@
             Welcome to MineSweeper!
         </h1>
     </div>
-    <div id="PlayArea" class="column center">
-        
-        <div class="row">
-            <div id="AddColumn" class="button">+column</div>
-            <div id="SubColumn" class="button">-column</div>
-            <div id="AddRow" class="button">+row</div>
-            <div id="SubRow" class="button">-row</div>
-            <div id="AddMine" class="button">+mine</div>
-            <div id="SubMine" class="button">-mine</div>
-            <div id="Reset" class="button">Reset</div>
-            <input id="Cheater" name="cheat" type="checkbox" value="false"/>
-            <label for="cheat">x-ray</label>
-        </div>
-        <div class="row center">
-            <div id="Hundreds" class="noSelect label"></div>
-            <div id="Tens" class="noSelect label"></div>
-            <div id="Ones" class="noSelect label"></div>
-        </div>
-        <div class="row">
-            <div id="Result" class="label"></div>
-        </div>
-        <div class="row center">
-            <div id="Board" class="grid column boardColumn"></div>
-        </div>
-        <div class="row center">
-            <input id="NameValue" type="text" placeholder="Name"></input>
-            <div id="Submit" class="button">Submit Score!</div>
+    <div id="Settings">
+        <div id="OutBorder">
+            <div id="MidBorder">
+                <div id="InBorder" class="column">
+                    <div class="row">
+                        <div id="ShowSettings" class="menuButton">▲</div>
+                        <div class="settingLabel">Settings</div>
+                    </div> 
+                    <div class="row">
+                        <div id="AddColumn" class="button settings">+column</div>
+                        <div id="SubColumn" class="button settings">-column</div>
+                    </div>
+                    <div class="row">
+                        <div id="AddRow" class="button settings">+row</div>
+                        <div id="SubRow" class="button settings">-row</div>
+                    </div>
+                    <div class="row">
+                        <div id="AddMine" class="button settings">+mine</div>
+                        <div id="SubMine" class="button settings">-mine</div>
+                    </div>
+                    <div class="row settingLabel">
+                        <input id="Cheater" class="settings" name="cheat" type="checkbox" value="false"/>
+                        <label for="cheat" class="settings">x-ray</label> 
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="column center">
+        <div id="OutBorder">
+            <div id="MidBorder">
+                <div id="InBorder">
+                    <div id="PlayArea" class="column center">
+                        <div id="HUD">
+                            <div class="row center digitalDisplay">
+                                <div id="MHundreds" class="label digit"></div>
+                                <div id="MTens" class="label digit"></div>
+                                <div id="MOnes" class="label digit"></div>
+                            </div>
+                            <div class="row">
+                                <div id="Reset" class="resetButton"></div>
+                            </div>
+                            <div class="row center digitalDisplay">
+                                <div id="THundreds" class="label digit"></div>
+                                <div id="TTens" class="label digit"></div>
+                                <div id="TOnes" class="label digit"></div>
+                            </div>
+                        </div>
+                            <div id="Board" class="grid column boardColumn"></div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row center">
+        <div id="Result" class="label"></div>
+    </div>
+    <div class="row center">
+        <input id="NameValue" type="text" placeholder="Name"></input>
+        <div id="Submit" class="button">Submit Score!</div>
+    </div>    
     <div id="Leaderboard" class="column center"></div>
     <script src="minesweeperScript.js"></script>
 </body>
