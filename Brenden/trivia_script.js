@@ -21,7 +21,6 @@ let answer_array = [];
 
 function ans_check(answer)
 {
-    console.log(player.ques_index)
     if(player.ques_index  == 9)
     {
         player.score = player.score + 10;
@@ -173,7 +172,6 @@ let onClick = evt =>
             player.ques_index = 0;
             player.score = 0;
             score.innerHTML = player.score;
-            console.log("Hello?");
             populate();
         }else
         {
