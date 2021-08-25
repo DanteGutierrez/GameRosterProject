@@ -776,17 +776,17 @@ let question_array = [
                     "Romainia",
                     "Yugoslavia"
                 ]
+            ],
+            [//10
+                "What nation is known for being the worse European Union Country to live in?",
+                [
+                    "Greece",
+                    "North Macedonia",
+                    "Ireland",
+                    "Slovenia"
+                ]
             ]
-        ],
-        [//10
-            "What nation is known for being the worse European Union Country to live in?",
-            [
-                "Greece",
-                "North Macedonia",
-                "Ireland",
-                "Slovenia"
-            ]
-        ]
+        ]      
     ]
 ]
 
