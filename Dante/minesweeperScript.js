@@ -339,9 +339,14 @@ const xrayBoard = () => {
     }
 };
 loadBoard();
+const selfHide = (name) => {
+    document.getElementById(name).hidden = true;
+}
 document.getElementById("AddColumn").addEventListener("click", (evt) => {
-    column++;
+    if ((((window.innerWidth / 2) - 184) - ((column/2) * 30)) - 60 > 0) {
+        column++;
     loadBoard();
+    }
 });
 document.getElementById("AddRow").addEventListener("click", (evt) => {
     row++;
@@ -387,5 +392,19 @@ document.getElementById("ShowSettings").addEventListener("click", (evt) => {
         items[index].hidden = !items[index].hidden;
     }
     document.getElementById("ShowSettings").innerHTML = items[0].hidden ? "▼" : "▲";
+});
+
+document.getElementById("ShowHelp").addEventListener("click", (evt) => {
+    let width = window.innerWidth;
+    let comments = document.getElementById("Helpers");
+    comments.innerHTML = '';
+    let resetButton = document.getElementById("Reset");
+    comments.innerHTML = '<div id="ResetHelp" class="helpLabel" style="position:absolute; top:' + (resetButton.offsetTop - 30) + 'px; left:' + (100 - (((width - (resetButton.offsetLeft - 61)) / width) * 100)) + '%;" onClick="selfHide(' + "'ResetHelp'" + ')">This is the Reset Button</div>';
+    let mineCounter = document.getElementById("MineCounter");
+    comments.innerHTML += '<div id="MineHelp" class="helpLabel" style="position:absolute; top:' + (mineCounter.offsetTop + 10) + 'px; left:' + (100 - (((width - (mineCounter.offsetLeft - 175)) / width) * 100)) + '%;" onClick="selfHide(' + "'MineHelp'" + ')">This is the mine tracker</div>';
+    let timer = document.getElementById("Timer");
+    comments.innerHTML += '<div id="TimeHelp" class="helpLabel" style="position:absolute; top:' + (timer.offsetTop + 10) + 'px; left:' + (100 - (((width - (timer.offsetLeft + 75)) / width) * 100)) + '%;" onClick="selfHide(' + "'TimeHelp'" + ')">This is the timer</div>';
+    let help = document.getElementById("Board");
+    comments.innerHTML += '<div id="FlagHelp" class="helpLabel" style="position:absolute; top:' + (help.offsetTop) + 'px; left:' + (100 - (((width - (help.offsetLeft + 50)) / width) * 100)) + '%;" onClick="selfHide(' + "'FlagHelp'" + ')">Hold Shift when clicking to add flag</div>';
 });
 let timer = setInterval(secondPassed, 1000);

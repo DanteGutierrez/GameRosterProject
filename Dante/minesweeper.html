@@ -12,10 +12,16 @@
     <div id="ReturnToRoster">
         <a id="BTN_Return" href="../index.html">Return to Roster</a>
     </div>
-    <div class="row center">
-        <h1>
-            Welcome to MineSweeper!
-        </h1>
+    <div id="Help">
+        <div id="OutBorder">
+            <div id="MidBorder">
+                <div id="InBorder" class="column">
+                    <div class="row">
+                        <div id="ShowHelp" class="menuButton">Show Help</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="Settings">
         <div id="OutBorder">
@@ -26,21 +32,37 @@
                         <div class="settingLabel">Settings</div>
                     </div> 
                     <div class="row">
-                        <div id="AddColumn" class="button settings">+column</div>
-                        <div id="SubColumn" class="button settings">-column</div>
+                        <div id="AddColumn" class="button settings square">+</div>
+                        <div id="SubColumn" class="button settings square">-</div>
+                        <div class="settings settingLabel">Column</div>
                     </div>
                     <div class="row">
-                        <div id="AddRow" class="button settings">+row</div>
-                        <div id="SubRow" class="button settings">-row</div>
+                        <div id="AddRow" class="button settings square">+</div>
+                        <div id="SubRow" class="button settings square">-</div>
+                        <div class="settings settingLabel">Row</div>
                     </div>
                     <div class="row">
-                        <div id="AddMine" class="button settings">+mine</div>
-                        <div id="SubMine" class="button settings">-mine</div>
+                        <div id="AddMine" class="button settings square">+</div>
+                        <div id="SubMine" class="button settings square">-</div>
+                        <div class="settings settingLabel">Mines</div>
                     </div>
-                    <div class="row settingLabel">
-                        <input id="Cheater" class="settings" name="cheat" type="checkbox" value="false"/>
-                        <label for="cheat" class="settings">x-ray</label> 
+                    <div class="row">
+                        <div class="settingLabel settings">
+                            <input id="Cheater" class="settings" name="cheat" type="checkbox" value="false"/>
+                            <label for="cheat" class="settings">x-ray</label> 
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row center">
+        <div id="OutBorder">
+            <div id="MidBorder">
+                <div id="InBorder">
+                    <h1 class="settingLabel">
+                        Welcome to MineSweeper!
+                    </h1>
                 </div>
             </div>
         </div>
@@ -51,7 +73,7 @@
                 <div id="InBorder">
                     <div id="PlayArea" class="column center">
                         <div id="HUD">
-                            <div class="row center digitalDisplay">
+                            <div id="MineCounter" class="row center digitalDisplay">
                                 <div id="MHundreds" class="label digit"></div>
                                 <div id="MTens" class="label digit"></div>
                                 <div id="MOnes" class="label digit"></div>
@@ -59,7 +81,7 @@
                             <div class="row">
                                 <div id="Reset" class="resetButton"></div>
                             </div>
-                            <div class="row center digitalDisplay">
+                            <div id="Timer" class="row center digitalDisplay">
                                 <div id="THundreds" class="label digit"></div>
                                 <div id="TTens" class="label digit"></div>
                                 <div id="TOnes" class="label digit"></div>
@@ -81,5 +103,6 @@
     </div>    
     <div id="Leaderboard" class="column center"></div>
     <script src="minesweeperScript.js"></script>
+    <div id="Helpers"></div>
 </body>
 </html>
