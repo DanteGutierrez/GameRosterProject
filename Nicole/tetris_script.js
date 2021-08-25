@@ -1,9 +1,8 @@
 
-const context = tetris_canvas.getContext("2d");
 const main_menu_btn = document.getElementById("main_menu_btn");
 const score_board = document.getElementById("score");
 const tetris_canvas = document.getElementById("tetris_canvas");
-
+const context = tetris_canvas.getContext("2d");
 const tetris_audio_player = document.getElementById("tetris_audio_play");
 
 
