@@ -256,7 +256,7 @@ const leaderBoardUpdate = () => {
     theBoard.innerHTML = '';
     orderLeaderboard();
     for (let index = 0; index < leaderBoard.length; index++) {
-        theBoard.innerHTML += "<div class='row noSelect'>" + leaderBoard[index][0] + ": " + leaderBoard[index][1] + " mine(s), " + leaderBoard[index][2] + " second(s)</div>";
+        theBoard.innerHTML += "<div class='row leaderLabel'>" + leaderBoard[index][0] + ": " + leaderBoard[index][1] + " mine(s), " + leaderBoard[index][2] + " second(s)</div>";
     }
 };
 const loadBoard = () => {
@@ -345,28 +345,38 @@ const selfHide = (name) => {
 document.getElementById("AddColumn").addEventListener("click", (evt) => {
     if ((((window.innerWidth / 2) - 184) - ((column/2) * 30)) - 60 > 0) {
         column++;
-    loadBoard();
+        loadBoard();
     }
 });
 document.getElementById("AddRow").addEventListener("click", (evt) => {
-    row++;
-    loadBoard();
+    if (row < 22) {
+        row++;
+        loadBoard(); 
+    }
 });
 document.getElementById("SubColumn").addEventListener("click", (evt) => {
-    if (column > 1) {
+    if (column > 3) {
         column--;
+        if (mines >= (column * row)) {
+            mines = (column * row) - 1;
+        }
         loadBoard();
     }
 });
 document.getElementById("SubRow").addEventListener("click", (evt) => {
-    if (row > 1) {
+    if (row > 3) {
         row--;
+        if (mines >= (column * row)) {
+            mines = (column * row) - 1;
+        }
         loadBoard();
     }
 });
 document.getElementById("AddMine").addEventListener("click", (evt) => {
-    mines++;
-    loadBoard();
+    if (mines + 1 < (column * row)) {
+        mines++;
+        loadBoard();
+    }
 });
 document.getElementById("SubMine").addEventListener("click", (evt) => {
     if (mines > 1) {
