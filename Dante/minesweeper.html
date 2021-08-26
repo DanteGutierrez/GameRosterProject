@@ -13,9 +13,9 @@
         <a id="BTN_Return" href="../index.html">Return to Roster</a>
     </div>
     <div id="Help">
-        <div id="OutBorder">
-            <div id="MidBorder">
-                <div id="InBorder" class="column">
+        <div class="OutBorder">
+            <div class="MidBorder">
+                <div class="InBorder column">
                     <div class="row">
                         <div id="ShowHelp" class="menuButton">Show Help</div>
                     </div>
@@ -24,9 +24,9 @@
         </div>
     </div>
     <div id="Settings">
-        <div id="OutBorder">
-            <div id="MidBorder">
-                <div id="InBorder" class="column">
+        <div class="OutBorder">
+            <div class="MidBorder">
+                <div class="InBorder column">
                     <div class="row">
                         <div id="ShowSettings" class="menuButton">▲</div>
                         <div class="settingLabel">Settings</div>
@@ -56,10 +56,10 @@
             </div>
         </div>
     </div>
-    <div class="row center">
-        <div id="OutBorder">
-            <div id="MidBorder">
-                <div id="InBorder">
+    <div id="Introduction" class="row center">
+        <div class="OutBorder">
+            <div class="MidBorder">
+                <div class="InBorder">
                     <h1 class="settingLabel">
                         Welcome to MineSweeper!
                     </h1>
@@ -67,10 +67,10 @@
             </div>
         </div>
     </div>
-    <div class="column center">
-        <div id="OutBorder">
-            <div id="MidBorder">
-                <div id="InBorder">
+    <div id="Field" class="column center">
+        <div class="OutBorder">
+            <div class="MidBorder">
+                <div class="InBorder">
                     <div id="PlayArea" class="column center">
                         <div id="HUD">
                             <div id="MineCounter" class="row center digitalDisplay">
@@ -94,14 +94,24 @@
             </div>
         </div>
     </div>
-    <div class="row center">
-        <div id="Result" class="label"></div>
+    <div id="EndGame" class="column center">
+        <div class="OutBorder">
+            <div class="MidBorder">
+                <div class="InBorder">
+                    <div class="row center">
+                        <div id="Result" class="label"></div>
+                    </div>
+                    <div class="row center">
+                        <input id="NameValue" type="text" placeholder="Name"></input>
+                        <div id="Submit" class="button">Submit Score!</div>
+                    </div>    
+                    <div class="row label center">Leader Board</div>
+                    <div id="Leaderboard" class="column"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row center">
-        <input id="NameValue" type="text" placeholder="Name"></input>
-        <div id="Submit" class="button">Submit Score!</div>
-    </div>    
-    <div id="Leaderboard" class="column center"></div>
+    
     <script src="minesweeperScript.js"></script>
     <div id="Helpers"></div>
 </body>
