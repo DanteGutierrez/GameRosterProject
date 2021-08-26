@@ -258,9 +258,7 @@ function question_rand()
     var a = 0;
     while(player.ques_category != questions[i].topic)
     {
-
-        i++;
-        
+        i++;   
     }
     while(player.ques_category == questions[i].topic)
     {
