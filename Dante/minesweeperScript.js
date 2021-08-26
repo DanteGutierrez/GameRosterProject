@@ -315,6 +315,7 @@ const loadBoard = () => {
     secondPassed();
     updateMines();
     leaderBoardUpdate();
+    document.getElementById("Helpers").innerHTML = '';
 };
 const xrayBoard = () => {
     for (let r = 0; r < row; r++) {
