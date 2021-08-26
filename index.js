@@ -90,7 +90,7 @@ let onClick = evt =>
                 description_box.innerHTML = "";
                 description_box_two.innerHTML = "";
                 description_box_three.innerHTML = "";
-                description_box_four.innerHTML = "Waifu Clicker Bois";
+                description_box_four.innerHTML = "Waifu Hunter is a clicker game in which you click to unlock Upgrades";
                 description_box_five.innerHTML = "";
 
                 a = 0;
@@ -111,7 +111,7 @@ let onClick = evt =>
                 description_box_two.innerHTML = "";
                 description_box_three.innerHTML = "";
                 description_box_four.innerHTML = "";
-                description_box_five.innerHTML = "The Trivia Game";
+                description_box_five.innerHTML = "Nikki's Trivia is a game in which you play a trivia game with 6 categories to choose from!";
 
                 a = 0;
                 b = 0;
