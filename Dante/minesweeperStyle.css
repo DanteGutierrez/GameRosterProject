@@ -125,6 +125,15 @@ h1 {
     border-right: grey solid 4px;
     background-color: lightgrey;
 }
+.leaderLabel {
+    padding: 2px;
+    box-sizing:border-box;
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+    background-color: lightgrey;
+}
 .helpLabel {
     padding: 2px;
     box-sizing:border-box;
@@ -175,6 +184,22 @@ h1 {
     display: flex;
     justify-content:space-between;
 }
+.OutBorder {
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+}
+.MidBorder {
+    border: lightgrey solid 22px;
+}
+.InBorder {
+    border-top: grey solid 4px;
+    border-bottom: ghostwhite solid 4px;
+    border-left: grey solid 4px;
+    border-right: ghostwhite solid 4px;
+    background-color: lightgrey;
+}
 #HUD {
     width:100%;
     display: flex;
@@ -202,22 +227,6 @@ h1 {
     left: 0px;
 }
 #PlayArea {
-    background-color: lightgrey;
-}
-#OutBorder {
-    border-top: ghostwhite solid 4px;
-    border-bottom: grey solid 4px;
-    border-left: ghostwhite solid 4px;
-    border-right: grey solid 4px;
-}
-#MidBorder {
-    border: lightgrey solid 22px;
-}
-#InBorder {
-    border-top: grey solid 4px;
-    border-bottom: ghostwhite solid 4px;
-    border-left: grey solid 4px;
-    border-right: ghostwhite solid 4px;
     background-color: lightgrey;
 }
 #Help {
