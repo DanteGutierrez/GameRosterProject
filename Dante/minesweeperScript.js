@@ -7,7 +7,8 @@ let trueTiles = [];
 let queue = [];
 let running = false;
 let time = 0;
-let leaderBoard = [["Dante", 20, 100], ["Randy", 20, 100], ["Nicole", 20, 100], ["Eric", 20, 100]];
+let difficulty = "Medium";
+let leaderBoard = [["Dante", "Medium", 100], ["Randy", "Medium", 100], ["Nicole", "Medium", 100], ["Eric", "Medium", 100]];
 
 const setResultText = (text) => {
     document.getElementById("Result").innerHTML = text;
@@ -256,7 +257,7 @@ const leaderBoardUpdate = () => {
     theBoard.innerHTML = '';
     orderLeaderboard();
     for (let index = 0; index < leaderBoard.length; index++) {
-        theBoard.innerHTML += "<div class='row leaderLabel'>" + leaderBoard[index][0] + ": " + leaderBoard[index][1] + " mine(s), " + leaderBoard[index][2] + " second(s)</div>";
+        theBoard.innerHTML += "<div class='row leaderLabel'>" + leaderBoard[index][0] + ": " + leaderBoard[index][1] + ", " + leaderBoard[index][2] + " second(s)</div>";
     }
 };
 const loadBoard = () => {
@@ -341,22 +342,34 @@ const xrayBoard = () => {
 loadBoard();
 const selfHide = (name) => {
     document.getElementById(name).hidden = true;
-}
+};
+const settingShowHide = (visible, settingsElement, settingsButton, changeButton) => {
+    let items = settingsElement;
+    for (let index = 0; index < items.length; index++) {
+        items[index].hidden = !visible;
+    }
+    if (changeButton) {
+        settingsButton.innerHTML = visible ? "▲" : "▼";
+    }
+};
 document.getElementById("AddColumn").addEventListener("click", (evt) => {
     if ((((window.innerWidth / 2) - 184) - ((column/2) * 30)) - 60 > 0) {
         column++;
+        difficulty = "Custom";
         loadBoard();
     }
 });
 document.getElementById("AddRow").addEventListener("click", (evt) => {
     if (row < 22) {
         row++;
+        difficulty = "Custom";
         loadBoard(); 
     }
 });
 document.getElementById("SubColumn").addEventListener("click", (evt) => {
     if (column > 3) {
         column--;
+        difficulty = "Custom";
         if (mines >= (column * row)) {
             mines = (column * row) - 1;
         }
@@ -366,6 +379,7 @@ document.getElementById("SubColumn").addEventListener("click", (evt) => {
 document.getElementById("SubRow").addEventListener("click", (evt) => {
     if (row > 3) {
         row--;
+        difficulty = "Custom";
         if (mines >= (column * row)) {
             mines = (column * row) - 1;
         }
@@ -375,12 +389,14 @@ document.getElementById("SubRow").addEventListener("click", (evt) => {
 document.getElementById("AddMine").addEventListener("click", (evt) => {
     if (mines + 1 < (column * row)) {
         mines++;
+        difficulty = "Custom";
         loadBoard();
     }
 });
 document.getElementById("SubMine").addEventListener("click", (evt) => {
     if (mines > 1) {
         mines--;
+        difficulty = "Custom";
         loadBoard();
     }
 });
@@ -392,29 +408,57 @@ document.getElementById("Reset").addEventListener("click", (evt) => {
     loadBoard();
 });
 document.getElementById("Submit").addEventListener("click", (evt) => {
-    leaderBoard.unshift([document.getElementById("NameValue").value, mines, time]);
+    leaderBoard.unshift([document.getElementById("NameValue").value, difficulty, time]);
     leaderBoardUpdate();
     document.getElementById("Submit").hidden = true;
 });
 document.getElementById("ShowSettings").addEventListener("click", (evt) => {
-    let items = document.getElementsByClassName("settings");
-    for (let index = 0; index < items.length; index++) {
-        items[index].hidden = !items[index].hidden;
+    let single = document.getElementById("ShowSettings").innerHTML == "▲";
+    let double = document.getElementById("ShowDouble").innerHTML == "▲";
+    settingShowHide(!single, document.getElementsByClassName("settings"), document.getElementById("ShowSettings"), true);
+    if (single && double) {
+        settingShowHide(!single, document.getElementsByClassName("settingsDouble"), document.getElementById("ShowDouble"), false);
     }
-    document.getElementById("ShowSettings").innerHTML = items[0].hidden ? "▼" : "▲";
+    if (!single && double) {
+        settingShowHide(!single, document.getElementsByClassName("settingsDouble"), document.getElementById("ShowDouble"), false);
+    }
 });
-
+document.getElementById("ShowDouble").addEventListener("click", (evt) => {
+    let double = document.getElementById("ShowDouble").innerHTML == "▲";
+    settingShowHide(!double, document.getElementsByClassName("settingsDouble"), document.getElementById("ShowDouble"), true);
+});
 document.getElementById("ShowHelp").addEventListener("click", (evt) => {
     let width = window.innerWidth;
     let comments = document.getElementById("Helpers");
     comments.innerHTML = '';
     let resetButton = document.getElementById("Reset");
-    comments.innerHTML = '<div id="ResetHelp" class="helpLabel" style="position:absolute; top:' + (resetButton.offsetTop - 30) + 'px; left:' + (100 - (((width - (resetButton.offsetLeft - 61)) / width) * 100)) + '%;" onClick="selfHide(' + "'ResetHelp'" + ')">This is the Reset Button</div>';
+    comments.innerHTML = '<div id="ResetHelp" class="helpLabel" style="position:absolute; top:' + (resetButton.offsetTop - 30) + 'px; left:' + (100 - (((width - (resetButton.offsetLeft - ((174.68 - resetButton.offsetWidth) / 2))) / width) * 100)) + '%;" onClick="selfHide(' + "'ResetHelp'" + ')">This is the Reset Button</div>';
     let mineCounter = document.getElementById("MineCounter");
-    comments.innerHTML += '<div id="MineHelp" class="helpLabel" style="position:absolute; top:' + (mineCounter.offsetTop + 10) + 'px; left:' + (100 - (((width - (mineCounter.offsetLeft - 175)) / width) * 100)) + '%;" onClick="selfHide(' + "'MineHelp'" + ')">This is the mine tracker</div>';
+    comments.innerHTML += '<div id="MineHelp" class="helpLabel" style="position:absolute; top:' + (mineCounter.offsetTop + 10) + 'px; left:' + (100 - (((width - (mineCounter.offsetLeft - 174.65)) / width) * 100)) + '%;" onClick="selfHide(' + "'MineHelp'" + ')">This is the mine tracker</div>';
     let timer = document.getElementById("Timer");
-    comments.innerHTML += '<div id="TimeHelp" class="helpLabel" style="position:absolute; top:' + (timer.offsetTop + 10) + 'px; left:' + (100 - (((width - (timer.offsetLeft + 75)) / width) * 100)) + '%;" onClick="selfHide(' + "'TimeHelp'" + ')">This is the timer</div>';
+    comments.innerHTML += '<div id="TimeHelp" class="helpLabel" style="position:absolute; top:' + (timer.offsetTop + 10) + 'px; left:' + (100 - (((width - (timer.offsetLeft + 88)) / width) * 100)) + '%;" onClick="selfHide(' + "'TimeHelp'" + ')">This is the timer</div>';
     let help = document.getElementById("Board");
-    comments.innerHTML += '<div id="FlagHelp" class="helpLabel" style="position:absolute; top:' + (help.offsetTop) + 'px; left:' + (100 - (((width - (help.offsetLeft + 50)) / width) * 100)) + '%;" onClick="selfHide(' + "'FlagHelp'" + ')">Hold Shift when clicking to add flag</div>';
+    comments.innerHTML += '<div id="FlagHelp" class="helpLabel" style="position:absolute; top:' + (help.offsetTop) + 'px; left:' + (100 - (((width - (help.offsetLeft + ((help.offsetWidth - 257.38) / 2))) / width) * 100)) + '%;" onClick="selfHide(' + "'FlagHelp'" + ')">Hold Shift when clicking to add flag</div>';
+});
+document.getElementById("Easy").addEventListener("click", (evt) => {
+    difficulty = "Easy";
+    mines = 8;
+    column = 8;
+    row = 8;
+    loadBoard();
+});
+document.getElementById("Medium").addEventListener("click", (evt) => {
+    difficulty = "Medium";
+    mines = 27;
+    column = 12;
+    row = 12;
+    loadBoard();
+});
+document.getElementById("Hard").addEventListener("click", (evt) => {
+    difficulty = "Hard";
+    mines = 100;
+    column = 20;
+    row = 20;
+    loadBoard();
 });
 let timer = setInterval(secondPassed, 1000);

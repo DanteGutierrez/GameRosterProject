@@ -3,6 +3,7 @@
 <head>
     <title>MineSweeper</title>
     <link href="minesweeperStyle.css" rel="stylesheet"/>
+    <link href="./Assets/Minesweeper.ico" rel="icon"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
@@ -28,30 +29,46 @@
             <div class="MidBorder">
                 <div class="InBorder column">
                     <div class="row">
-                        <div id="ShowSettings" class="menuButton">▲</div>
+                        <div id="ShowSettings" class="menuButton">▼</div>
                         <div class="settingLabel">Settings</div>
                     </div> 
                     <div class="row">
-                        <div id="AddColumn" class="button settings square">+</div>
-                        <div id="SubColumn" class="button settings square">-</div>
-                        <div class="settings settingLabel">Column</div>
+                        <div id="Easy" class="button settings" hidden>Easy</div>
                     </div>
                     <div class="row">
-                        <div id="AddRow" class="button settings square">+</div>
-                        <div id="SubRow" class="button settings square">-</div>
-                        <div class="settings settingLabel">Row</div>
+                        <div id="Medium" class="button settings" hidden>Medium</div>
                     </div>
                     <div class="row">
-                        <div id="AddMine" class="button settings square">+</div>
-                        <div id="SubMine" class="button settings square">-</div>
-                        <div class="settings settingLabel">Mines</div>
+                        <div id="Hard" class="button settings" hidden>Hard</div>
                     </div>
                     <div class="row">
-                        <div class="settingLabel settings">
-                            <input id="Cheater" class="settings" name="cheat" type="checkbox" value="false"/>
-                            <label for="cheat" class="settings">x-ray</label> 
+                        <div id="ShowDouble" class="menuButton settings" hidden>▼</div>
+                        <div class="settings settingLabel" hidden>Customization</div>
+                    </div>
+                    <div id="DoubleMenu" class="settingsDouble InBorder" hidden>
+                        <div class="row">
+                            <div id="AddColumn" class="button settingsDouble square" hidden>+</div>
+                            <div id="SubColumn" class="button settingsDouble square" hidden>-</div>
+                            <div class="settingsDouble settingLabel" hidden>Column</div>
                         </div>
+                        <div class="row">
+                            <div id="AddRow" class="button settingsDouble square" hidden>+</div>
+                            <div id="SubRow" class="button settingsDouble square" hidden>-</div>
+                            <div class="settingsDouble settingLabel" hidden>Row</div>
+                        </div>
+                        <div class="row">
+                            <div id="AddMine" class="button settingsDouble square" hidden>+</div>
+                            <div id="SubMine" class="button settingsDouble square" hidden>-</div>
+                            <div class="settingsDouble settingLabel" hidden>Mines</div>
+                        </div>
+                        <div class="row">
+                            <div class="settingLabel settingsDouble" hidden>
+                                <input id="Cheater" class="settingsDouble" name="cheat" type="checkbox" value="false" hidden/>
+                                <label for="cheat" class="settingsDouble" hidden>x-ray</label> 
+                            </div>
+                        </div> 
                     </div>
+                    
                 </div>
             </div>
         </div>
