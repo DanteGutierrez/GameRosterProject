@@ -222,6 +222,12 @@ function populate_game()
     opt_two.innerHTML = answer_array[1];
     opt_three.innerHTML = answer_array[2];
     opt_four.innerHTML = answer_array[3];
+    question_txt.style.backgroundColor = "#EEE2DF";
+    question_txt.style.color = "#B36A5E";
+    opt_three.style.backgroundColor = "#EEE2DF";
+    opt_three.style.border = "2px solid #C89F9C";
+    opt_four.style.backgroundColor = "#EEE2DF";
+    opt_four.style.border = "2px solid #C89F9C";
 }
 function populate_win()
 {
@@ -230,6 +236,12 @@ function populate_win()
     opt_two.innerHTML = "Return to the Main Menu";
     opt_three.innerHTML = "";
     opt_four.innerHTML = "";
+    question_txt.style.backgroundColor = "#97C1A9";
+    question_txt.style.color = "#B36A5E";
+    opt_three.style.backgroundColor = "#B36A5E";
+    opt_three.style.border = "0px solid #B36A5E";
+    opt_four.style.backgroundColor = "#B36A5E";
+    opt_four.style.border = "0px solid #B36A5E";
 }
 function populate_lose()
 {
@@ -238,6 +250,10 @@ function populate_lose()
     opt_two.innerHTML = "Return to the Main Menu";
     opt_three.innerHTML = "Restart";
     opt_four.innerHTML = "";
+    question_txt.style.backgroundColor = "#FF9684";
+    question_txt.style.color = "#EED7C5";
+    opt_four.style.backgroundColor = "#B36A5E";
+    opt_four.style.border = "0px solid #B36A5E";
 }
 
 let question_array = [];
