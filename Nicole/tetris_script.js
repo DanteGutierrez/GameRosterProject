@@ -346,10 +346,6 @@ let onClick = evt =>
     {
         audioFile.play();
     }
-    else if(evt.target.id == "main_menu_btn")
-    {
-        window.location.replace("../index.html");
-    }
 }
 
 playerReset();

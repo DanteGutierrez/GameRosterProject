@@ -23,6 +23,8 @@
     margin: auto;
     padding: 10px;
     cursor: pointer;
+    display: block;
+    text-decoration: none;
 }
 .score_board
 {

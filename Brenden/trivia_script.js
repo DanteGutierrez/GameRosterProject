@@ -90,9 +90,6 @@ let menuOnClick = evt =>
         category = "Nations";
         sessionStorage.setItem(player.ques_category, category);
         window.location.replace("trivia.html");
-    }else if(evt.target.id == "main_menu")
-    {
-        window.location.replace("../index.html");
     }
     
 }
