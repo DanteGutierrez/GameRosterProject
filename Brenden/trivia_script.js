@@ -21,17 +21,16 @@ let answer_array = [];
 
 function ans_check(answer)
 {
-    if(player.ques_index  == 9)
-    {
-        player.score = player.score + 10;
-        score.innerHTML = player.score;
-        populate_win();
-    }else if(answer == player.ans_id)
+    if(answer == player.ans_id)
     {
         player.score = player.score + 10;
         score.innerHTML = player.score;
         player.ques_index = player.ques_index + 1;
         populate();
+        if(player.ques_index  == 10)
+        {
+            populate_win();
+        }
     }else if(answer != player.ans_id)
     {
         populate_lose();
@@ -506,6 +505,116 @@ var questions = [
             }
         ]
     },
+    {
+        topic: "History",
+        prompt: "What was the span of time of the Irish War of Independence?",
+        answers: [
+            {
+                answer_txt: "1876-1893",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1922-1923",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1960-1964",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1919-1921",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "History",
+        prompt: "Which west coast state was made a state last?",
+        answers: [
+            {
+                answer_txt: "Oregon",
+                isCorrect: false
+            },
+            {
+                answer_txt: "California",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Nevada",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Washington",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "History",
+        prompt: "Which state of the US was not part of the 13 colonies?",
+        answers: [
+            {
+                answer_txt: "Massachuesetts",
+                isCorrect: false
+            },
+            {
+                answer_txt: "North Carolina",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Virginia",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Florida",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "History",
+        prompt: "When did the Soviet Union disolve?",
+        answers: [
+            {
+                answer_txt: "1989",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1994",
+                isCorrect: false
+            },
+            {
+                answer_txt: "2001",
+                isCorrect:false
+            },
+            {
+                answer_txt: "1991",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "History",
+        prompt: "When did the second World War start and end in for Europe?",
+        answers: [
+            {
+                answer_txt: "1938-1942",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1940-1946",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1935-1940",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1939-1945",
+                isCorrect: true
+            }
+        ]
+    },
     {//1
         topic: "Geography",
         prompt: "What is the biggest mountain range on the American Continents?",
@@ -722,6 +831,28 @@ var questions = [
             },
             {
                 answer_txt: "Guateng",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Geography",
+        prompt: "What are the coastal mountains in Austrailia called",
+        answers: [
+            {
+                answer_txt: "Kaikoura Range",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Keweka Range",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Austrailian Alps",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Great Dividing Range",
                 isCorrect: true
             }
         ]
@@ -946,6 +1077,28 @@ var questions = [
             }
         ]
     },
+    {
+        topic: "Sports",
+        prompt: "What is the national sport of New Zealand?",
+        answers: [
+            {
+                answer_txt: "Football",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Kricket",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Field Hockey",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Rugby",
+                isCorrect: true
+            }
+        ]
+    },
     {//1
         topic: "Pop Culture",
         prompt: "As of 2021 who is the most subscribed singlular YouTuber?",
@@ -1162,6 +1315,28 @@ var questions = [
             },
             {
                 answer_txt: "Walt Disney World, Orlando",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Pop Culture",
+        prompt: "What country is the biggest destination for international tourist in Europe?",
+        answers: [
+            {
+                answer_txt: "Italy",
+                isCorrect: false
+            },
+            {
+                answer_txt : "Spain",
+                isCorrect: false
+            },
+            {
+                answer_txt: "United Kingdom",
+                isCorrect: false
+            },
+            {
+                answer_txt: "France",
                 isCorrect: true
             }
         ]
@@ -1386,6 +1561,28 @@ var questions = [
             }
         ]
     },
+    {
+        topic: "Gaming",
+        prompt: "What is the most popular game in the Simulation Genre",
+        answers: [
+            {
+                answer_txt: "Cities: Skylines",
+                isCorrect: false
+            },
+            {
+                answer_txt: "American Truck Simulator",
+                isCorrect: false
+            },
+            {
+                answer_txt: "The Sims 4",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Euro Truck Simulator 2",
+                isCorrect: true
+            }
+        ]
+    },
     {//1
         topic: "Nations",
         prompt: "Which of these countries has only one Capitol?",
@@ -1602,6 +1799,28 @@ var questions = [
             },
             {
                 answer_txt: "Slovenia",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Nations",
+        prompt: "What country is within the borders of South Africa?",
+        answers: [
+            {
+                answer_txt: "Zimbabwe",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Botswana",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Swaziland",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Lesotho",
                 isCorrect: true
             }
         ]
