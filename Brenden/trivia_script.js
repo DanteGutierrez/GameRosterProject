@@ -279,6 +279,7 @@ function question_rand()
         a++;
     }
     shuffle(question_array);
+   
 }
 
 var questions = [
@@ -854,6 +855,94 @@ var questions = [
             }
         ]
     },
+    {
+        topic: "Geography",
+        prompt: "How many Islands are within Japan?",
+        answers: [
+            {
+                answer_txt: "6.285",
+                isCorrect: false
+            },
+            {
+                answer_txt: "6.582",
+                isCorrect: false
+            },
+            {
+                answer_txt: "6.825",
+                isCorrect: false
+            },
+            {
+                answer_txt: "6.852",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Geography",
+        prompt: "What is the most populous subcontinent in the world?",
+        answers: [
+            {
+                answer_txt: "Arabian Subcontinent",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Alaskan Subcontinent",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Siberian Subcontinent",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Indian Subcontinent",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Geography",
+        prompt: "What three provinces of Canada are with the Grande Prairie?",
+        answers: [
+            {
+                answer_txt: "Ontario, Quebec, New Brunswick",
+                isCorrect: false
+            },
+            {
+                answer_txt: "The Yukon, British Columbia, Nunavut",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Ontario, Manitoba, Nunavut",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Alberta, Saskatchewan, Manitoba",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Geography",
+        prompt: "What is the largest desert in all of Europe?",
+        answers: [
+            {
+                answer_txt: "Tabernas Desert, Spain",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Aconna Desert, Italy",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Oltenian Sahara Desert, Romania",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Oleshky Sands, Ukraine",
+                isCorrect: true
+            }
+        ]
+    },
     {//1
         topic: "Sports",
         prompt: "What country is known for inventing football, or commonly known as Soccer in North America?",
@@ -1092,6 +1181,94 @@ var questions = [
             },
             {
                 answer_txt: "Rugby",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Sports",
+        prompt: "What country won the most Gold Medals in the 2021 Olympics?",
+        answers: [
+            {
+                answer_txt: "China",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Russia",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Canada",
+                isCorrect: false
+            },
+            {
+                answer_txt: "United States",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Sports",
+        prompt: "What is the current world record for the High Jump event in the Olympics?",
+        answers: [
+            {
+                answer_txt: "2,60 metres",
+                isCorrect: false
+            },
+            {
+                answer_txt: "2,35 metres",
+                isCorrect: false
+            },
+            {
+                answer_txt: "2,39 metres",
+                isCorrect: false
+            },
+            {
+                answer_txt: "2,45 metres",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Sports",
+        prompt: "What is the current record for the 100 metre dash?",
+        answers: [
+            {
+                answer_txt: "9,72 seconds",
+                isCorrect: false
+            },
+            {
+                answer_txt: "9,69 seconds",
+                isCorrect: false
+            },
+            {
+                answer_txt: "9,68 seconds",
+                isCorrect: false
+            },
+            {
+                answer_txt: "9,58 seconds",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Sports",
+        prompt: "What is the most popular sport in all of Canada",
+        answers: [
+            {
+                answer_txt: "Field Hockey",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Football",
+                isCorrect: false
+            },
+            {
+                answer_txt: "American Football",
+                isCorrect: false
+            },
+            {
+                answer_txt:"Ice Hockey",
                 isCorrect: true
             }
         ]
@@ -1338,6 +1515,94 @@ var questions = [
             }
         ]
     },
+    {
+        topic: "Pop Culture",
+        prompt: "What is the most popular genre of music in Russia?",
+        answers: [
+            {
+                answer_txt: "Jazz",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Folk Music",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Hardbass",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Russian Pop",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Pop Culture",
+        prompt: "What is the most popular social media platform?",
+        answers: [
+            {
+                answer_txt: "Twiiter",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Instagram",
+                isCorrect: false
+            },
+            {
+                answer_txt: "TikTok",
+                isCorrect: false
+            },
+            {
+                answer_txt: "FaceBook",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Pop Culture",
+        prompt: "What company is the biggest employer in the city of Seattle?",
+        answers: [
+            {
+                answer_txt: "Microsoft",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Sucker Punch Productions",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Nintendo of America",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Amazon",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Pop Culture",
+        prompt: "Where is Google's UK headquarters located?",
+        answers: [
+            {
+                answer_txt: "Manchester, England",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Glaslow, Scotland",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Aberdeen, Scotland",
+                isCorrect: false
+            },
+            {
+                answer_txt: "London, England",
+                isCorrect: true
+            }
+        ]
+    },
     {//1
         topic: "Gaming",
         prompt: "What was the first game released on the Original Xbox back in 2001?",
@@ -1580,6 +1845,94 @@ var questions = [
             }
         ]
     },
+    {
+        topic: "Gaming",
+        prompt: "How many copies of Minecraft have been sold world-wide as of 2021?",
+        answers: [
+            {
+                answer_txt: "164 Million",
+                isCorrect: false
+            },
+            {
+                answer_txt: "230 Million",
+                isCorrect: false,
+            },
+            {
+                answer_txt: "190 Million",
+                isCorrect: false
+            },
+            {
+                answer_txt: "200 Million",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Gaming",
+        prompt: "What is the main character in CyberPunk 2077 named?",
+        answers: [
+            {
+                answer_txt: "Jackie",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Takemura",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Yorinobu",
+                isCorrect: false
+            },
+            {
+                answer_txt: "V",
+                isCorrect: false
+            }
+        ]
+    },
+    {
+        topic: "Gaming",
+        prompt: "What was the most expensive game to develop ever?",
+        answers: [
+            {
+                answer_txt: "Grand Theft Auto V",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Call of Duty: Modern Warfare 2",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Battlefield 4",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Star Citizen",
+                isCorrect: false
+            }
+        ]
+    },
+    {
+        topic: "Gaming",
+        prompt: "What is the most popular sports game in terms of the players?",
+        answers: [
+            {
+                answer_txt: "Madden",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Grand Turismo",
+                isCorrect: false
+            },
+            {
+                answer_txt: "NBA 2K",
+                isCorrect: false
+            },
+            {
+                answer_txt: "FIFA",
+                isCorrect: true
+            }
+        ]
+    },
     {//1
         topic: "Nations",
         prompt: "Which of these countries has only one Capitol?",
@@ -1818,6 +2171,94 @@ var questions = [
             },
             {
                 answer_txt: "Lesotho",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Nations",
+        prompt: "What is the old capital of India?",
+        answers: [
+            {
+                answer_txt: "Mumbai",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Delhi",
+                isCorrect: false
+            },
+            {
+                answer_txt: "New Delhi",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Calcutta",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Nations",
+        prompt: "What Country borders the Republic of Ireland?",
+        answers: [
+            {
+                answer_txt: "Northern Ireland",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Scotland",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Iceland",
+                isCorrect: false
+            },
+            {
+                answer_txt: "United Kingdom",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Nations",
+        prompt: "What is the \"Capitol\" of the European Union",
+        answers: [
+            {
+                answer_txt: "Berlin",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Paris",
+                isCorrect: false
+            },
+            {
+                answer_txt: "London",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Brussels",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Nations",
+        prompt: "Which of these countries has an AK-47 in there flag?",
+        answers: [
+            {
+                answer_txt: "Russia",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Belarus",
+                isCorrect: false
+            },
+            {
+                answer_txt: "South Sudan",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Mozambique",
                 isCorrect: true
             }
         ]
