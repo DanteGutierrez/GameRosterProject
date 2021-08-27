@@ -295,7 +295,7 @@ function levels()
         dropInterval = 400;
     }else if(player.score >= 500)
     {
-        dropInterval = 100;
+        dropInterval = 200;
     }
 }
 

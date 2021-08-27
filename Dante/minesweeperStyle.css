@@ -3,6 +3,10 @@ html {
     width: 100%;
     background-color:azure;
 }
+h1 {
+    height: fit-content;
+    margin: 0px;
+}
 .grid {
     height: fit-content;
     width: fit-content;
@@ -47,6 +51,11 @@ html {
 }
 .button:hover {
     cursor: pointer;
+}
+.square {
+    width: 30px;
+    height: 30px;
+    text-align: center;
 }
 .menuButton {
     padding: 2px;
@@ -116,6 +125,28 @@ html {
     border-right: grey solid 4px;
     background-color: lightgrey;
 }
+.leaderLabel {
+    padding: 2px;
+    box-sizing:border-box;
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+    background-color: lightgrey;
+}
+.helpLabel {
+    padding: 2px;
+    box-sizing:border-box;
+    border-top: gold solid 4px;
+    border-bottom: darkorange solid 4px;
+    border-left: gold solid 4px;
+    border-right: darkorange solid 4px;
+    background-color: orange;
+    font-weight:bold;
+}
+.helpLabel:hover {
+    cursor:pointer;
+}
 .noSelect {
     user-select: none;
 }
@@ -149,6 +180,26 @@ html {
     width: 100%;
     height: 30px;
 }
+.edges {
+    display: flex;
+    justify-content:space-between;
+}
+.OutBorder {
+    border-top: ghostwhite solid 4px;
+    border-bottom: grey solid 4px;
+    border-left: ghostwhite solid 4px;
+    border-right: grey solid 4px;
+}
+.MidBorder {
+    border: lightgrey solid 22px;
+}
+.InBorder {
+    border-top: grey solid 4px;
+    border-bottom: ghostwhite solid 4px;
+    border-left: grey solid 4px;
+    border-right: ghostwhite solid 4px;
+    background-color: lightgrey;
+}
 #HUD {
     width:100%;
     display: flex;
@@ -178,18 +229,7 @@ html {
 #PlayArea {
     background-color: lightgrey;
 }
-#OutBorder {
-    border-top: ghostwhite solid 4px;
-    border-bottom: grey solid 4px;
-    border-left: ghostwhite solid 4px;
-    border-right: grey solid 4px;
-}
-#MidBorder {
-    border: lightgrey solid 22px;
-}
-#InBorder {
-    border-top: grey solid 4px;
-    border-bottom: ghostwhite solid 4px;
-    border-left: grey solid 4px;
-    border-right: ghostwhite solid 4px;
+#Help {
+    position: absolute;
+    right: 0px;
 }

@@ -3,6 +3,7 @@
 <head>
     <title>MineSweeper</title>
     <link href="minesweeperStyle.css" rel="stylesheet"/>
+    <link href="./Assets/Minesweeper.ico" rel="icon"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
@@ -12,46 +13,84 @@
     <div id="ReturnToRoster">
         <a id="BTN_Return" href="../index.html">Return to Roster</a>
     </div>
-    <div class="row center">
-        <h1>
-            Welcome to MineSweeper!
-        </h1>
-    </div>
-    <div id="Settings">
-        <div id="OutBorder">
-            <div id="MidBorder">
-                <div id="InBorder" class="column">
+    <div id="Help">
+        <div class="OutBorder">
+            <div class="MidBorder">
+                <div class="InBorder column">
                     <div class="row">
-                        <div id="ShowSettings" class="menuButton">▲</div>
-                        <div class="settingLabel">Settings</div>
-                    </div> 
-                    <div class="row">
-                        <div id="AddColumn" class="button settings">+column</div>
-                        <div id="SubColumn" class="button settings">-column</div>
-                    </div>
-                    <div class="row">
-                        <div id="AddRow" class="button settings">+row</div>
-                        <div id="SubRow" class="button settings">-row</div>
-                    </div>
-                    <div class="row">
-                        <div id="AddMine" class="button settings">+mine</div>
-                        <div id="SubMine" class="button settings">-mine</div>
-                    </div>
-                    <div class="row settingLabel">
-                        <input id="Cheater" class="settings" name="cheat" type="checkbox" value="false"/>
-                        <label for="cheat" class="settings">x-ray</label> 
+                        <div id="ShowHelp" class="menuButton">Show Help</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="column center">
-        <div id="OutBorder">
-            <div id="MidBorder">
-                <div id="InBorder">
+    <div id="Settings">
+        <div class="OutBorder">
+            <div class="MidBorder">
+                <div class="InBorder column">
+                    <div class="row">
+                        <div id="ShowSettings" class="menuButton">▼</div>
+                        <div class="settingLabel">Settings</div>
+                    </div> 
+                    <div class="row">
+                        <div id="Easy" class="button settings" hidden>Easy: 8x8 12.5%</div>
+                    </div>
+                    <div class="row">
+                        <div id="Medium" class="button settings" hidden>Medium: 12x12 18.75%</div>
+                    </div>
+                    <div class="row">
+                        <div id="Hard" class="button settings" hidden>Hard 20x20 25%</div>
+                    </div>
+                    <div class="row">
+                        <div id="ShowDouble" class="menuButton settings" hidden>▼</div>
+                        <div class="settings settingLabel" hidden>Customization</div>
+                    </div>
+                    <div id="DoubleMenu" class="settingsDouble InBorder" hidden>
+                        <div class="row">
+                            <div id="AddColumn" class="button settingsDouble square" hidden>+</div>
+                            <div id="SubColumn" class="button settingsDouble square" hidden>-</div>
+                            <div class="settingsDouble settingLabel" hidden>Column</div>
+                        </div>
+                        <div class="row">
+                            <div id="AddRow" class="button settingsDouble square" hidden>+</div>
+                            <div id="SubRow" class="button settingsDouble square" hidden>-</div>
+                            <div class="settingsDouble settingLabel" hidden>Row</div>
+                        </div>
+                        <div class="row">
+                            <div id="AddMine" class="button settingsDouble square" hidden>+</div>
+                            <div id="SubMine" class="button settingsDouble square" hidden>-</div>
+                            <div class="settingsDouble settingLabel" hidden>Mines</div>
+                        </div>
+                        <div class="row">
+                            <div class="settingLabel settingsDouble" hidden>
+                                <input id="Cheater" class="settingsDouble" name="cheat" type="checkbox" value="false" hidden/>
+                                <label for="cheat" class="settingsDouble" hidden>x-ray</label> 
+                            </div>
+                        </div> 
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Introduction" class="row center">
+        <div class="OutBorder">
+            <div class="MidBorder">
+                <div class="InBorder">
+                    <h1 class="settingLabel">
+                        Welcome to MineSweeper!
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Field" class="column center">
+        <div class="OutBorder">
+            <div class="MidBorder">
+                <div class="InBorder">
                     <div id="PlayArea" class="column center">
                         <div id="HUD">
-                            <div class="row center digitalDisplay">
+                            <div id="MineCounter" class="row center digitalDisplay">
                                 <div id="MHundreds" class="label digit"></div>
                                 <div id="MTens" class="label digit"></div>
                                 <div id="MOnes" class="label digit"></div>
@@ -59,7 +98,7 @@
                             <div class="row">
                                 <div id="Reset" class="resetButton"></div>
                             </div>
-                            <div class="row center digitalDisplay">
+                            <div id="Timer" class="row center digitalDisplay">
                                 <div id="THundreds" class="label digit"></div>
                                 <div id="TTens" class="label digit"></div>
                                 <div id="TOnes" class="label digit"></div>
@@ -72,14 +111,24 @@
             </div>
         </div>
     </div>
-    <div class="row center">
-        <div id="Result" class="label"></div>
+    <div id="EndGame" class="column center">
+        <div class="OutBorder">
+            <div class="MidBorder">
+                <div class="InBorder">
+                    <div class="row center">
+                        <div id="Result" class="label"></div>
+                    </div>
+                    <div class="row center">
+                        <input id="NameValue" type="text" placeholder="Name"></input>
+                        <div id="Submit" class="button">Submit Score!</div>
+                    </div>    
+                    <div class="row label center">Leader Board</div>
+                    <div id="Leaderboard" class="column"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row center">
-        <input id="NameValue" type="text" placeholder="Name"></input>
-        <div id="Submit" class="button">Submit Score!</div>
-    </div>    
-    <div id="Leaderboard" class="column center"></div>
+    <div id="Helpers"></div>
     <script src="minesweeperScript.js"></script>
 </body>
 </html>

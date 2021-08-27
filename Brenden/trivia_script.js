@@ -9,8 +9,6 @@ let cate_eight;
 let main_menu;
 
 //Trivia game objects
-let answer;
-let correct_ans;
 let category_txt;
 let opt_one;
 let opt_two;
@@ -19,72 +17,78 @@ let opt_four;
 let question_txt;
 let score;
 
+let answer_array = [];
 
-function ans_check()
+function ans_check(answer)
 {
-    if(player.ques_id == question_array[0][player.ques_category].length)
+    if(player.ques_index  == 9)
     {
         player.score = player.score + 10;
         score.innerHTML = player.score;
-        populate();
-    }else if(answer == correct_ans)
+        populate_win();
+    }else if(answer == player.ans_id)
     {
         player.score = player.score + 10;
         score.innerHTML = player.score;
-        shuffle(answer_select);
-        ques_populate();
-    }else
-    {
-        emt_score = player.score;
-        player.score = 0;
-        score.innerHTML = player.score;
+        player.ques_index = player.ques_index + 1;
         populate();
+    }else if(answer != player.ans_id)
+    {
+        populate_lose();
     }
-    
 }
 
-let answer_select = [0, 1, 2, 3];
+function ans_rand()
+{
+    answer_array.length = 0;
+    var i = 0;
+    var a = 0;
+    while(question_array[player.ques_index] != questions[i].prompt)
+    {
+        i++;
+    }
+    while(question_array[player.ques_index] == questions[i].prompt && answer_array.length < 4)
+    {
+        answer_array[a] = questions[i].answers[a].answer_txt;
+        a++;
+    }
+    shuffle(answer_array);
+    player.ans_id = answer_array.indexOf(questions[i].answers[3].answer_txt);
+}
 
-let category = 0;
-
-let emt_score;
+let emt_array = [];
 
 
 let menuOnClick = evt =>
 {
     if(evt.target.id == "cate_one")
     {
-        category = 1;
+        category = "History";
         sessionStorage.setItem(player.ques_category, category);
         window.location.replace("trivia.html");
     }else if(evt.target.id == "cate_two")
     {
-        category = 2;
+        category = "Geography";
         sessionStorage.setItem(player.ques_category, category);
         window.location.replace("trivia.html");
     }else if(evt.target.id == "cate_four")
     {
-        category = 3;
+        category = "Sports";
         sessionStorage.setItem(player.ques_category, category);
         window.location.replace("trivia.html");
     }else if(evt.target.id == "cate_five")
     {
-        category = 4;
+        category = "Pop Culture";
         sessionStorage.setItem(player.ques_category, category);
         window.location.replace("trivia.html");
     }else if(evt.target.id == "cate_six")
     {
-        category = 5;
+        category = "Gaming";
         sessionStorage.setItem(player.ques_category, category);
         window.location.replace("trivia.html");
     }else if(evt.target.id == "cate_eight")
     {
-        category = 6;
-        sessionStorage.setItem(player.ques_category, category);
-        window.location.replace("trivia.html");
-    }else if(evt.target.id == "cate_nine")
-    {
-        category = 7;
+        category = "Nations";
         sessionStorage.setItem(player.ques_category, category);
         window.location.replace("trivia.html");
     }else if(evt.target.id == "main_menu")
@@ -93,6 +97,8 @@ let menuOnClick = evt =>
     }
     
 }
+
+var firstLoad = false;
 
 function onLoad()
 {
@@ -125,15 +131,15 @@ function onLoad()
         opt_four = document.getElementById("opt_four");
         player.ques_category = sessionStorage.getItem(player.ques_category);
 
-        category_txt.innerHTML = question_category[player.ques_category];
+        category_txt.innerHTML = player.ques_category;
         score.innerHTML = 0;
 
         opt_one.addEventListener('click', onClick);
         opt_two.addEventListener('click', onClick);
         opt_three.addEventListener('click', onClick);
         opt_four.addEventListener('click', onClick);
-
-        randomize_ques();
+        populate();
+        
     }
 }
 
@@ -141,685 +147,1475 @@ let onClick = evt =>
 {
     if(evt.target.id == "opt_one")
     {
-        if(opt_one.textContent == "Restart")
-        {
-            randomize_ques();
-        }else if(opt_one.textContent == "Choose new Category")
+        if(opt_one.textContent == "Return to Categories")
         {
             window.location.replace("trivia_menu.html");
-        }else
-        {
-            answer = opt_one.textContent;
-            ans_check();
         }
+        var answer = answer_array.indexOf(opt_one.textContent);
+        ans_check(answer);
        
     }else if(evt.target.id == "opt_two")
     {
-        if(opt_two.textContent == "Choose new Category")
-        {
-            window.location.replace("trivia_menu.html");
-        }else if(opt_two.textContent == "Go back to Main Menu")
+        if(opt_two.textContent == "Return to the Main Menu")
         {
             window.location.replace("../index.html");
-        }else
-        {
-            answer = opt_two.textContent;
-            ans_check();
         }
+        var answer = answer_array.indexOf(opt_two.textContent);
+        ans_check(answer);
     }else if(evt.target.id == "opt_three")
     {
-        if(opt_three.textContent == "Go back to the Main Menu")
+        if(opt_three.textContent == "Restart")
         {
-            window.location.replace("../index.html");
+            firstLoad = false;
+            player.ans_id = 0;
+            player.ques_id = 0;
+            player.ques_index = 0;
+            player.score = 0;
+            score.innerHTML = player.score;
+            populate();
         }else
         {
-            answer = opt_three.textContent;
-            ans_check();
+            var answer = answer_array.indexOf(opt_three.textContent);
+            ans_check(answer);
         }
+        
         
         
     }else if(evt.target.id == "opt_four")
     {
-        if(opt_four.textContent == "See Score before Fail")
-        {
-            question_txt.innerHTML = "Your score before fail was " + emt_score + ". What now?";
-        }else
-        {
-            answer = opt_four.textContent;
-            ans_check();
-        }
-        
+        var answer = answer_array.indexOf(opt_four.textContent);
+        ans_check(answer);
     }
 }
+
+let player =
+{
+    ans_id: 0,
+    score: 0,
+    ques_category: null,
+    ques_id: 0,
+    ques_index: 0,
+}
+
+
 
 function populate()
 {
-    if(player.score == 0)
+    if(firstLoad == false)
     {
-        question_txt.innerHTML = "You have lost, what would you like to do?";
-        opt_one.innerHTML = "Restart";
-        opt_two.innerHTML = "Choose new Category";
-        opt_three.innerHTML = "Go back to the Main Menu";
-        opt_four.innerHTML = "See Score before Fail";
-    }
-    else if(player.score == 100)
+        question_rand();
+        ans_rand();
+        ques_id_set();
+        populate_game();
+        firstLoad = true;
+    }else if(firstLoad == true)
     {
-        question_txt.innerHTML = "You have won! What's your next move?";
-        opt_one.innerHTML = "Choose new Category";
-        opt_two.innerHTML = "Go back to Main Menu";
-        opt_three.innerHTML = "";
-        opt_four.innerHTML = "";
+        ans_rand();
+        ques_id_set();
+        populate_game();
     }
 }
-
-
-const player =
+function populate_game()
 {
-    score: 0,
-    ques_category: null,
-    ques_id: null,
-    difficult: 0,
+    question_txt.innerHTML = question_array[player.ques_index];
+    opt_one.innerHTML = answer_array[0];
+    opt_two.innerHTML = answer_array[1];
+    opt_three.innerHTML = answer_array[2];
+    opt_four.innerHTML = answer_array[3];
+    question_txt.style.backgroundColor = "#EEE2DF";
+    question_txt.style.color = "#B36A5E";
+    opt_three.style.backgroundColor = "#EEE2DF";
+    opt_three.style.border = "2px solid #C89F9C";
+    opt_four.style.backgroundColor = "#EEE2DF";
+    opt_four.style.border = "2px solid #C89F9C";
+}
+function populate_win()
+{
+    question_txt.innerHTML = "You've Won! what would you like to do Now?";
+    opt_one.innerHTML = "Return to Categories";
+    opt_two.innerHTML = "Return to the Main Menu";
+    opt_three.innerHTML = "";
+    opt_four.innerHTML = "";
+    question_txt.style.backgroundColor = "#97C1A9";
+    question_txt.style.color = "#B36A5E";
+    opt_three.style.backgroundColor = "#B36A5E";
+    opt_three.style.border = "0px solid #B36A5E";
+    opt_four.style.backgroundColor = "#B36A5E";
+    opt_four.style.border = "0px solid #B36A5E";
+}
+function populate_lose()
+{
+    question_txt.innerHTML = "You have lost, would you like to try again, or do something else?";
+    opt_one.innerHTML = "Return to Categories";
+    opt_two.innerHTML = "Return to the Main Menu";
+    opt_three.innerHTML = "Restart";
+    opt_four.innerHTML = "";
+    question_txt.style.backgroundColor = "#FF9684";
+    question_txt.style.color = "#EED7C5";
+    opt_four.style.backgroundColor = "#B36A5E";
+    opt_four.style.border = "0px solid #B36A5E";
 }
 
+let question_array = [];
 
-//[ans1, ans2, ans3, correctans]
-//question_array[0][1][0][question][ans]
-let question_array = [
-    ["easy",
-        [//History
-            [//1
-                "When did the American Revolutionary War start and end?", 
-                [
-                    "1776-1777",
-                    "1761-1765",
-                    "1754-1763",
-                    "1775-1783"
-                ]
-            ],
-            [//2
-                "When was Queen Elizabeth II crowned as queen of the common realm?",
-                [
-                    "June 2nd, 1943",
-                    "November 3rd, 1947",
-                    "April 8th, 1956",
-                    "June 2nd, 1953"
-                ]
-            ],
-            [//3
-                "On September 20th, 1997, the Prime Minister of Australia defecated there pants, who were they?",
-                [
-                    "Kevin Rudd",
-                    "Tony Abbott",
-                    "Julia Gillard",
-                    "Scott Morrison"
-                ]
-            ],
-            [//4
-                "What year did Canada gain independence from the UK?",
-                [
-                    "1810",
-                    "1901",
-                    "1875",
-                    "1867"
-                ]
-            ],
-            [//5
-                "What country legalized gay marriage first in 2001?",
-                [
-                    "Sweden",
-                    "Canada",
-                    "Norway",
-                    "The Netherlands"
-                ]
-            ],
-            [//6
-                "In what year did the Baltic States become part of the Soviet Union?",
-                [
-                    "1935",
-                    "1945",
-                    "1937",
-                    "1940"
-                ]
-            ],
-            [//7
-                "What was the first city founded in the United States?",
-                [
-                    "Boston, Massachuesetts",
-                    "St. Augusatine, Florida",
-                    "Acoma Pueblo, New Mexico",
-                    "Oraibi, Arizona"
-                ]
-            ],
-            [//8
-                "What year was the European Union founded?",
-                [
-                    "1991",
-                    "1992",
-                    "1994",
-                    "1993"
-                ]
-            ],
-            [//9
-                "What year was the United Nations formed?",
-                [
-                    "1956",
-                    "1973",
-                    "1969",
-                    "1945"
-                ]
-            ],
-            [//10
-                "When did the Berlin Wall fall in Germany?",
-                [
-                    "Novmeber 9th, 1991",
-                    "November 9th, 1990",
-                    "November 9th, 1988",
-                    "November 9th, 1989"
-                ]
-            ]
-        ],
-        [//Geography
-            [//1
-                "What is the biggest mountain range on the American Continents?",
-                [
-                    "Rocky Mountains",
-                    "Appalachian Mountains",
-                    "Cascade Range",
-                    "The Andes"
-                ]
-            ],
-            [//2
-                "What is the largest lake in the world?",
-                [
-                    "Lake Victoria",
-                    "Lake Tanganyika",
-                    "Lake Michigan",
-                    "Casipian Sea"
-                ]
-            ],
-            [//3
-                "What mountian range seperates Asia from Europe?",
-                [
-                    "The Great Divide",
-                    "Swiss Alps",
-                    "Tibetan Range",
-                    "The Urals"
-                ]
-            ],
-            [//4
-                "What are the coastal mountains that surround the cape of South Africa called?",
-                [
-                    "Rwenzori Mountains",
-                    "Table Mountains",
-                    "Atlas Mountains",
-                    "Drakensberg Mountains"
-                ]
-            ],
-            [//5
-                "What is the largest river basin in the world?",
-                [
-                     "Nile River Delta",
-                     "Mississippi River Basin",
-                     "Yangtzhe River Basin",
-                     "Amazon River Basin"
-                ]
-            ],
-            [//6
-                "What is the largest wetlands in the entire world?",
-                [
-                    "The Everglades, United States",
-                    "Asmat Swamp, Indonesia",
-                    "Okavango Delta, Botswana",
-                    "The Pantanal, Brazil"
-                ]
-            ],
-            [//7
-                "What mountain range surrounds the Death Valley National Park in California?",
-                [
-                    "Rocky Mountains",
-                    "Cascade Mountains",
-                    "Columbian Mountains",
-                    "Sierra Nevada Mountains"
-                ]
-            ],
-            [//8
-                "Where is the largest salt flat in the United States located and what is it called?",
-                [
-                    "Death Valley Salt Flats, California",
-                    "Great Salt Plains, Oklahoma",
-                    "Alkali Sink, California",
-                    "Bonneville Salt Flats, Utah"
-                ]
-            ],
-            [//9
-                "What Canadian province is with in the ring of fire?",
-                [
-                    "Ottawa",
-                    "Alberta",
-                    "The Yukon",
-                    "British Columbia"
-                ]
-            ],
-            [//10
-                "Which province of South Africa is the most populated?",
-                [
-                    "Eastern Cape",
-                    "Western Cape",
-                    "KwaZulu-Natal",
-                    "Guateng"
-                ]
-            ]
-        ],
-        [//Sports
-            [//1
-                "What country is known for inventing football, or commonly known as Soccer in North America?",
-                [
-                    "Germany",
-                    "Ireland",
-                    "Sweden",
-                    "England"
-                ]
-            ],
-            [//2
-                "Who won the very first basketball play offs, back 1947?",
-                [
-                    "Baltimore Bullets",
-                    "Chicago Stags",
-                    "New York Knicks",
-                    "Philidalphia Warriors"
-                ]
-            ],
-            [//3
-                "What country won the first FIFA World Cup in 1930?",
-                [
-                    "Germany",
-                    "Paraguay",
-                    "Brazil",
-                    "Uruguay"
-                ]
-            ],
-            [//4
-                "What is the most popular and most watched sport in Australia?",
-                [
-                    "Rugby",
-                    "Kricket",
-                    "Badmitten",
-                    "Football"
-                ]
-            ],
-            [//5
-                "What is the most watched sport in the United States?",
-                [
-                    "Baseball",
-                    "Basketball",
-                    "Hockey",
-                    "American Football"
-                ]
-            ],
-            [//6
-                "Who won the second most golds in the 1984 Olympics?",
-                [
-                    "Russia",
-                    "South Korea",
-                    "United States",
-                    "Romania"
-                ]
-            ],
-            [//7
-                "What city was the 2008 Olympics held?",
-                [
-                    "New York, United States",
-                    "Tokyo, Japan",
-                    "Cape Town, South Africa",
-                    "Beijing, China"
-                ]
-            ],
-            [//8
-                "What city in the United States has the most teams for any sport?",
-                [
-                    "Boston, Massachuestts",
-                    "Los Angeles, California",
-                    "Dallas, Texas",
-                    "New York City, New York"
-                ]
-            ],
-            [//9
-                "Who was the person who won the very first Gold Medal for South Africa in the 1908 Olympics?",
-                [
-                    "Mei Sheppard",
-                    "Emil Voigt",
-                    "Johnny Hayes",
-                    "Reggie Walker"
-                ]
-            ],
-            [//10
-                "Which team has the most wins in the Superbowl?",
-                [
-                    "New York Giants",
-                    "Miami Dolphins",
-                    "Pittsburgh Steelers",
-                    "New England Patriots"
-                ]
-            ]
-        ],
-        [//Pop Culture
-            [//1
-                "As of 2021 who is the most subscribed singlular YouTuber?",
-                [
-                    "Dude Perfect",
-                    "MrBeast",
-                    "Ninja",
-                    "Pewdiepie"
-                ]
-            ],
-            [//2
-                "As of 2021 what is the most streamed song on Spotify?",
-                [
-                    "Blinding Lights, The Weekend",
-                    "Dance Monkey, Tones and I",
-                    "Rockstar, Post Malone",
-                    "Shape of You, Ed Sheeran"
-                ]
-            ],
-            [//3
-                "On Steam what is the most played game in terms of hours played Globally?",
-                [
-                    "Dota 2",
-                    "Apex Legends",
-                    "PUBG",
-                    "CSGO"
-                ]
-            ],
-            [//3
-                "What is the most popular Streaming service for videos and shows?",
-                [
-                    "Netflix",
-                    "Hulu",
-                    "Amazon Prime Video",
-                    "YouTube"
-                ]
-            ],
-            [//4
-                "In the popular show The Mandalorian, what is Baby Yoda's Name?",
-                [
-                    "Baby Yoda",
-                    "Jabba the Baby",
-                    "JarJar Destroyer of Worlds",
-                    "Grogu"
-                ]
-            ],
-            [//5
-                "Who is the most popular Twitch Streamer as of 2021?",
-                [
-                    "XQC",
-                    "Critikal",
-                    "PayMoneyWubby",
-                    "Ninja"
-                ]
-            ],
-            [//6
-                "What is the most visit country by international Tourist?",
-                [
-                    "Mexico",
-                    "Canada",
-                    "Argentina",
-                    "United States"
-                ]
-            ],
-            [//7
-                "What city is known as the Music Capital of the World?",
-                [
-                    "Memphis, Tennessee",
-                    "Charlotte, North Carolina",
-                    "Atlanta, Georgia",
-                    "Austin, Texas"
-                ]
-            ],
-            [//8
-                "What was the worst movie of 2021 by there Meta Critic Score?",
-                [
-                    "Breaking News in Yuba County",
-                    "American Skin",
-                    "Music",
-                    "Vanquish"
-                ]
-            ],
-            [//9
-                "Who or what band has the most platinum records of all time?",
-                [
-                    "The Beatles",
-                    "Elton John",
-                    "The Rolling Stones",
-                    "Neil Diamond"
-                ]
-            ],
-            [//10
-                "What is the most popular tourist attraction in the United States?",
-                [
-                    "Times Square, New York City",
-                    "Las Vegas Strip, Las Vegas",
-                    "Golden Gate Bridge, San Fransico",
-                    "Walt Disney World, Orlando"
-                ]
-            ]
-        ],
-        [//Gaming
-            [//1
-                "What was the first game released on the Original Xbox back in 2001?",
-                [
-                    "Grand Theft Auto 3",
-                    "Half Life 2",
-                    "Counter Strike",
-                    "Halo: Combat Evolved"
-                ]
-            ],
-            [//2
-                "What was the first E-Sports game ever played?",
-                [
-                    "League of Legends",
-                    "Dota 2",
-                    "Pac-Man",
-                    "Red Annihilation"
-                ]
-            ],
-            [//3
-                "What game had a contriversal release on PC?",
-                [
-                    "Elder Scrolls V: Skyrim",
-                    "Sid Meier's: Civilization V",
-                    "Fallout 76",
-                    "Grand Theft Auto: San Andreas"
-                ]
-            ],
-            [//4
-                "What is the most streamed and watched game on Twitch?",
-                [
-                    "Apex Legends",
-                    "Valorant",
-                    "League of Legends",
-                    "Grand Theft Auto V"
-                ]
-            ],
-            [//5
-                "Who is the most watched gaming channel on YouTube?",
-                [
-                    "CallMeKevin",
-                    "Markiplier",
-                    "RTGames",
-                    "PewDiePie"
-                ]
-            ],
-            [//6
-                "What is the game that recieved the most backlash for an unfinished release?",
-                [
-                    "Pokemon Sword and Shield",
-                    "Yooka-Laylee",
-                    "Super Mario Tennis SMASH",
-                    "Cyberpunk 2077"
-                ]
-            ],
-            [//7
-                "What is Nintendo's best selling franchise on all of there platforms?",
-                [
-                    "Pokemon",
-                    "Donkey Kong",
-                    "Legends of Zelda",
-                    "Mario"
-                ]
-            ],
-            [//8
-                "What was the very first video game ever made for the public?",
-                [
-                    "Tetris",
-                    "Space Invaders",
-                    "Super Mario Bros",
-                    "Pong"
-                ]
-            ],
-            [//9
-                "What mythology is the game Skyrim based upon?",
-                [
-                    "Roman Mythology",
-                    "Gaelic Mythology",
-                    "Slavic Mythology",
-                    "Norse Mythology"
-                ]
-            ],
-            [//10
-                "In the game TitanFall 2 in the main campaign what is the Titans Name?",
-                [
-                    "Legion",
-                    "Ronin",
-                    "Tone",
-                    "BT"
-                ]
-            ]
-        ],
-        [//Nations
-            [//1
-                "Which of these countries has only one Capitol?",
-                [
-                    "South Africa",
-                    "The Netherlands",
-                    "Cote d'Ivoire",
-                    "Sudan"
-                ]
-            ],
-            [//2
-                "What was the capitol of East Germany during Soviet Occupation?",
-                [
-                    "Nuremburg",
-                    "Dresden",
-                    "Munich",
-                    "East Berlin"
-                ]
-            ],
-            [//3
-                "Which of these Nations are part of the UK Commonwealth?",
-                [
-                    "United states, Canada, Mexico",
-                    "Hong Kong, Macau, Singnapore",
-                    "Egypt, Isreal, Afghanistan",
-                    "Hong Kong, Jamacia, South Africa"
-                ]
-            ],
-            [//4
-                "What is the most populas metro area in the United States?",
-                [
-                    "Dallas Metro Area",
-                    "Los Angeles Metro Area",
-                    "Chicago Metro Area",
-                    "New York City Metro Area"
-                ]
-            ],
-            [//5
-                "What is the youngest city in Australia?",
-                [
-                    "Perth",
-                    "Melbourne",
-                    "Canberra",
-                    "Springfield"
-                ]
-            ],
-            [//6
-                "What are the three capitols of South Africa",
-                [
-                    "Johannesburg, Durban, Port Elizabeth",
-                    "Soweto, Benoni, East London",
-                    "Vereeniging, Pietermaritzburg, Tembisa",
-                    "Cape Town, Pretoria, Bloemfontein"
-                ]
-            ],
-            [//7
-                "What is the biggest city by area in Canada?",
-                [
-                    "Ottawa",
-                    "Montreal",
-                    "Toronto",
-                    "La Tuque"
-                ]
-            ],
-            [//8
-                "What year did South African Apartheid end?",
-                [
-                    "1945",
-                    "1965",
-                    "2006",
-                    "1990"
-                ]
-            ],
-            [//9
-                "Which of these countries were not part of the Warsaw Pact?",
-                [
-                    "Poland",
-                    "Bulgaria",
-                    "Romainia",
-                    "Yugoslavia"
-                ]
-            ]
-        ],
-        [//10
-            "What nation is known for being the worse European Union Country to live in?",
-            [
-                "Greece",
-                "North Macedonia",
-                "Ireland",
-                "Slovenia"
-            ]
+function ques_id_set()
+{
+    var i = 0;
+    while(question_array[player.ques_index] != questions[i].prompt)
+    {
+        i++;
+    }
+    player.ques_id = i;
+}
+
+function question_rand()
+{
+    var i = 0;
+    var a = 0;
+    while(player.ques_category != questions[i].topic)
+    {
+        i++;   
+    }
+    while(player.ques_category == questions[i].topic)
+    {
+        question_array[a] = questions[i].prompt;
+        i++;
+        a++;
+    }
+    shuffle(question_array);
+}
+
+var questions = [
+    {//1
+        topic: "History",
+        prompt: "When did the American Revolutionary War start and end?",
+        answers: [
+            {
+                answer_txt: "1776-1777",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1761-1765",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1754-1763",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1775-1783",
+                isCorrect: true
+            }
         ]
-    ]
+    },
+    {//2
+        topic: "History",
+        prompt: "When was Queen Elizabeth II crowned as queen of the common realm?",
+        answers: [
+            {
+                answer_txt: "June 2nd, 1943",
+                isCorrect: false
+            },
+            {
+                answer_txt: "November 3rd, 1947",
+                isCorrect: false
+            },
+            {
+                answer_txt: "April 8th, 1956",
+                isCorrect: false
+            },
+            {
+                answer_txt: "June 2nd, 1953",
+                isCorrect: true
+            }
+        ]
+    },
+    {//3
+        topic: "History",
+        prompt: "On September 20th, 1997, the Prime Minister of Australia defecated there pants, who were they?",
+        answers: [
+            {
+                answer_txt: "Kevin Rudd",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Tony Abbott",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Julia Gillard",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Scott Morrison",
+                isCorrect: true
+            }
+        ]
+    },
+    {//4
+        topic: "History",
+        prompt: "What year did Canada gain independence from the UK?",
+        answers: [
+            {
+                answer_txt: "1810",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1901",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1875",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1867",
+                isCorrect: true
+            }
+        ]
+    },
+    {//5
+        topic: "History",
+        prompt: "What country legalized gay marriage first in 2001?",
+        answers: [
+            {
+                answer_txt: "Sweden",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Canada",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Norway",
+                isCorrect: false
+            },
+            {
+                answer_txt: "The Netherlands",
+                isCorrect: true
+            }
+        ]
+    },
+    {//6
+        topic: "History",
+        prompt: "In what year did the Baltic States become part of the Soviet Union?",
+        answers: [
+            {
+                answer_txt: "1935",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1945",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1937",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1940",
+                isCorrect: true
+            }
+        ]
+    },
+    {//7
+        topic: "History",
+        prompt: "What was the first city founded in the United States?",
+        answers: [
+            {
+                answer_txt: "Boston, Massachuesetts",
+                isCorrect: false
+            },
+            {
+                answer_txt: "St. Augusatine, Florida",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Acoma Pueblo, New Mexico",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Oraibi, Arizona",
+                isCorrect: true
+            }
+        ]
+    },
+    {//8
+        topic: "History",
+        prompt: "What year was the European Union founded?",
+        answers: [
+            {
+                answer_txt: "1991",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1992",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1994",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1993",
+                isCorrect: true
+            }
+        ]
+    },
+    {//9
+        topic: "History",
+        prompt: "What year was the United Nations formed?",
+        answers: [
+            {
+                answer_txt: "1956",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1973",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1969",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1945",
+                isCorrect: true
+            }
+        ]
+    },
+    {//10
+        topic: "History",
+        prompt: "When did the Berlin Wall fall in Germany?",
+        answers: [
+            {
+                answer_txt: "Novmeber 9th, 1991",
+                isCorrect: false
+            },
+            {
+                answer_txt: "November 9th, 1990",
+                isCorrect: false
+            },
+            {
+                answer_txt: "November 9th, 1990",
+                isCorrect: false
+            },
+            {
+                answer_txt: "November 9th, 1989",
+                isCorrect: true
+            }
+        ]
+    },
+    {//1
+        topic: "Geography",
+        prompt: "What is the biggest mountain range on the American Continents?",
+        answers: [
+            {
+                answer_txt: "Rocky Mountains",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Appalachian Mountains",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Cascade Range",
+                isCorrect: false
+            },
+            {
+                answer_txt: "The Andes",
+                isCorrect: true
+            }
+        ]
+    },
+    {//2
+        topic: "Geography",
+        prompt: "What is the largest lake in the world?",
+        answers: [
+            {
+                answer_txt: "Lake Victoria",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Lake Tanganyika",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Lake Michigan",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Casipian Sea",
+                isCorrect: true
+            }
+        ]
+    },
+    {//3
+        topic: "Geography",
+        prompt: "What mountian range seperates Asia from Europe?",
+        answers: [
+            {
+                answer_txt: "The Great Divide",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Swiss Alps",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Tibetan Range",
+                isCorrect: false
+            },
+            {
+                answer_txt: "The Urals",
+                isCorrect: true
+            }
+        ]
+    },
+    {//4
+        topic: "Geography",
+        prompt: "What are the coastal mountains that surround the cape of South Africa called?",
+        answers: [
+            {
+                answer_txt: "Rwenzori Mountains",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Table Mountains",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Atlas Mountains",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Drakensberg Mountains",
+                isCorrect: true
+            }
+        ]
+    },
+    {//5
+        topic: "Geography",
+        prompt: "What is the largest river basin in the world?",
+        answers: [
+            {
+                answer_txt: "Nile River Delta",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Mississippi River Basin",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Yangtzhe River Basin",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Amazon River Basin",
+                isCorrect: true
+            }
+        ]
+    },
+    {//6
+        topic: "Geography",
+        prompt: "What is the largest wetlands in the entire world?",
+        answers: [
+            {
+                answer_txt: "The Everglades, United States",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Asmat Swamp, Indonesia",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Okavango Delta, Botswana",
+                isCorrect: false
+            },
+            {
+                answer_txt: "The Pantanal, Brazil",
+                isCorrect: true
+            }
+        ]
+    },
+    {//7
+        topic: "Geography",
+        prompt: "What mountain range surrounds the Death Valley National Park in California?",
+        answers: [
+            {
+                answer_txt: "Rocky Mountains",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Cascade Mountains",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Columbian Mountains",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Sierra Nevada Mountains",
+                isCorrect: true
+            }
+        ]
+    },
+    {//8
+        topic: "Geography",
+        prompt: "Where is the largest salt flat in the United States located and what is it called?",
+        answers: [
+            {
+                answer_txt: "Death Valley Salt Flats, California",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Great Salt Plains, Oklahoma",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Alkali Sink, California",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Bonneville Salt Flats, Utah",
+                isCorrect: true
+            }
+        ]
+    },
+    {//9
+        topic: "Geography",
+        prompt: "What Canadian province is with in the ring of fire?",
+        answers: [
+            {
+                answer_txt: "Ottawa",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Alberta",
+                isCorrect: false
+            },
+            {
+                answer_txt: "The Yukon",
+                isCorrect: false
+            },
+            {
+                answer_txt: "British Columbia",
+                isCorrect: true
+            }
+        ]
+    },
+    {//20
+        topic: "Geography",
+        prompt: "Which province of South Africa is the most populated?",
+        answers: [
+            {
+                answer_txt: "Eastern Cape",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Western Cape",
+                isCorrect: false
+            },
+            {
+                answer_txt: "KwaZulu-Natal",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Guateng",
+                isCorrect: true
+            }
+        ]
+    },
+    {//1
+        topic: "Sports",
+        prompt: "What country is known for inventing football, or commonly known as Soccer in North America?",
+        answers: [
+            {
+                answer_txt: "Germany",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Ireland",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Sweden",
+                isCorrect: false
+            },
+            {
+                answer_txt: "England",
+                isCorrect: true
+            }
+        ]
+    },
+    {//2
+        topic: "Sports",
+        prompt: "Who won the very first basketball play offs, back 1947?",
+        answers: [
+            {
+                answer_txt: "Baltimore Bullets",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Chicago Stags",
+                isCorrect: false
+            },
+            {
+                answer_txt: "New York Knicks",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Philidalphia Warriors",
+                isCorrect: true
+            }
+        ]
+    },
+    {//3
+        topic: "Sports",
+        prompt: "What country won the first FIFA World Cup in 1930?",
+        answers: [
+            {
+                answer_txt: "Germany",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Paraguay",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Brazil",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Uruguay",
+                isCorrect: true
+            }
+        ]
+    },
+    {//4
+        topic: "Sports",
+        prompt: "What is the most popular and most watched sport in Australia?",
+        answers: [
+            {
+                answer_txt: "Rugby",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Kricket",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Badmitten",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Football",
+                isCorrect: true
+            }
+        ]
+    },
+    {//5
+        topic: "Sports",
+        prompt: "What is the most watched sport in the United States?",
+        answers: [
+            {
+                answer_txt: "Baseball",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Basketball",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Hockey",
+                isCorrect: false
+            },
+            {
+                answer_txt: "American Football",
+                isCorrect: true
+            }
+        ]
+    },
+    {//6
+        topic: "Sports",
+        prompt: "Who won the second most golds in the 1984 Olympics?",
+        answers: [
+            {
+                answer_txt: "Russia",
+                isCorrect: false
+            },
+            {
+                answer_txt: "South Korea",
+                isCorrect: false
+            },
+            {
+                answer_txt: "United States",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Romania",
+                isCorrect: true
+            }
+        ]
+    },
+    {//7
+        topic: "Sports",
+        prompt: "What city was the 2008 Olympics held?",
+        answers: [
+            {
+                answer_txt: "New York, United States",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Tokyo, Japan",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Cape Town, South Africa",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Beijing, China",
+                isCorrect: true
+            }
+        ]
+    },
+    {//8
+        topic: "Sports",
+        prompt: "What city in the United States has the most teams for any sport?",
+        answers: [
+            {
+                answer_txt: "Boston, Massachuestts",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Los Angeles, California",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Dallas, Texas",
+                isCorrect: false
+            },
+            {
+                answer_txt: "New York City, New York",
+                isCorrect: true
+            }
+        ]
+    },
+    {//9
+        topic: "Sports",
+        prompt: "Who was the person who won the very first Gold Medal for South Africa in the 1908 Olympics?",
+        answers: [
+            {
+                answer_txt: "Mei Sheppard",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Emil Voigt",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Johnny Hayes",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Reggie Walker",
+                isCorrect: true
+            }
+        ]
+    },
+    {//30
+        topic: "Sports",
+        prompt: "Which team has the most wins in the Superbowl?",
+        answers: [
+            {
+                answer_txt: "New York Giants",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Miami Dolphins",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Pittsburgh Steelers",
+                isCorrect: false
+            },
+            {
+                answer_txt: "New England Patriots",
+                isCorrect: true
+            }
+        ]
+    },
+    {//1
+        topic: "Pop Culture",
+        prompt: "As of 2021 who is the most subscribed singlular YouTuber?",
+        answers: [
+            {
+                answer_txt: "Dude Perfect",
+                isCorrect: false
+            },
+            {
+                answer_txt: "MrBeast",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Ninja",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Pewdiepie",
+                isCorrect: true
+            }
+        ]
+    },
+    {//2
+        topic: "Pop Culture",
+        prompt: "As of 2021 what is the most streamed song on Spotify?",
+        answers: [
+            {
+                answer_txt: "Blinding Lights, The Weekend",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Dance Monkey, Tones and I",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Rockstar, Post Malone",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Shape of You, Ed Sheeran",
+                isCorrect: true
+            }
+        ]
+    },
+    {//3
+        topic: "Pop Culture",
+        prompt: "On Steam what is the most played game in terms of hours played Globally?",
+        answers: [
+            {
+                answer_txt: "Dota 2",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Apex Legends",
+                isCorrect: false
+            },
+            {
+                answer_txt: "PUBG",
+                isCorrect: false
+            },
+            {
+                answer_txt: "CSGO",
+                isCorrect: true
+            }
+        ]
+    },
+    {//4
+        topic: "Pop Culture",
+        prompt: "In the popular show The Mandalorian, what is Baby Yoda's Name?",
+        answers: [
+            {
+                answer_txt: "Baby Yoda",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Jabba the Baby",
+                isCorrect: false
+            },
+            {
+                answer_txt: "JarJar Destroyer of Worlds",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Grogu",
+                isCorrect: true
+            }
+        ]
+    },
+    {//5
+        topic: "Pop Culture",
+        prompt: "Who is the most popular Twitch Streamer as of 2021?",
+        answers: [
+            {
+                answer_txt: "XQC",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Critikal",
+                isCorrect: false
+            },
+            {
+                answer_txt: "PayMoneyWubby",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Ninja",
+                isCorrect: true
+            }
+        ]
+    },
+    {//6
+        topic: "Pop Culture",
+        prompt: "What is the most visit country by international Tourist?",
+        answers: [
+            {
+                answer_txt: "Mexico",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Canada",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Argentina",
+                isCorrect: false
+            },
+            {
+                answer_txt: "United States",
+                isCorrect: true
+            }
+        ]
+    },
+    {//7
+        topic: "Pop Culture",
+        prompt: "What city is known as the Music Capital of the World?",
+        answers: [
+            {
+                answer_txt: "Memphis, Tennessee",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Charlotte, North Carolina",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Atlanta, Georgia",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Austin, Texas",
+                isCorrect: true
+            }
+        ]
+    },
+    {//8
+        topic: "Pop Culture",
+        prompt: "What was the worst movie of 2021 by there Meta Critic Score?",
+        answers: [
+            {
+                answer_txt: "Breaking News in Yuba County",
+                isCorrect: false
+            },
+            {
+                answer_txt: "American Skin",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Music",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Vanquish",
+                isCorrect: true
+            }
+        ]
+    },
+    {//9
+        topic: "Pop Culture",
+        prompt: "Who or what band has the most platinum records of all time?",
+        answers: [
+            {
+                answer_txt: "The Beatles",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Elton John",
+                isCorrect: false
+            },
+            {
+                answer_txt: "The Rolling Stones",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Neil Diamond",
+                isCorrect: true
+            }
+        ]
+    },
+    {//40
+        topic: "Pop Culture",
+        prompt: "What is the most popular tourist attraction in the United States?",
+        answers: [
+            {
+                answer_txt: "Times Square, New York City",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Las Vegas Strip, Las Vegas",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Golden Gate Bridge, San Fransico",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Walt Disney World, Orlando",
+                isCorrect: true
+            }
+        ]
+    },
+    {//1
+        topic: "Gaming",
+        prompt: "What was the first game released on the Original Xbox back in 2001?",
+        answers: [
+            {
+                answer_txt: "Grand Theft Auto 3",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Half Life 2",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Counter Strike",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Halo: Combat Evolved",
+                isCorrect: true
+            }
+        ]
+    },
+    {//2
+        topic: "Gaming",
+        prompt: "What was the first E-Sports game ever played?",
+        answers: [
+            {
+                answer_txt: "League of Legends",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Dota 2",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Pac-Man",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Red Annihilation",
+                isCorrect: true
+            }
+        ]
+    },
+    {//3
+        topic: "Gaming",
+        prompt: "What game had a contriversal release on PC?",
+        answers: [
+            {
+                answer_txt: "Elder Scrolls V: Skyrim",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Sid Meier's: Civilization V",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Fallout 76",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Grand Theft Auto: San Andreas",
+                isCorrect: true
+            }
+        ]
+    },
+    {//4
+        topic: "Gaming",
+        prompt: "What is the most streamed and watched game on Twitch?",
+        answers: [
+            {
+                answer_txt: "Apex Legends",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Valorant",
+                isCorrect: false
+            },
+            {
+                answer_txt: "League of Legends",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Grand Theft Auto V",
+                isCorrect: true
+            }
+        ]
+    },
+    {//5
+        topic: "Gaming",
+        prompt: "Who is the most watched gaming channel on YouTube?",
+        answers: [
+            {
+                answer_txt: "CallMeKevin",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Markiplier",
+                isCorrect: false
+            },
+            {
+                answer_txt: "RTGames",
+                isCorrect: false
+            },
+            {
+                answer_txt: "PewDiePie",
+                isCorrect: true
+            }
+        ]
+    },
+    {//6
+        topic: "Gaming",
+        prompt: "What is the game that recieved the most backlash for an unfinished release?",
+        answers: [
+            {
+                answer_txt: "Pokemon Sword and Shield",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Yooka-Laylee",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Super Mario Tennis SMASH",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Cyberpunk 2077",
+                isCorrect: true
+            }
+        ]
+    },
+    {//7
+        topic: "Gaming",
+        prompt: "What is Nintendo's best selling franchise on all of there platforms?",
+        answers: [
+            {
+                answer_txt: "Pokemon",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Donkey Kong",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Legends of Zelda",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Mario",
+                isCorrect: true
+            }
+        ]
+    },
+    {//8
+        topic: "Gaming",
+        prompt: "What was the very first video game ever made for the public?",
+        answers: [
+            {
+                answer_txt: "Tetris",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Space Invaders",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Super Mario Bros",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Pong",
+                isCorrect: true
+            }
+        ]
+    },
+    {//9
+        topic: "Gaming",
+        prompt: "What mythology is the game Skyrim based upon?",
+        answers: [
+            {
+                answer_txt: "Roman Mythology",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Gaelic Mythology",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Slavic Mythology",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Norse Mythology",
+                isCorrect: true
+            }
+        ]
+    },
+    {//50
+        topic: "Gaming",
+        prompt: "In the game TitanFall 2 in the main campaign what is the Titans Name?",
+        answers: [
+            {
+                answer_txt: "Legion",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Ronin",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Tone",
+                isCorrect: false
+            },
+            {
+                answer_txt: "BT",
+                isCorrect: true
+            }
+        ]
+    },
+    {//1
+        topic: "Nations",
+        prompt: "Which of these countries has only one Capitol?",
+        answers: [
+            {
+                answer_txt: "South Africa",
+                isCorrect: false
+            },
+            {
+                answer_txt: "The Netherlands",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Cote d'Ivoire",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Sudan",
+                isCorrect: true
+            }
+        ]
+    },
+    {//2
+        topic: "Nations",
+        prompt: "What was the capitol of East Germany during Soviet Occupation?",
+        answers: [
+            {
+                answer_txt: "Nuremburg",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Dresden",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Munich",
+                isCorrect: false
+            },
+            {
+                answer_txt: "East Berlin",
+                isCorrect: true
+            }
+        ]
+    },
+    {//3
+        topic: "Nations",
+        prompt: "Which of these Nations are part of the UK Commonwealth?",
+        answers: [
+            {
+                answer_txt: "United states, Canada, Mexico",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Hong Kong, Macau, Singnapore",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Egypt, Isreal, Afghanistan",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Hong Kong, Jamacia, South Africa",
+                isCorrect: true
+            }
+        ]
+    },
+    {//4
+        topic: "Nations",
+        prompt: "What is the most populas metro area in the United States?",
+        answers: [
+            {
+                answer_txt: "Dallas Metro Area",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Los Angeles Metro Area",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Chicago Metro Area",
+                isCorrect: false
+            },
+            {
+                answer_txt: "New York City Metro Area",
+                isCorrect: true
+            }
+        ]
+    },
+    {//5
+        topic: "Nations",
+        prompt: "What is the youngest city in Australia?",
+        answers: [
+            {
+                answer_txt: "Perth",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Melbourne",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Canberra",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Springfield",
+                isCorrect: true
+            }
+        ]
+    },
+    {//6
+        topic: "Nations",
+        prompt: "What are the three capitols of South Africa",
+        answers: [
+            {
+                answer_txt: "Johannesburg, Durban, Port Elizabeth",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Soweto, Benoni, East London",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Vereeniging, Pietermaritzburg, Tembisa",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Cape Town, Pretoria, Bloemfontein",
+                isCorrect: true
+            }
+        ]
+    },
+    {//7
+        topic: "Nations",
+        prompt: "What is the biggest city by area in Canada?",
+        answers: [
+            {
+                answer_txt: "Ottawa",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Montreal",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Toronto",
+                isCorrect: false
+            },
+            {
+                answer_txt: "La Tuque",
+                isCorrect: true
+            }
+        ]
+    },
+    {//8
+        topic: "Nations",
+        prompt: "What year did South African Apartheid end?",
+        answers: [
+            {
+                answer_txt: "1945",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1965",
+                isCorrect: false
+            },
+            {
+                answer_txt: "2006",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1990",
+                isCorrect: true
+            }
+        ]
+    },
+    {//9
+        topic: "Nations",
+        prompt: "Which of these countries were not part of the Warsaw Pact?",
+        answers: [
+            {
+                answer_txt: "Poland",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Bulgaria",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Romainia",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Yugoslavia",
+                isCorrect: true
+            }
+        ]
+    },
+    {//60
+        topic: "Nations",
+        prompt: "What nation is known for being the worse European Union Country to live in?",
+        answers: [
+            {
+                answer_txt: "Greece",
+                isCorrect: false
+            },
+            {
+                answer_txt: "North Macedonia",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Ireland",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Slovenia",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "",
+        prompt: "",
+        answers: [
+
+        ]
+    }
 ]
 
-let question_category = [
-    null, "History", "Geography", "Sports", "Pop Culture", "Gaming", "Nations"
-]
 
-let question_select = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-function ques_populate()
-{
-    console.log(player.ques_id);
-    question_txt.innerHTML = question_array[0][player.ques_category][question_select[player.ques_id]][0];
-    opt_one.innerHTML = question_array[0][player.ques_category][question_select[player.ques_id]][1][answer_select[0]];
-    opt_two.innerHTML = question_array[0][player.ques_category][question_select[player.ques_id]][1][answer_select[1]];
-    opt_three.innerHTML = question_array[0][player.ques_category][question_select[player.ques_id]][1][answer_select[2]];
-    opt_four.innerHTML = question_array[0][player.ques_category][question_select[player.ques_id]][1][answer_select[3]];
-    correct_ans = question_array[0][player.ques_category][question_select[player.ques_id]][1][3];
-    player.ques_id++;
-    console.log(correct_ans);
-    console.log(player.ques_id);
-}
-
-//question_array[0][1][0][question][ans]
-//question_txt.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][0];
-//opt_one.innerHTML = question_array[0][player.ques_category][question_select[ques_rand]][1][answer_select[ans_rand]];
-function randomize_ques()
-{
-    shuffle(answer_select);
-    shuffle(question_select);
-    player.ques_id = 0;
-    ques_populate();
-}
 function shuffle(array)
 {
     var current_index = array.length;
@@ -828,11 +1624,11 @@ function shuffle(array)
     while(0 != current_index)
     {
         rand_index = Math.random() * current_index | 0;
-        current_index -= 1;
-        
+        current_index--;
+
         temp_value = array[current_index];
         array[current_index] = array[rand_index];
-        array[rand_index] = temp_value
+        array[rand_index] = temp_value;
     }
     return array;
 }

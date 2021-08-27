@@ -54,6 +54,10 @@ body{
     padding: 10px;
     cursor: pointer;
 }
+#BTN_Return {
+    color: white;
+    text-decoration: none;
+}
 @keyframes blur {
     0% {
       filter: blur(0.5px);
