@@ -156,7 +156,13 @@ function reset() {
     standButton.disabled = true;
 }
 function checkWinner() {
-    if (player.score == 21) {
+    if (player.cards.length == 5 && player.score <= 21) {
+        board.innerHTML = "You win, you have reaached a 5 card charlie. click 'Start New Game' to keep playing";
+        bet("win")
+        document.getElementById("player-money").innerHTML = "Your money: $" + player.money;
+        gameEnd();
+    }
+    else if (player.score == 21) {
         board.innerHTML = "You hit 21, you win! click 'Start New Game' to keep playing";
         bet("win")
         document.getElementById("player-money").innerHTML = "Your money: $" + player.money;
