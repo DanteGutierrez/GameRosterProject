@@ -17,6 +17,9 @@ let dealercard2 = document.getElementById("dealerCard2");
 let dealercard3 = document.getElementById("dealerCard3");
 let dealercard4 = document.getElementById("dealerCard4");
 let dealercard5 = document.getElementById("dealerCard5");
+let dealercard6 = document.getElementById("dealerCard6");
+let dealercard7 = document.getElementById("dealerCard7");
+let dealercard8 = document.getElementById("dealerCard8");
 let hitFinished = false;
 let totalCardsPulled = 0;
 
@@ -239,6 +242,15 @@ function showDealerCards(hand) {
                 dealercard4.innerHTML = '<img src="./Cards/'+ dealer.cards[i].rank + 'Of' + dealer.cards[i].suit + '.png">';
                 break;
             case 4:
+                dealercard5.innerHTML = '<img src="./Cards/'+ dealer.cards[i].rank + 'Of' + dealer.cards[i].suit + '.png">';
+                break;
+            case 5:
+                dealercard5.innerHTML = '<img src="./Cards/'+ dealer.cards[i].rank + 'Of' + dealer.cards[i].suit + '.png">';
+                break;
+            case 6:
+                dealercard5.innerHTML = '<img src="./Cards/'+ dealer.cards[i].rank + 'Of' + dealer.cards[i].suit + '.png">';
+                break;
+            case 7:
                 dealercard5.innerHTML = '<img src="./Cards/'+ dealer.cards[i].rank + 'Of' + dealer.cards[i].suit + '.png">';
                 break;
             default:
