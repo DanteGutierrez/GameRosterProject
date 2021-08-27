@@ -1,9 +1,9 @@
 html {
-    background: repeating-conic-gradient(#fa0000b9 0% 25%, #000000 0% 50%) 
-                50% / 20px 20px
+    background-image: url(Images/casino-background.jpg);
+    background-size: 100%;
 }
 body{
-    background-image: url(RouletteImages/background.jpg); 
+    background-image: url(Images/background.jpg); 
     width: 50%;
     margin: 20px auto;
     box-shadow: 10px 10px 5px #000;
@@ -11,6 +11,7 @@ body{
     border: 5px solid rgb(0, 0, 0);
     border-radius: 50px;
     text-align: center;
+    font-size: larger;
     color: #f0f0f0;
 }
 #app {

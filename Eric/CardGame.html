@@ -5,29 +5,41 @@
          <title>Blackjack</title>
      </head>
      <body>
-         <h1>Welcome to Blackjack</h1><br>
+         <h1>Welcome to Blackjack</h1>
          <div class = "main_menu" id = "main_menu_btn">Go Back</div>
          <br>
-         Cards:
-         <br>
          <div id="dealercards"></div>
+         <br>
          <div>
-             <div id="dealerTest"></div>
+            <div id="dealerCard1" class='inline'></div>
+            <div id="dealerCard2" class='inline'></div>
+            <div id="dealerCard3" class='inline'></div>
+            <div id="dealerCard4" class='inline'></div>
+            <div id="dealerCard5" class='inline'></div>
          </div>
          <br>
          <div id="playercards"></div>
+         <br>
          <div>
-             <div id="test"></div>
+            <div id="playerCard1" class='inline'></div>
+            <div id="playerCard2" class='inline'></div>
+            <div id="playerCard3" class='inline'></div>
+            <div id="playerCard4" class='inline'></div>
+            <div id="playerCard5" class='inline'></div>
          </div>
-         
          <br>
          Total Points:
          <div id="playerscore"></div>
          <div id="dealerscore"></div>
          <br>
-         <input type='submit' id='newgamebutton' value='Deal' onclick='newGame();'/>
+         <input type='submit' id='newgamebutton' value='Start New Game' onclick='newGame();'/>
          <input type='button' id='hitbutton' value='Hit' onclick='hit();' disabled/>
          <input type='button' id='standbutton' value='Stand' onclick='stand();' disabled/>
+         <br>
+         <br>
+         <div id=player-money></div>
+         Bet: 
+         <input type='number' id='bet' value='10' min='1'/>
          <br>
          <br>
          <h2 id="messageboard"></h2>

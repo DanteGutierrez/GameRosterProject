@@ -14,8 +14,6 @@ let onClick = evt =>
     if (evt.target.id == "blackjack_btn") {
         if (a == 0) {
             description_box.innerHTML = "A classic game of Black Jack where the first to 21 points wins.";
-            description_box_two.innerHTML = "";
-            description_box_three.innerHTML = "";
 
             a = 1;
             b = 0;
@@ -26,9 +24,7 @@ let onClick = evt =>
         }
     }else if (evt.target.id == "roulette_btn") {
         if (b == 0) {
-            description_box.innerHTML = "";
             description_box_two.innerHTML = "Take a guess on the results on a spinning wheel";
-            description_box_three.innerHTML = "";
 
             a = 0;
             b = 1;
@@ -38,18 +34,7 @@ let onClick = evt =>
             window.location.replace("Roulette.html");
         }
     }else if (evt.target.id == "return_btn") {
-        if (c == 0) {
-            description_box.innerHTML = "";
-            description_box_two.innerHTML = "";
-            description_box_three.innerHTML = "Return to the main menu to pick a different game";
-
-            a = 0;
-            b = 0;
-            c = 1;
-        }else if(c == 1)
-        {
-            window.location.replace("../index.html");
-        }
+        window.location.replace("../index.html");
     }
 }
 
