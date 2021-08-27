@@ -146,18 +146,24 @@ let onClick = evt =>
         if(opt_one.textContent == "Return to Categories")
         {
             window.location.replace("trivia_menu.html");
+        }else
+        {
+            var answer = answer_array.indexOf(opt_one.textContent);
+            ans_check(answer);
         }
-        var answer = answer_array.indexOf(opt_one.textContent);
-        ans_check(answer);
+        
        
     }else if(evt.target.id == "opt_two")
     {
         if(opt_two.textContent == "Return to the Main Menu")
         {
             window.location.replace("../index.html");
+        }else
+        {
+            var answer = answer_array.indexOf(opt_two.textContent);
+            ans_check(answer);
         }
-        var answer = answer_array.indexOf(opt_two.textContent);
-        ans_check(answer);
+        
     }else if(evt.target.id == "opt_three")
     {
         if(opt_three.textContent == "Restart")
