@@ -619,6 +619,50 @@ var questions = [
             }
         ]
     },
+    {
+        topic: "History",
+        prompt: "What year was the first motor powered car built and sold to the public?",
+        answers: [
+            {
+                answer_txt: "1908",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1900",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1898",
+                isCorrect: false
+            },
+            {
+                answer_txt: "1886",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "History",
+        prompt: "Who is the person that discovered the eastern coast of Australia in 1770?",
+        answers: [
+            {
+                answer_txt: "James Watt",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Robert Burns",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Adam Smith",
+                isCorrect: false
+            },
+            {
+                answer_txt: "James Cook",
+                isCorrect: true
+            }
+        ]
+    },
     {//1
         topic: "Geography",
         prompt: "What is the biggest mountain range on the American Continents?",
@@ -945,6 +989,50 @@ var questions = [
             },
             {
                 answer_txt: "Oleshky Sands, Ukraine",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Geography",
+        prompt: "What is the height of the largest Volcano in the World, Mount Kilimanjaro?",
+        answers: [
+            {
+                answer_txt: "3,8 Kilometres",
+                isCorrect: false
+            },
+            {
+                answer_txt: "4,2 Kilometres",
+                isCorrect: false
+            },
+            {
+                answer_txt: "5,4 Kilometres",
+                isCorrect: false
+            },
+            {
+                answer_txt: "5,9 Kilometres",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Geography",
+        prompt: "How large is the Sahara Desert?",
+        answers: [
+            {
+                answer_txt: "1,2 Mil. Sq. Kilometres",
+                isCorrect: false
+            },
+            {
+                answer_txt: "3,1 Mil. Sq. Kilometres",
+                isCorrect: false
+            },
+            {
+                answer_txt: "30,4 Mil. Sq. Kilometres",
+                isCorrect: false
+            },
+            {
+                answer_txt: "9,2 Mil. Sq. Kilometres",
                 isCorrect: true
             }
         ]
@@ -1279,6 +1367,50 @@ var questions = [
             }
         ]
     },
+    {
+        topic: "Sports",
+        prompt: "What is the oldest motor race that is still going on to this day?",
+        answers: [
+            {
+                answer_txt: "Monaco Grande Prix",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Indianapolis 500",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Rally Finland",
+                isCorrect: false
+            },
+            {
+                answer_txt: "24 Hours of Le Mans",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Sports",
+        prompt: "What is the fastest speed ever ran by a Human?",
+        answers: [
+            {
+                answer_txt: "21,32 kph",
+                isCorrect: false
+            },
+            {
+                answer_txt: "22,46 kph",
+                isCorrect: false
+            },
+            {
+                answer_txt: "23,12 kph",
+                isCorrect: false
+            },
+            {
+                answer_txt: "23,35 kph",
+                isCorrect: true
+            }
+        ]
+    },
     {//1
         topic: "Pop Culture",
         prompt: "As of 2021 who is the most subscribed singlular YouTuber?",
@@ -1605,6 +1737,50 @@ var questions = [
             },
             {
                 answer_txt: "London, England",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Pop Culture",
+        prompt: "Outside of the United States what is the city where the most films are filmed?",
+        answers: [
+            {
+                answer_txt: "Hong Kong, China",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Toronto, Canada",
+                isCorrect: false
+            },
+            {
+                answer_txt: "London, England",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Paris, France",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Pop Culture",
+        prompt: "In what city did the films Chappie and District 9 take place in?",
+        answers: [
+            {
+                answer_txt: "Perth, Australia",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Durban, South Africa",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Auckland, New Zealand",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Johannesbrug, South Africa",
                 isCorrect: true
             }
         ]
@@ -1939,6 +2115,50 @@ var questions = [
             }
         ]
     },
+    {
+        topic: "Gaming",
+        prompt: "In the Fallout 4 DLC, Far Harbour, what is the state that the are in?",
+        answers: [
+            {
+                answer_txt: "Massachuesetts",
+                isCorrect: false
+            },
+            {
+                answer_txt: "New Hampshire",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Connecticut",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Maine",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Gaming",
+        prompt: "In Sid Meier's Civilization V, how many civ's are there?",
+        answers: [
+            {
+                answer_txt: "22",
+                isCorrect: false
+            },
+            {
+                answer_txt: "33",
+                isCorrect: false
+            },
+            {
+                answer_txt: "54",
+                isCorrect: false
+            },
+            {
+                answer_txt: "43",
+                isCorrect: true
+            }
+        ]
+    },
     {//1
         topic: "Nations",
         prompt: "Which of these countries has only one Capitol?",
@@ -2265,6 +2485,50 @@ var questions = [
             },
             {
                 answer_txt: "Mozambique",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Nations",
+        prompt: "What is the smallest Nation recognized by the United Nations?",
+        answers: [
+            {
+                answer_txt: "Monaco",
+                isCorrect: false
+            },
+            {
+                answer_txt: "San Marino",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Luxembourg",
+                isCorrect: false
+            },
+            {
+                answer_txt: "Vatican City",
+                isCorrect: true
+            }
+        ]
+    },
+    {
+        topic: "Nations",
+        prompt: "How many nations have some sort of claim on Antartica?",
+        answers: [
+            {
+                answer_txt: "10",
+                isCorrect: false
+            },
+            {
+                answer_txt: "8",
+                isCorrect: false
+            },
+            {
+                answer_txt: "5",
+                isCorrect: false
+            },
+            {
+                answer_txt: "7",
                 isCorrect: true
             }
         ]
