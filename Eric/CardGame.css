@@ -1,9 +1,9 @@
 html {
-    background: repeating-conic-gradient(#fa0000b9 0% 25%, #000000 0% 50%) 
-                50% / 20px 20px
+    background-image: url(Images/casino-background.jpg);
+    background-size: cover;
 }
 body{
-    background-image: url(RouletteImages/background.jpg); 
+    background-image: url(Images/background.jpg); 
     width: 30%;
     margin: 20px auto;
     box-shadow: 10px 10px 5px #000;
@@ -14,20 +14,20 @@ body{
     color: #f0f0f0;
 }
 img{
-    width: 10%;
-    height: 17%;
+    width: 18%;
+    height: 20%;
     margin: auto;
     padding: 10px;
 }
-div{
-    display: block;
-}
-.main_menu
-{
-    background-color: #f0f0f0;
-    color:#000000;
+.main_menu{
+    background-color: #000000;
+    color: #f0f0f0;
     width: 70px;
     margin: auto;
     padding: 10px;
     cursor: pointer;
 }
+.inline { 
+    display: inline; 
+    margin:10px;
+    }

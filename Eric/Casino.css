@@ -1,9 +1,9 @@
 html {
-    background: repeating-conic-gradient(#fa0000b9 0% 25%, #000000 0% 50%) 
-                50% / 20px 20px
+    background-image: url(Images/casino-background.jpg);
+    background-size: cover;
 }
 body{
-    background-color: rgb(255, 255, 255); 
+    background-image: url(Images/background.jpg);
     width: 30%;
     margin: 20px auto;
     box-shadow: 10px 10px 5px #000;
@@ -11,6 +11,7 @@ body{
     border: 5px solid rgb(0, 0, 0);
     border-radius: 12px;
     text-align: center;
+    color: #f0f0f0;
 }
 img{
     width: 15%;
@@ -22,26 +23,26 @@ img{
     width: 300px;
     text-align: center;
     cursor: pointer;
-    margin:auto;
-    color: #313638;
+    margin: auto;
+    color: #f0f0f0;
 }
 .blackjack
 {
-    border: 2px solid #EF6461;
+    border: 2px solid #f0f0f0;
     width: 300px;
     text-align: center;
     cursor: pointer;
 }
 .roulette
 {
-    border: 2px solid #EF6461;
+    border: 2px solid #f0f0f0;
     width: 300px;
     text-align: center;
     cursor: pointer;
 }
 .return
 {
-    border: 2px solid #EF6461;
+    border: 2px solid #f0f0f0;
     width: 300px;
     text-align: center;
     cursor: pointer;

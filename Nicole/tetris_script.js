@@ -1,8 +1,10 @@
+
+const main_menu_btn = document.getElementById("main_menu_btn");
+const score_board = document.getElementById("score");
 const tetris_canvas = document.getElementById("tetris_canvas");
 const context = tetris_canvas.getContext("2d");
-const score_board = document.getElementById("score");
 const tetris_audio_player = document.getElementById("tetris_audio_play");
-const main_menu_btn = document.getElementById("main_menu_btn");
+
 
 var audioFile = new Audio("audio/tetris_audio.mp3");
 
@@ -122,6 +124,16 @@ function createPiece(type)
     }
 }
 
+const colours = [
+    null,
+    "#258EA6",
+    "#549F93",
+    "#9FAF90",
+    "#E2B1B1",
+    "#E2C2FF",
+    "#D4E4BC",
+    "#48233C",
+];
 
 function draw()
 {
@@ -132,6 +144,7 @@ function draw()
     drawMatrix(arena, {x:0, y:0})
     drawMatrix(player.matrix, player.pos);
 }
+
 
 //This Funchtion Draws the Tee piece
 function drawMatrix(matrix, offset)
@@ -149,7 +162,10 @@ function drawMatrix(matrix, offset)
     });
 }
 
+let dropCounter = 0;
+let dropInterval = 1000;
 
+let lastTime = 0;
 
 function merge(arena, player)
 {
@@ -246,10 +262,9 @@ function rotate(matrix, dir)
     }
 }
 
-let dropCounter = 0;
-let dropInterval = 1000;
 
-let lastTime = 0;
+
+
 //This function calls for an animation of the piece
 function update(time = 0)
 {
@@ -280,20 +295,11 @@ function levels()
         dropInterval = 400;
     }else if(player.score >= 500)
     {
-        dropInterval = 100;
+        dropInterval = 200;
     }
 }
 
-const colours = [
-    null,
-    "#258EA6",
-    "#549F93",
-    "#9FAF90",
-    "#E2B1B1",
-    "#E2C2FF",
-    "#D4E4BC",
-    "#48233C",
-];
+
 
 function updateScore()
 {
@@ -339,10 +345,6 @@ let onClick = evt =>
     if(evt.target.id == "tetris_audio_play")
     {
         audioFile.play();
-    }
-    else if(evt.target.id == "main_menu_btn")
-    {
-        window.location.replace("../index.html");
     }
 }
 

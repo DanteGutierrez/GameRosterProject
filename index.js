@@ -36,7 +36,7 @@ let onClick = evt =>
                 e = 0;
             }else if(a == 1)
             {
-                window.location.replace("Dante/minesweeper.html");
+                window.location.replace("./Dante/minesweeper.html");
             }
         }
         if(evt.target.id == "casino_btn")
@@ -57,7 +57,7 @@ let onClick = evt =>
                 e = 0;
             }else if(b == 1)
             {
-                window.location.replace("Eric/Casino.html");
+                window.location.replace("./Eric/casino.html");
             }
         }
         if(evt.target.id == "tetris_btn")
@@ -79,7 +79,7 @@ let onClick = evt =>
                 console.log(c);
             }else if(c == 1)
             {
-                window.location.replace("Nicole/tetris.html");
+                window.location.replace("./Nicole/tetris.html");
                 
             }
         }
@@ -90,7 +90,7 @@ let onClick = evt =>
                 description_box.innerHTML = "";
                 description_box_two.innerHTML = "";
                 description_box_three.innerHTML = "";
-                description_box_four.innerHTML = "Waifu Clicker Bois";
+                description_box_four.innerHTML = "Waifu Hunter is a clicker game in which you click to unlock Upgrades";
                 description_box_five.innerHTML = "";
 
                 a = 0;
@@ -100,7 +100,7 @@ let onClick = evt =>
                 e = 0;
             }else if(d == 1)
             {
-                window.location.replace("Randy/waifu.html");
+                window.location.replace("./Randy/waifu.html");
             }
         }
         if(evt.target.id == "trivia_btn")
@@ -111,7 +111,7 @@ let onClick = evt =>
                 description_box_two.innerHTML = "";
                 description_box_three.innerHTML = "";
                 description_box_four.innerHTML = "";
-                description_box_five.innerHTML = "The Trivia Game";
+                description_box_five.innerHTML = "Nikki's Trivia is a game in which you play a trivia game with 6 categories to choose from!";
 
                 a = 0;
                 b = 0;
@@ -120,7 +120,7 @@ let onClick = evt =>
                 e = 1;
             }else if(e == 1)
             {
-                window.location.replace("Brenden/trivia_menu.html");
+                window.location.replace("./Brenden/trivia_menu.html");
             }
         }
         
