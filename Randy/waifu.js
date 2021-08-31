@@ -167,9 +167,6 @@ function runtime(){
     Background1 = document.getElementById('Background1');
     // Waifu1 = document.getElementById('Waifu1');
     Waifu2 = document.getElementById('Waifu2');
-
-
-    console.log(sessionStorage.getItem('start'));
     if(sessionStorage.getItem('start') == 1){
       money = Number(sessionStorage.getItem('money'));
       multiplier = Number(sessionStorage.getItem('multiplier'));
