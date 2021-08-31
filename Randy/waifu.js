@@ -2,7 +2,14 @@ var money = 0;
 var multiplier = 1;
 var BaseClick = 1;
 var start = 0;
+var html;
 
+let Timer;
+let Click;
+let Automult = 1;
+let Clickinterval = 1000;
+
+let HTML;
 let money_btn;
 let money_count;
 let UpgradePage;
@@ -13,6 +20,7 @@ let MainPage;
 let Upgrade1;
 let Upgrade2;
 let Upgrade3;
+let AutoUpgrade1;
 let PowerUpgrade1;
 
 let onClick = evt =>
@@ -41,8 +49,8 @@ let Background1onClick = evt =>
 {
   if(evt.target.id == 'Background1')
   {
-    document.getElementById('main').classList.remove();
-    document.getElementById('main').classList.add('background1');
+    document.body.style.backgroundImage = "url('images/anime-City.jpg')";
+    document.body.style.backgroundSize = "cover";
   }
 }
 
@@ -118,6 +126,22 @@ let Upgrade3OnClick = evt =>
   }
 }
 
+let AutoUpgrade1OnClick = evt =>
+{
+  if(evt.target.id == 'autoUpgrade1')
+  {
+    if(money >= 1000){
+      money = money - 1000;
+      money_count.innerHTML = money;
+      Automult = 1;
+      Click = Click + 1;
+      
+      Timer = setInterval(function(){money = money + (Click * Automult)},Clickinterval);
+      console.log("I stole money");
+    }
+  }
+}
+
 let PowerUpgrade1OnClick = evt =>
 {
   if(evt.target.id == 'powerUpgrade1')
@@ -126,7 +150,7 @@ let PowerUpgrade1OnClick = evt =>
       money = 0;
       money_count.innerHTML = money;
       multiplier = 1;
-      BaseClick = 2;
+      BaseClick = BaseClick + 2;
       console.log(multiplier);
       console.log(BaseClick);
     }
@@ -134,7 +158,9 @@ let PowerUpgrade1OnClick = evt =>
 }
 
 function runtime(){
+
   if(document.URL.includes("waifu.html")){
+    HTML = document.getElementById('main');
     money_btn = document.getElementById('waifu');
     money_count = document.getElementById('money');
     UpgradePage = document.getElementById('UpgradesPage');
@@ -142,13 +168,14 @@ function runtime(){
     // Waifu1 = document.getElementById('Waifu1');
     Waifu2 = document.getElementById('Waifu2');
 
+
     console.log(sessionStorage.getItem('start'));
     if(sessionStorage.getItem('start') == 1){
-        money = Number(sessionStorage.getItem('money'));
-        multiplier = Number(sessionStorage.getItem('multiplier'));
-        BaseClick = Number(sessionStorage.getItem('BaseClick'));
-        money_count.innerHTML = money;
-        console.log(money);
+      money = Number(sessionStorage.getItem('money'));
+      multiplier = Number(sessionStorage.getItem('multiplier'));
+      BaseClick = Number(sessionStorage.getItem('BaseClick'));
+      money_count.innerHTML = money;
+      console.log(money);
 
     }else if(start == 0){
       money_count.innerHTML = money;
@@ -168,14 +195,18 @@ function runtime(){
     Upgrade1 = document.getElementById('waifuUpgrade1');
     Upgrade2 = document.getElementById('waifuUpgrade2');
     Upgrade3 = document.getElementById('waifuUpgrade3');
+    AutoUpgrade1 = document.getElementById('autoUpgrade1');
     PowerUpgrade1 = document.getElementById('powerUpgrade1');
     money_count = document.getElementById('money');
-    money = sessionStorage.getItem('money');
+    money = Number(sessionStorage.getItem('money'));
+    multiplier = Number(sessionStorage.getItem('multiplier'));
+    BaseClick = Number(sessionStorage.getItem('BaseClick'));
     
     MainPage.addEventListener('click', MainPageOnClick);
     Upgrade1.addEventListener('click', Upgrade1OnClick);
     Upgrade2.addEventListener('click', Upgrade2OnClick);
     Upgrade3.addEventListener('click', Upgrade3OnClick);
+    AutoUpgrade1.addEventListener('click', AutoUpgrade1OnClick);
     PowerUpgrade1.addEventListener('click', PowerUpgrade1OnClick);
 
     money_count.innerHTML = sessionStorage.getItem('money');
