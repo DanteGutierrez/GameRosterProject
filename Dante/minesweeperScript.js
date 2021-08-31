@@ -6,9 +6,9 @@ let xray = false;
 let trueTiles = [];
 let queue = [];
 let running = false;
-let winning = 0;
 let time = 0;
-let leaderBoard = [["Dante", 100], ["Randy", 100], ["Nicole", 100], ["Eric", 100]];
+let difficulty = "Medium";
+let leaderBoard = [["Dante", "Medium", 100], ["Randy", "Medium", 100], ["Nicole", "Medium", 100], ["Eric", "Medium", 100]];
 
 const setResultText = (text) => {
     document.getElementById("Result").innerHTML = text;
@@ -110,15 +110,17 @@ const gameLost = () => {
 };
 const gameWon = () => {
     running = false;
-    setResultText("Winner!");
-    document.getElementById("Submit").hidden = false;
+    if (document.getElementById("Result").innerHTML != "Cheater!") {
+        setResultText("Winner!");
+        document.getElementById("Submit").hidden = false;
+    }
 };
 const singleTile = (r, c) => {
     let box = trueTiles[r][c];
     let boxValue = grid[r][c];
     if (!box.classList.contains("flagged")) {
         box.classList.add(numberToString(boxValue));
-        box.innerHTML = (boxValue == 0 ? '' : boxValue);
+        box.innerHTML = (boxValue == 0 || boxValue == 'M' ? '' : boxValue);
     }
     return boxValue;
 };
@@ -156,17 +158,40 @@ const revealTiles = () => {
         let box = trueTiles[queue[0][0]][queue[0][1]];
         if (!box.classList.contains("flagged")) {
             boxValue = singleTile(queue[0][0], queue[0][1]);
-            winning--;
             if (boxValue == 'M') {
+                box.classList.add("loserTile");
                 gameLost();
-            }
-            else if (winning == 0) {
-                gameWon();
             }
             box.classList.add("revealed");
             queueTiles(queue[0][0], queue[0][1]);
+            if (document.getElementsByClassName("revealed").length == (row * column) - mines) {
+                gameWon();
+            }
         }
         queue.shift();
+    }
+};
+const updateMines = () => {
+    let hundreds = document.getElementById("MHundreds");
+    let tens = document.getElementById("MTens");
+    let ones = document.getElementById("MOnes");
+    let counter = mines - document.getElementsByClassName("flagged").length;
+    if (running) {
+        if (counter >= 100) {
+            hundreds.innerHTML = counter.toString()[0];
+            tens.innerHTML = counter.toString()[1];
+            ones.innerHTML = counter.toString()[2];
+        }
+        else if (counter >= 10) {
+            hundreds.innerHTML = 0;
+            tens.innerHTML = counter.toString()[0];
+            ones.innerHTML = counter.toString()[1];
+        }
+        else {
+            hundreds.innerHTML = 0;
+            tens.innerHTML = 0;
+            ones.innerHTML = counter.toString()[0];
+        }
     }
 };
 const flagTile = (r, c) => {
@@ -174,35 +199,34 @@ const flagTile = (r, c) => {
     if (!box.classList.contains("revealed")) {
         if (box.classList.contains("flagged")) {
             box.classList.remove("flagged");
-            box.innerHTML = "";
+            updateMines();
         }
-        else {
+        else if(document.getElementsByClassName("flagged").length < mines){
             box.classList.add("flagged");
-            box.innerHTML = "F";
+            updateMines();
         }    
     }
-    
 };
-let secondPassed = () => {
-    document.getElementById("Hundreds").hidden = false;
-    document.getElementById("Tens").hidden = false;
-    document.getElementById("Ones").hidden = false;
+const secondPassed = () => {
+    let hundreds = document.getElementById("THundreds");
+    let tens = document.getElementById("TTens");
+    let ones = document.getElementById("TOnes");
     if (running) {
         time++;
         if (time >= 100) {
-            document.getElementById("Hundreds").innerHTML = time.toString()[0];
-            document.getElementById("Tens").innerHTML = time.toString()[1];
-            document.getElementById("Ones").innerHTML = time.toString()[2];
+            hundreds.innerHTML = time.toString()[0];
+            tens.innerHTML = time.toString()[1];
+            ones.innerHTML = time.toString()[2];
         }
         else if (time >= 10) {
-            document.getElementById("Hundreds").hidden = true;
-            document.getElementById("Tens").innerHTML = time.toString()[0];
-            document.getElementById("Ones").innerHTML = time.toString()[1];
+            hundreds.innerHTML = 0;
+            tens.innerHTML = time.toString()[0];
+            ones.innerHTML = time.toString()[1];
         }
         else {
-            document.getElementById("Hundreds").hidden = true;
-            document.getElementById("Tens").hidden = true;
-            document.getElementById("Ones").innerHTML = time.toString()[0];
+            hundreds.innerHTML = 0;
+            tens.innerHTML = 0;
+            ones.innerHTML = time.toString()[0];
         }
     }
 };
@@ -213,7 +237,7 @@ const orderLeaderboard = () => {
         let inputIndex = 0;
         let error = true;
         for (let secondIndex = 0; secondIndex < tempBoard.length; secondIndex++) {
-            if (temp[1] < tempBoard[secondIndex][1]) {
+            if (temp[2] < tempBoard[secondIndex][2]) {
                 inputIndex = secondIndex;
                 error = false;
                 break;
@@ -227,28 +251,26 @@ const orderLeaderboard = () => {
         }
     }
     leaderBoard = tempBoard;
-}
+};
 const leaderBoardUpdate = () => {
     let theBoard = document.getElementById("Leaderboard");
     theBoard.innerHTML = '';
     orderLeaderboard();
     for (let index = 0; index < leaderBoard.length; index++) {
-        theBoard.innerHTML += "<div class='row noSelect'>" + leaderBoard[index][0] + ": " + leaderBoard[index][1] + "</div>";
+        theBoard.innerHTML += "<div class='row leaderLabel'>" + leaderBoard[index][0] + ": " + leaderBoard[index][1] + ", " + leaderBoard[index][2] + " second(s)</div>";
     }
-}
+};
 const loadBoard = () => {
     document.getElementById("Submit").hidden = true;
     let board = document.getElementById("Board");
     board.innerHTML = '';
     let tempArray = [];
     // Fill array with mines
-    winning = 0;
     for (let r = 0; r < row; r++) {
         for (let c = 0; c < column; c++) {
             let tempMine = 'M';
             if ((column * r) + c >= mines) {
                 tempMine = '';
-                winning++;
             }
             tempArray[(column * r) + c] = tempMine;
         }
@@ -283,7 +305,7 @@ const loadBoard = () => {
             });
         }
     }
-    setResultText("");
+    setResultText(" ");
     if (xray) {
         xrayBoard();
     }
@@ -291,7 +313,9 @@ const loadBoard = () => {
     running = true;
     time = -1;
     secondPassed();
+    updateMines();
     leaderBoardUpdate();
+    document.getElementById("Helpers").innerHTML = '';
 };
 const xrayBoard = () => {
     for (let r = 0; r < row; r++) {
@@ -312,36 +336,68 @@ const xrayBoard = () => {
             }
         }
     }
-    setResultText(xray ? "Cheater!" : "");
+    if (xray) {
+        setResultText("Cheater!");
+    }
 };
 loadBoard();
+const selfHide = (name) => {
+    document.getElementById(name).hidden = true;
+};
+const settingShowHide = (visible, settingsElement, settingsButton, changeButton) => {
+    let items = settingsElement;
+    for (let index = 0; index < items.length; index++) {
+        items[index].hidden = !visible;
+    }
+    if (changeButton) {
+        settingsButton.innerHTML = visible ? "▲" : "▼";
+    }
+};
 document.getElementById("AddColumn").addEventListener("click", (evt) => {
-    column++;
-    loadBoard();
+    if ((((window.innerWidth / 2) - 184) - ((column/2) * 30)) - 60 > 0) {
+        column++;
+        difficulty = "Custom";
+        loadBoard();
+    }
 });
 document.getElementById("AddRow").addEventListener("click", (evt) => {
-    row++;
-    loadBoard();
+    if (row < 22) {
+        row++;
+        difficulty = "Custom";
+        loadBoard(); 
+    }
 });
 document.getElementById("SubColumn").addEventListener("click", (evt) => {
-    if (column > 1) {
+    if (column > 3) {
         column--;
+        difficulty = "Custom";
+        if (mines >= (column * row)) {
+            mines = (column * row) - 1;
+        }
         loadBoard();
     }
 });
 document.getElementById("SubRow").addEventListener("click", (evt) => {
-    if (row > 1) {
+    if (row > 3) {
         row--;
+        difficulty = "Custom";
+        if (mines >= (column * row)) {
+            mines = (column * row) - 1;
+        }
         loadBoard();
     }
 });
 document.getElementById("AddMine").addEventListener("click", (evt) => {
-    mines++;
-    loadBoard();
+    if (mines + 1 < (column * row)) {
+        mines++;
+        difficulty = "Custom";
+        loadBoard();
+    }
 });
 document.getElementById("SubMine").addEventListener("click", (evt) => {
     if (mines > 1) {
         mines--;
+        difficulty = "Custom";
         loadBoard();
     }
 });
@@ -353,9 +409,57 @@ document.getElementById("Reset").addEventListener("click", (evt) => {
     loadBoard();
 });
 document.getElementById("Submit").addEventListener("click", (evt) => {
-    leaderBoard.unshift([document.getElementById("NameValue").value, time]);
+    leaderBoard.unshift([document.getElementById("NameValue").value, difficulty, time]);
     leaderBoardUpdate();
     document.getElementById("Submit").hidden = true;
 });
-
+document.getElementById("ShowSettings").addEventListener("click", (evt) => {
+    let single = document.getElementById("ShowSettings").innerHTML == "▲";
+    let double = document.getElementById("ShowDouble").innerHTML == "▲";
+    settingShowHide(!single, document.getElementsByClassName("settings"), document.getElementById("ShowSettings"), true);
+    if (single && double) {
+        settingShowHide(!single, document.getElementsByClassName("settingsDouble"), document.getElementById("ShowDouble"), false);
+    }
+    if (!single && double) {
+        settingShowHide(!single, document.getElementsByClassName("settingsDouble"), document.getElementById("ShowDouble"), false);
+    }
+});
+document.getElementById("ShowDouble").addEventListener("click", (evt) => {
+    let double = document.getElementById("ShowDouble").innerHTML == "▲";
+    settingShowHide(!double, document.getElementsByClassName("settingsDouble"), document.getElementById("ShowDouble"), true);
+});
+document.getElementById("ShowHelp").addEventListener("click", (evt) => {
+    let width = window.innerWidth;
+    let comments = document.getElementById("Helpers");
+    comments.innerHTML = '';
+    let resetButton = document.getElementById("Reset");
+    comments.innerHTML = '<div id="ResetHelp" class="helpLabel" style="position:absolute; top:' + (resetButton.offsetTop - 30) + 'px; left:' + (100 - (((width - (resetButton.offsetLeft - ((174.68 - resetButton.offsetWidth) / 2))) / width) * 100)) + '%;" onClick="selfHide(' + "'ResetHelp'" + ')">This is the Reset Button</div>';
+    let mineCounter = document.getElementById("MineCounter");
+    comments.innerHTML += '<div id="MineHelp" class="helpLabel" style="position:absolute; top:' + (mineCounter.offsetTop + 10) + 'px; left:' + (100 - (((width - (mineCounter.offsetLeft - 174.65)) / width) * 100)) + '%;" onClick="selfHide(' + "'MineHelp'" + ')">This is the mine tracker</div>';
+    let timer = document.getElementById("Timer");
+    comments.innerHTML += '<div id="TimeHelp" class="helpLabel" style="position:absolute; top:' + (timer.offsetTop + 10) + 'px; left:' + (100 - (((width - (timer.offsetLeft + 88)) / width) * 100)) + '%;" onClick="selfHide(' + "'TimeHelp'" + ')">This is the timer</div>';
+    let help = document.getElementById("Board");
+    comments.innerHTML += '<div id="FlagHelp" class="helpLabel" style="position:absolute; top:' + (help.offsetTop) + 'px; left:' + (100 - (((width - (help.offsetLeft + ((help.offsetWidth - 257.38) / 2))) / width) * 100)) + '%;" onClick="selfHide(' + "'FlagHelp'" + ')">Hold Shift when clicking to add flag</div>';
+});
+document.getElementById("Easy").addEventListener("click", (evt) => {
+    difficulty = "Easy";
+    mines = 8;
+    column = 8;
+    row = 8;
+    loadBoard();
+});
+document.getElementById("Medium").addEventListener("click", (evt) => {
+    difficulty = "Medium";
+    mines = 27;
+    column = 12;
+    row = 12;
+    loadBoard();
+});
+document.getElementById("Hard").addEventListener("click", (evt) => {
+    difficulty = "Hard";
+    mines = 100;
+    column = 20;
+    row = 20;
+    loadBoard();
+});
 let timer = setInterval(secondPassed, 1000);

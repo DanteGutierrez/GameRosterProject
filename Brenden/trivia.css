@@ -18,6 +18,7 @@ Colour Pallete
     background-color: #EED7C5;
     color: #B36A5E;
     cursor: pointer;
+    text-decoration: none;
 }
 .category
 {

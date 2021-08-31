@@ -4,20 +4,38 @@
     <title>Roulette wheel</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="Roulette.css" />
+    <link href= "casino_icon.ico" rel = "icon">
   </head>
   <body class="back" >
-    <div class = "main_menu" id = "main_menu_btn">Go Back</div>
-    <br>
-    <h1 id="result" ><strong></strong></h1>
-    <br>
-    <br>
-    <div id="app">
-      <img class="marker" src="RouletteImages/marker.png" />  <span id="result" ></span>
-      <img style="margin-top:5px" class="wheel" src="RouletteImages/wheel.png" />
-      <img class="button" src="RouletteImages/button.png" />
-      <br>
+    <div class = "main_menu">
+      <a id="BTN_Return" href="../index.html">Go Back</a>
     </div>
-
+    <br>
+    <div id=player-money></div>
+    Bet: 
+    <input type='number' value='100' id='bet' min='1'/>
+    <p>What type of bet would you like to make?</p>
+    <input type='button' id='singleNumber' value='Single Number (0-36)' onclick='singleNumberBet();'/>
+    <input type='button' id='evenNumber' value='Even Numbers' onclick="evenNumberBet();"/>
+    <input type='button' id='oddNumber' value='Odd Numbers' onclick="oddNumberBet();"/>
+    <input type='button' id='first19Numbers' value='Numbers 0-18' onclick="first19NumberBet();"/>
+    <input type='button' id='last18Numbers' value='Numbers 19-36' onclick="last18NumberBet();"/>
+    <input type='button' id='redNumbers' value='Red Numbers' onclick="redNumberBet();"/>
+    <input type='button' id='blackNumbers' value='Black Numbers' onclick="blackNumberBet();"/>
+    <br>
+    <h2 id="messageboard"></h2>
+    <br>
+    <h1 id="result"></h1>
+    <div id="app">
+      <img class="marker" src="Images/marker.png" />  <span id="result" ></span>
+      <img style="margin-top:5px" class="wheel" src="Images/wheel.png" />
+      <img class="button" src="Images/button.png"/>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <script src="Roulette.js"></script>
   </body>
 </html>
