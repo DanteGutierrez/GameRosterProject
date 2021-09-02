@@ -9,6 +9,7 @@ let Automult = 1;
 let Clickinterval = 1000;
 
 let playerName;
+let nameBox;
 let money_btn;
 let money_count;
 let UpgradePage;
@@ -26,7 +27,6 @@ let onClick = evt =>
   {
     money = money + (BaseClick * multiplier);
     money_count.innerHTML = money;
-    console.log(money);
   }
 }
 
@@ -35,6 +35,9 @@ let UpgradesPageOnClick = evt =>
   if(evt.target.id == 'UpgradesPage')
   {
     window.location = 'Upgrades.html';
+    playerName = document.getElementById('NameBox').value;
+    sessionStorage.setItem('playerName',playerName);
+    console.log(sessionStorage.getItem(playerName));
     sessionStorage.setItem('money',money);
     sessionStorage.setItem('multiplier',multiplier);
     sessionStorage.setItem('BaseClick',BaseClick);
@@ -42,7 +45,6 @@ let UpgradesPageOnClick = evt =>
     sessionStorage.setItem('Click',Click);
     sessionStorage.setItem('Clickinterval',Clickinterval);
     sessionStorage.setItem('Automult',Automult);
-    console.log(sessionStorage.getItem('multiplier'));
   }
 }
 
@@ -58,10 +60,9 @@ let MainPageOnClick = evt =>
     sessionStorage.setItem('Click',Click);
     sessionStorage.setItem('Clickinterval',Clickinterval);
     sessionStorage.setItem('Automult',Automult);
-    console.log(sessionStorage.getItem('money'));
+    sessionStorage.setItem('playerName',playerName);
+    console.log('playerName');
     sessionStorage.setItem('start', start);
-    console.log(sessionStorage.getItem('start'));
-    console.log(sessionStorage.getItem('multiplier'));
   }
 }
 
@@ -73,7 +74,6 @@ let Upgrade1OnClick = evt =>
       money = money - 20;
       money_count.innerHTML = money;
       multiplier = multiplier + 1;
-      console.log(multiplier);
     }
   }
 }
@@ -86,7 +86,6 @@ let Upgrade2OnClick = evt =>
       money = money - 60;
       money_count.innerHTML = money;
       multiplier = multiplier + 3;
-      console.log(multiplier);
     }
   }
 }
@@ -95,11 +94,10 @@ let Upgrade3OnClick = evt =>
 {
   if(evt.target.id == 'waifuUpgrade3')
   {
-    if(money >= 150){
-      money = money - 150;
+    if(money >= 120){
+      money = money - 120;
       money_count.innerHTML = money;
-      multiplier = multiplier + 10;
-      console.log(multiplier);
+      multiplier = multiplier + 5;
     }
   }
 }
@@ -120,7 +118,6 @@ let AutoUpgrade1OnClick = evt =>
       Click = Click + 1;
       
       Timer = setInterval(timmermethod, Clickinterval);
-      console.log(Click);
     }
   }
 }
@@ -135,8 +132,6 @@ let PowerUpgrade1OnClick = evt =>
       multiplier = 1;
       BaseClick = BaseClick + 2;
       clearInterval(Timer);
-      console.log(multiplier);
-      console.log(BaseClick);
     }
   }
 }
@@ -148,6 +143,7 @@ function runtime(){
     money_btn = document.getElementById('waifu');
     money_count = document.getElementById('money');
     UpgradePage = document.getElementById('UpgradesPage');
+    nameBox = document.getElementById('NameBox');
     if(sessionStorage.getItem('start') == 1){
       money = Number(sessionStorage.getItem('money'));
       multiplier = Number(sessionStorage.getItem('multiplier'));
@@ -156,11 +152,11 @@ function runtime(){
       Click = Number(sessionStorage.getItem('Click'));
       Automult = Number(sessionStorage.getItem('Automult'));
       Clickinterval = Number(sessionStorage.getItem('Clickinterval'));
+      playerName = sessionStorage.getItem('playerName');
+      nameBox.innerHTML = playerName
 
       money_count.innerHTML = money;
-      console.log(money);
-
-      //();
+     Timer = setInterval(timmermethod,Clickinterval);
     }else if(start == 0){
       money_count.innerHTML = money;
     }
@@ -177,6 +173,7 @@ function runtime(){
     AutoUpgrade1 = document.getElementById('autoUpgrade1');
     PowerUpgrade1 = document.getElementById('powerUpgrade1');
     money_count = document.getElementById('money');
+    nameBox = document.getElementById('NameBox');
     money = Number(sessionStorage.getItem('money'));
     multiplier = Number(sessionStorage.getItem('multiplier'));
     BaseClick = Number(sessionStorage.getItem('BaseClick'));
@@ -184,8 +181,10 @@ function runtime(){
     Click = Number(sessionStorage.getItem('Click'));
     Automult = Number(sessionStorage.getItem('Automult'));
     Clickinterval = Number(sessionStorage.getItem('Clickinterval'));
-    //();
+    playerName = sessionStorage.getItem('playerName');
+
     
+    Timer = setInterval(timmermethod,Clickinterval);
     MainPage.addEventListener('click', MainPageOnClick);
     Upgrade1.addEventListener('click', Upgrade1OnClick);
     Upgrade2.addEventListener('click', Upgrade2OnClick);
