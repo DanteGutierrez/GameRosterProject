@@ -152,10 +152,11 @@ function runtime(){
       money = Number(sessionStorage.getItem('money'));
       multiplier = Number(sessionStorage.getItem('multiplier'));
       BaseClick = Number(sessionStorage.getItem('BaseClick'));
-      Timer = Number(sessionStorage.getItem('Timer'));
       Click = Number(sessionStorage.getItem('Click'));
       Automult = Number(sessionStorage.getItem('Automult'));
       Clickinterval = Number(sessionStorage.getItem('Clickinterval'));
+
+      Timer = setInterval(timmermethod, Clickinterval);
 
       money_count.innerHTML = money;
       console.log(money);
