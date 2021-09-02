@@ -34,9 +34,10 @@ let UpgradesPageOnClick = evt =>
 {
   if(evt.target.id == 'UpgradesPage')
   {
-    window.location = 'Upgrades.html';
     playerName = document.getElementById('NameBox').value;
     sessionStorage.setItem('playerName',playerName);
+    window.location = 'Upgrades.html';
+    
     console.log(sessionStorage.getItem(playerName));
     sessionStorage.setItem('money',money);
     sessionStorage.setItem('multiplier',multiplier);
@@ -61,8 +62,10 @@ let MainPageOnClick = evt =>
     sessionStorage.setItem('Clickinterval',Clickinterval);
     sessionStorage.setItem('Automult',Automult);
     sessionStorage.setItem('playerName',playerName);
-    console.log('playerName');
+    var name = sessionStorage.getItem('playerName');
+    console.log(name)
     sessionStorage.setItem('start', start);
+    
   }
 }
 
