@@ -148,12 +148,13 @@ function runtime(){
       money = Number(sessionStorage.getItem('money'));
       multiplier = Number(sessionStorage.getItem('multiplier'));
       BaseClick = Number(sessionStorage.getItem('BaseClick'));
-      Timer = Number(sessionStorage.getItem('Timer'));
       Click = Number(sessionStorage.getItem('Click'));
       Automult = Number(sessionStorage.getItem('Automult'));
       Clickinterval = Number(sessionStorage.getItem('Clickinterval'));
       playerName = sessionStorage.getItem('playerName');
       nameBox.innerHTML = playerName
+
+      Timer = setInterval(timmermethod, Clickinterval);
 
       money_count.innerHTML = money;
      Timer = setInterval(timmermethod,Clickinterval);
