@@ -476,4 +476,9 @@ document.getElementById("Hard").addEventListener("click", (evt) => {
     row = 20;
     loadBoard();
 });
+document.getElementById("Introduction").addEventListener('click', (evt) => {
+    let song = Math.round((Math.random() * 10) + 1) != 1 ? "./Assets/Music.mp3" : "./Assets/BetterMusic.mp3";
+    let audio = new Audio(song);
+    audio.play();
+});
 let timer = setInterval(secondPassed, 1000);
