@@ -38,7 +38,6 @@ let UpgradesPageOnClick = evt =>
     sessionStorage.setItem('playerName',playerName);
     window.location = 'Upgrades.html';
     
-    console.log(sessionStorage.getItem(playerName));
     sessionStorage.setItem('money',money);
     sessionStorage.setItem('multiplier',multiplier);
     sessionStorage.setItem('BaseClick',BaseClick);
@@ -63,7 +62,6 @@ let MainPageOnClick = evt =>
     sessionStorage.setItem('Automult',Automult);
     sessionStorage.setItem('playerName',playerName);
     var name = sessionStorage.getItem('playerName');
-    console.log(name)
     sessionStorage.setItem('start', start);
     
   }
@@ -155,12 +153,12 @@ function runtime(){
       Automult = Number(sessionStorage.getItem('Automult'));
       Clickinterval = Number(sessionStorage.getItem('Clickinterval'));
       playerName = sessionStorage.getItem('playerName');
-      nameBox.innerHTML = playerName
+      nameBox.value = playerName;
 
       Timer = setInterval(timmermethod, Clickinterval);
 
       money_count.innerHTML = money;
-     Timer = setInterval(timmermethod,Clickinterval);
+      Timer = setInterval(timmermethod,Clickinterval);
     }else if(start == 0){
       money_count.innerHTML = money;
     }
