@@ -38,36 +38,12 @@ h1{
     height: 400px;
 }
 
-#waifu1{
-    position: absolute;
-    left: 150px;
-    margin-top: 300px;
-    width: 150px;
-    height: 150px;
-}
-
-#waifu2{
-    position: absolute;
-    left: 150px;
-    margin-top: 150px;
-    width: 150px;
-    height: 100px;
-}
-
 #money{
     font-size: 20px;
     width: 200px;
     left: 100px;
     text-align: center;
     outline-style: solid;
-}
-
-#background1{
-    position: absolute;
-    left: 10px;
-    margin-top: 150px;
-    width: 150px;
-    height: 100px;
 }
 
 #waifuUpgrade1 {
@@ -127,16 +103,4 @@ html{
 
 #title{
     width: 100%;
-}
-
-.waifu1{
-    background-image: url("images/waifu (2).png");
-    background-size: cover;
-    background-position: center;
-}
-
-.waifu2{
-    background-image: url("images/anime-girl-with-long-hair-52650-117629__1_-removebg-preview.png");
-    background-size: cover;
-    background-position: center;
 }
