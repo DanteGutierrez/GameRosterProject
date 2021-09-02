@@ -6,7 +6,7 @@ var start = 0;
 let Timer;
 let Click = 0;
 let Automult = 1;
-let Clickinterval = 1000;
+let Clickinterval = 0;
 
 let playerName;
 let nameBox;
@@ -117,6 +117,7 @@ let AutoUpgrade1OnClick = evt =>
       money_count.innerHTML = money;
       Automult = 1;
       Click = Click + 1;
+      Clickinterval = 1000;
       
       Timer = setInterval(timmermethod, Clickinterval);
     }
@@ -132,7 +133,8 @@ let PowerUpgrade1OnClick = evt =>
       money_count.innerHTML = money;
       multiplier = 1;
       BaseClick = BaseClick + 2;
-      clearInterval(Timer);
+      Clickinterval = 0;
+      Click = 0;
     }
   }
 }
