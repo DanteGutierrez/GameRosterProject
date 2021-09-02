@@ -6,7 +6,7 @@ var start = 0;
 let Timer;
 let Click = 0;
 let Automult = 1;
-let Clickinterval = 0;
+let Clickinterval = 1000;
 
 let playerName;
 let nameBox;
@@ -133,7 +133,7 @@ let PowerUpgrade1OnClick = evt =>
       money_count.innerHTML = money;
       multiplier = 1;
       BaseClick = BaseClick + 2;
-      Clickinterval = 0;
+      Clickinterval = 1000;
       Click = 0;
     }
   }
@@ -156,8 +156,6 @@ function runtime(){
       Clickinterval = Number(sessionStorage.getItem('Clickinterval'));
       playerName = sessionStorage.getItem('playerName');
       nameBox.value = playerName;
-
-      Timer = setInterval(timmermethod, Clickinterval);
 
       money_count.innerHTML = money;
       Timer = setInterval(timmermethod,Clickinterval);
@@ -186,7 +184,6 @@ function runtime(){
     Automult = Number(sessionStorage.getItem('Automult'));
     Clickinterval = Number(sessionStorage.getItem('Clickinterval'));
     playerName = sessionStorage.getItem('playerName');
-
     
     Timer = setInterval(timmermethod,Clickinterval);
     MainPage.addEventListener('click', MainPageOnClick);
