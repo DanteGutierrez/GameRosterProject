@@ -95,6 +95,8 @@ const numberToString = (number) => {
 };
 const gameLost = () => {
     running = false;
+    let audio = new Audio("./Assets/Boom.mp3");
+    audio.play();
     for (let r = 0; r < row; r++) {
         for (let c = 0; c < column; c++) {
             let box = trueTiles[r][c];
@@ -298,6 +300,10 @@ const loadBoard = () => {
                         flagTile(r, c);
                     }
                     else {
+                        if (!trueTiles[r][c].classList.contains("revealed") && grid[r][c] != 'M') {
+                            let audio = new Audio("./Assets/Reveal.mp3");
+                            audio.play();
+                        }
                         queueTiles(r, c);
                         revealTiles();
                     }
@@ -342,6 +348,8 @@ const xrayBoard = () => {
 };
 loadBoard();
 const selfHide = (name) => {
+    let audio = new Audio("./Assets/Clear.mp3");
+    audio.play();
     document.getElementById(name).hidden = true;
 };
 const settingShowHide = (visible, settingsElement, settingsButton, changeButton) => {
@@ -406,6 +414,8 @@ document.getElementById("Cheater").addEventListener("click", (evt) => {
     xrayBoard();
 });
 document.getElementById("Reset").addEventListener("click", (evt) => {
+    let audio = new Audio("./Assets/Reset.mp3");
+    audio.play();
     loadBoard();
 });
 document.getElementById("Submit").addEventListener("click", (evt) => {
@@ -414,6 +424,8 @@ document.getElementById("Submit").addEventListener("click", (evt) => {
     document.getElementById("Submit").hidden = true;
 });
 document.getElementById("ShowSettings").addEventListener("click", (evt) => {
+    let audio = new Audio("./Assets/Ding.mp3");
+    audio.play();
     let single = document.getElementById("ShowSettings").innerHTML == "▲";
     let double = document.getElementById("ShowDouble").innerHTML == "▲";
     settingShowHide(!single, document.getElementsByClassName("settings"), document.getElementById("ShowSettings"), true);
@@ -425,6 +437,8 @@ document.getElementById("ShowSettings").addEventListener("click", (evt) => {
     }
 });
 document.getElementById("ShowDouble").addEventListener("click", (evt) => {
+    let audio = new Audio("./Assets/Ding.mp3");
+    audio.play();
     let double = document.getElementById("ShowDouble").innerHTML == "▲";
     settingShowHide(!double, document.getElementsByClassName("settingsDouble"), document.getElementById("ShowDouble"), true);
 });
@@ -461,5 +475,10 @@ document.getElementById("Hard").addEventListener("click", (evt) => {
     column = 20;
     row = 20;
     loadBoard();
+});
+document.getElementById("Introduction").addEventListener('click', (evt) => {
+    let song = Math.round((Math.random() * 10) + 1) != 1 ? "./Assets/Music.mp3" : "./Assets/BetterMusic.mp3";
+    let audio = new Audio(song);
+    audio.play();
 });
 let timer = setInterval(secondPassed, 1000);

@@ -160,7 +160,7 @@ function reset() {
 }
 function checkWinner() {
     if (player.cards.length == 5 && player.score <= 21) {
-        board.innerHTML = "You win, you have reaached a 5 card charlie. click 'Start New Game' to keep playing";
+        board.innerHTML = "You win, you have reached a 5 card charlie. click 'Start New Game' to keep playing";
         bet("win")
         document.getElementById("player-money").innerHTML = "Your money: $" + player.money;
         gameEnd();

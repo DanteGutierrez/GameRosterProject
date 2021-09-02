@@ -8,12 +8,14 @@ const betlast18 = document.getElementById("last18Numbers");
 const betRed = document.getElementById("redNumbers");
 const betBlack = document.getElementById("blackNumbers");
 var board = document.getElementById("messageboard");
+let playerBet = 0;
 var winningNumber;
 var winningColor;
 var money = 1000;
 document.getElementById("player-money").innerHTML = "Your money: $" + money;
 
 function singleNumberBet() {
+  playerBet = document.getElementById("bet").valueAsNumber;
   var betNumber = 0;
   const minNumber = 0;
   const maxNumber = 36;
@@ -27,8 +29,12 @@ function singleNumberBet() {
   do {
     betNumber = prompt("which number would you like to guess (0-36)?");
   } while (betNumber < minNumber || betNumber > maxNumber);
-
-  console.log(betNumber);
+  
+  if (betNumber) {
+    console.log("Valid Bet");
+  }else {
+    betNumber = 10;
+  }
 
   (function() {
     const wheel = document.querySelector('.wheel');
@@ -39,8 +45,8 @@ function singleNumberBet() {
     startButton.addEventListener('click', () => {
       startButton.style.pointerEvents = 'none';
       deg = Math.floor(5000 + Math.random() * 5000);
-      wheel.style.transition = 'all 10s ease ';
-      back.style.transition = 'all 14s ease-out';
+      wheel.style.transition = 'all 5s ease ';
+      back.style.transition = 'all 7s ease-out';
       wheel.style.transform = `rotate(${deg}deg)`;
       wheel.classList.add('blur');
     });
@@ -49,7 +55,7 @@ function singleNumberBet() {
       back.classList.remove('rainbow');
       startButton.style.pointerEvents = 'auto';
       wheel.style.transition = 'none';
-      const actualDeg = deg % 360;
+      const actualDeg = (deg % 360);
       wheel.style.transform = `rotate(${actualDeg}deg)`;
       
       if (actualDeg>=0 && actualDeg<10 ){
@@ -237,15 +243,15 @@ function singleNumberBet() {
         winningNumber = 0;
         winningColor = "green";
       }
+      console.log(playerBet);
       console.log(winningNumber);
       if (betNumber == winningNumber) {
         board.innerHTML = "Good Job, you guessed correctly.";
-        bet("win");
+        singleBetWin("win");
       }else{
         board.innerHTML = "Bet Lost, you did not guess correctly.";
-        bet("lose");
+        singleBetWin("lose");
       }
-      document.getElementById("player-money").innerHTML = "Your money: $" + money;
       betSingle.disabled = false;
       betEven.disabled = false;
       betOdd.disabled = false;
@@ -258,6 +264,7 @@ function singleNumberBet() {
 })();
 }
 function evenNumberBet() {
+  playerBet = document.getElementById("bet").valueAsNumber;
   betSingle.disabled = true;
   betEven.disabled = true;
   betOdd.disabled = true;
@@ -275,8 +282,8 @@ function evenNumberBet() {
     startButton.addEventListener('click', () => {
       startButton.style.pointerEvents = 'none';
       deg = Math.floor(5000 + Math.random() * 5000);
-      wheel.style.transition = 'all 10s ease ';
-      back.style.transition = 'all 14s ease-out';
+      wheel.style.transition = 'all 5s ease ';
+      back.style.transition = 'all 7s ease-out';
       wheel.style.transform = `rotate(${deg}deg)`;
       wheel.classList.add('blur');
     });
@@ -481,7 +488,6 @@ function evenNumberBet() {
         board.innerHTML = "Bet Lost, you did not guess correctly.";
         bet("lose");
       }
-      document.getElementById("player-money").innerHTML = "Your money: $" + money;
       betSingle.disabled = false;
       betEven.disabled = false;
       betOdd.disabled = false;
@@ -494,6 +500,7 @@ function evenNumberBet() {
 })();
 }
 function oddNumberBet() {
+  playerBet = document.getElementById("bet").valueAsNumber;
   betSingle.disabled = true;
   betEven.disabled = true;
   betOdd.disabled = true;
@@ -511,8 +518,8 @@ function oddNumberBet() {
     startButton.addEventListener('click', () => {
       startButton.style.pointerEvents = 'none';
       deg = Math.floor(5000 + Math.random() * 5000);
-      wheel.style.transition = 'all 10s ease ';
-      back.style.transition = 'all 14s ease-out';
+      wheel.style.transition = 'all 5s ease ';
+      back.style.transition = 'all 7s ease-out';
       wheel.style.transform = `rotate(${deg}deg)`;
       wheel.classList.add('blur');
     });
@@ -717,7 +724,6 @@ function oddNumberBet() {
         board.innerHTML = "Good Job, you guessed correctly.";
         bet("win");
       }
-      document.getElementById("player-money").innerHTML = "Your money: $" + money;
       betSingle.disabled = false;
       betEven.disabled = false;
       betOdd.disabled = false;
@@ -730,6 +736,7 @@ function oddNumberBet() {
 })();
 }
 function first19NumberBet() {
+  playerBet = document.getElementById("bet").valueAsNumber;
   betSingle.disabled = true;
   betEven.disabled = true;
   betOdd.disabled = true;
@@ -747,8 +754,8 @@ function first19NumberBet() {
     startButton.addEventListener('click', () => {
       startButton.style.pointerEvents = 'none';
       deg = Math.floor(5000 + Math.random() * 5000);
-      wheel.style.transition = 'all 10s ease ';
-      back.style.transition = 'all 14s ease-out';
+      wheel.style.transition = 'all 5s ease ';
+      back.style.transition = 'all 7s ease-out';
       wheel.style.transform = `rotate(${deg}deg)`;
       wheel.classList.add('blur');
     });
@@ -956,7 +963,6 @@ function first19NumberBet() {
         board.innerHTML = "Bet Lost, you did not guess correctly.";
         bet("lose");
       }
-      document.getElementById("player-money").innerHTML = "Your money: $" + money;
       betSingle.disabled = false;
       betEven.disabled = false;
       betOdd.disabled = false;
@@ -969,6 +975,7 @@ function first19NumberBet() {
 })();
 }
 function last18NumberBet() {
+  playerBet = document.getElementById("bet").valueAsNumber;
   betSingle.disabled = true;
   betEven.disabled = true;
   betOdd.disabled = true;
@@ -986,8 +993,8 @@ function last18NumberBet() {
     startButton.addEventListener('click', () => {
       startButton.style.pointerEvents = 'none';
       deg = Math.floor(5000 + Math.random() * 5000);
-      wheel.style.transition = 'all 10s ease ';
-      back.style.transition = 'all 14s ease-out';
+      wheel.style.transition = 'all 5s ease ';
+      back.style.transition = 'all 7s ease-out';
       wheel.style.transform = `rotate(${deg}deg)`;
       wheel.classList.add('blur');
     });
@@ -1195,7 +1202,6 @@ function last18NumberBet() {
         board.innerHTML = "Bet Lost, you did not guess correctly.";
         bet("lose");
       }
-      document.getElementById("player-money").innerHTML = "Your money: $" + money;
       betSingle.disabled = false;
       betEven.disabled = false;
       betOdd.disabled = false;
@@ -1208,6 +1214,7 @@ function last18NumberBet() {
 })();
 }
 function redNumberBet() {
+  playerBet = document.getElementById("bet").valueAsNumber;
   betSingle.disabled = true;
   betEven.disabled = true;
   betOdd.disabled = true;
@@ -1225,8 +1232,8 @@ function redNumberBet() {
     startButton.addEventListener('click', () => {
       startButton.style.pointerEvents = 'none';
       deg = Math.floor(5000 + Math.random() * 5000);
-      wheel.style.transition = 'all 10s ease ';
-      back.style.transition = 'all 14s ease-out';
+      wheel.style.transition = 'all 5s ease ';
+      back.style.transition = 'all 7s ease-out';
       wheel.style.transform = `rotate(${deg}deg)`;
       wheel.classList.add('blur');
     });
@@ -1431,7 +1438,6 @@ function redNumberBet() {
         board.innerHTML = "Bet Lost, you did not guess correctly.";
         bet("lose");
       }
-      document.getElementById("player-money").innerHTML = "Your money: $" + money;
       betSingle.disabled = false;
       betEven.disabled = false;
       betOdd.disabled = false;
@@ -1444,6 +1450,7 @@ function redNumberBet() {
 })();
 }
 function blackNumberBet() {
+  playerBet = document.getElementById("bet").valueAsNumber;
   betSingle.disabled = true;
   betEven.disabled = true;
   betOdd.disabled = true;
@@ -1461,8 +1468,8 @@ function blackNumberBet() {
     startButton.addEventListener('click', () => {
       startButton.style.pointerEvents = 'none';
       deg = Math.floor(5000 + Math.random() * 5000);
-      wheel.style.transition = 'all 10s ease ';
-      back.style.transition = 'all 14s ease-out';
+      wheel.style.transition = 'all 5s ease ';
+      back.style.transition = 'all 7s ease-out';
       wheel.style.transform = `rotate(${deg}deg)`;
       wheel.classList.add('blur');
     });
@@ -1667,7 +1674,6 @@ function blackNumberBet() {
         board.innerHTML = "Bet Lost, you did not guess correctly.";
         bet("lose");
       }
-      document.getElementById("player-money").innerHTML = "Your money: $" + money;
       betSingle.disabled = false;
       betEven.disabled = false;
       betOdd.disabled = false;
@@ -1680,13 +1686,27 @@ function blackNumberBet() {
 })();
 }
 function bet(outcome) {
-  let playerBet = document.getElementById("bet").valueAsNumber;
   if (outcome == "win") {
       money = money + playerBet;
+      document.getElementById("player-money").innerHTML = "Your money: $" + money;
   }else if (outcome == "lose") {
       money = money - playerBet;
+      document.getElementById("player-money").innerHTML = "Your money: $" + money;
   }else{
       money = money;
+      document.getElementById("player-money").innerHTML = "Your money: $" + money;
+  }
+}
+function singleBetWin(outcome) {
+  if (outcome == "win") {
+      money = money + (playerBet * 35);
+      document.getElementById("player-money").innerHTML = "Your money: $" + money;
+  }else if (outcome == "lose") {
+      money = money - playerBet;
+      document.getElementById("player-money").innerHTML = "Your money: $" + money;
+  }else{
+      money = money;
+      document.getElementById("player-money").innerHTML = "Your money: $" + money;
   }
 }
 let onClick = evt =>
